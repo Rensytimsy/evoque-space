@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2 } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,38 +18,46 @@ const NavigationBar = () => {
   }, [])
 
   const navLinks = [
-    { name: 'Properties', href: '#properties', icon: <Building2 size={25} /> },
-    { name: 'Services', href: '#services', icon: <Hammer size={25} /> },
-    { name: 'Shop', href: '#shop', icon: <ShoppingCart size={25} /> },
+    { name: 'Home', href: '/', icon: <Building2 size={25} /> },
+    { name: 'Properties', href: '/pages/properties', icon: <Building2 size={25} /> },
+    { name: 'Services', href: '/pages/services', icon: <Hammer size={25} /> },
+    { name: 'About', href: '/pages/about', icon: <Hammer size={25} /> },
+    { name: 'Shop', href: '/pages/shop', icon: <ShoppingCart size={25} /> },
     { name: 'Portfolio', href: '#portfolio', icon: <Home size={25} /> },
   ];
 
   console.log(isScrolled)
 
+  const path = usePathname()
+  console.log(path)
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white backdrop-blur-md shadow-md py-3' : 'bg-transparent backdrop-blur-md py-5'
+      isScrolled ? 'bg-white backdrop-blur-md shadow-md py-3' : path != "/" ? 'bg-[var(--teal-dark-light)] py-5' : 'bg-transparent backdrop-blur-md py-5'}
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         
         {/* LOGO */}
         <div className="flex items-center gap-2 group cursor-pointer">
           <div className="w-15 h-15 rounded-lg flex items-center justify-center group-hover:bg-[#3BC1A8] transition-colors">
-            <img src="esl-logo.png" alt="evoque space logo" className='h-12'/>
+            <img src="/esl-logo.png" alt="evoque space logo" className='h-12'/>
           </div>
         </div>
 
         {/* DESKTOP LINKS */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className={`hidden md:flex items-center gap-10 bg-[var(--teal-dark-dark)]/50 p-4 pr-6 pl-6 rounded-full`}>
           {navLinks.map((link) => (
             <a 
               key={link.name}
               href={link.href}
-              className={`flex items-center gap-1.5 font-semibold ${isScrolled ? "text-[var(--teal-dark-light)]" : "text-white"} hover:text-[#3BC1A8] transition-colors`}
+              className={`flex items-center gap-1.5 font-semibold flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-white"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-white transition-colors`}
             >
               {link.name}
-              {link.name === 'Services' && <ChevronDown size={14} />}
+              {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
+
+              </div>}
             </a>
+            
           ))}
         </div>
 
@@ -59,7 +68,7 @@ const NavigationBar = () => {
           </button>
           <div className={`relative p-2 ${isScrolled ? "text-[var(--site-light)]" : "text-white"} hover:bg-[var(--teal-light)] rounded-full cursor-pointer`}>
             <ShoppingCart size={20} />
-            <span className="absolute top-1 right-1 bg-[#3BC1A8] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">3</span>
+            <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
           </div>
           <button className="bg-[#005461] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
             Sign In
