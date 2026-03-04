@@ -37,7 +37,7 @@ export default function Services() {
     ];
     return (
         <div>
-            <section id="services" className="py-24 bg-[var(--secondary)] mt-24">
+            <section id="services" className="py-24 bg-white mt-24">
                 <div className="container mx-auto px-4 lg:px-8">
                     {/* Section Header */}
                     <div className="text-center max-w-3xl mx-auto mb-16">
@@ -45,7 +45,7 @@ export default function Services() {
                         <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mt-4 mb-6">
                             Our Services
                         </h2>
-                        <p className="text-muted-foreground text-lg">
+                        <p className="text-lg text-black">
                             Comprehensive construction and design services tailored to your unique vision and requirements.
                         </p>
                     </div>
@@ -55,16 +55,16 @@ export default function Services() {
                         {services.map((service, index) => (
                             <div
                                 key={service.title}
-                                className="group bg-background p-8 rounded-lg shadow-soft hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
+                                className="group bg-[var(--teal-dark-dark)] rounded-md p-8 text-white hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
                                 style={{ animationDelay: `${index * 0.1}s` }}
                             >
                                 <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
                                     <service.icon className="w-7 h-7 text-accent group-hover:text-accent-foreground transition-colors duration-300" />
                                 </div>
-                                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+                                <h3 className="font-display text-xl text-white font-semibold text-foreground mb-3">
                                     {service.title}
                                 </h3>
-                                <p className="text-muted-foreground leading-relaxed">
+                                <p className="text-white  leading-relaxed">
                                     {service.description}
                                 </p>
                             </div>

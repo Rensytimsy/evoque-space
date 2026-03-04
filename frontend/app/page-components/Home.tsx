@@ -78,7 +78,7 @@ export default function HomePage() {
                         {/* Search/Filter UI */}
                         <div className="bg-white p-2 rounded-2xl shadow-2xl border border-slate-100 max-w-xl">
                             <div className="flex gap-2 p-2 border-b border-slate-100 mb-2">
-                                {['Buy', 'Rent', 'Renovate', 'Shop'].map((tab) => (
+                                {['Buy'].map((tab) => (
                                     <button
                                         key={tab}
                                         onClick={() => setActiveTab(tab.toLowerCase())}

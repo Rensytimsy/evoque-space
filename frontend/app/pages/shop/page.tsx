@@ -4,18 +4,18 @@ import { useState, useMemo, useEffect } from "react";
 import { Search } from "lucide-react";
 
 const products = [
-    { id: 1, name: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840, rating: 4.8, reviews: 124, tag: "Bestseller", img: "🛁", desc: "Oval cast-iron soaker with matte white finish" },
-    { id: 2, name: "Rainfall Shower System", category: "Bathrooms", price: 1290, rating: 4.7, reviews: 89, tag: "New", img: "🚿", desc: "Ceiling-mount 12in head with thermostatic valve" },
-    { id: 3, name: "Wall-Mount Vanity", category: "Bathrooms", price: 980, rating: 4.5, reviews: 67, tag: null, img: "🪞", desc: "Floating oak vanity with integrated basin" },
-    { id: 4, name: "Steam Shower Enclosure", category: "Bathrooms", price: 3450, rating: 4.9, reviews: 43, tag: "Premium", img: "🚿", desc: "Frameless tempered glass with steam generator" },
-    { id: 5, name: "Clawfoot Bathtub", category: "Bathrooms", price: 3200, rating: 4.8, reviews: 58, tag: null, img: "🛁", desc: "Victorian cast-iron with brushed brass feet" },
-    { id: 6, name: "Modular Kitchen Island", category: "Kitchen", price: 2100, rating: 4.6, reviews: 201, tag: "Bestseller", img: "🍽️", desc: "Solid walnut top with integrated wine rack" },
-    { id: 7, name: "Farmhouse Sink", category: "Kitchen", price: 760, rating: 4.7, reviews: 155, tag: null, img: "🚰", desc: "Apron-front fireclay in antique white" },
-    { id: 8, name: "Pot Filler Faucet", category: "Kitchen", price: 390, rating: 4.5, reviews: 88, tag: "New", img: "🚰", desc: "Articulated brass wall-mount, matte black" },
-    { id: 9, name: "Linen Storage Cabinet", category: "Bedroom", price: 670, rating: 4.4, reviews: 73, tag: null, img: "🗄️", desc: "Solid oak with rattan panel doors" },
-    { id: 10, name: "Statement Pendant Light", category: "Lighting", price: 520, rating: 4.7, reviews: 112, tag: "New", img: "💡", desc: "Hand-blown smoked glass, antique brass" },
-    { id: 11, name: "Marble Console Table", category: "Living Room", price: 1850, rating: 4.8, reviews: 39, tag: "Premium", img: "🪑", desc: "Calacatta marble top with brass hairpin legs" },
-    { id: 12, name: "Heated Towel Rail", category: "Bathrooms", price: 340, rating: 4.6, reviews: 198, tag: null, img: "🧣", desc: "Stainless ladder rail, polished chrome" },
+    { id: 1, name: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840, rating: 4.8, reviews: 124, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Oval cast-iron soaker with matte white finish" },
+    { id: 2, name: "Rainfall Shower System", category: "Bathrooms", price: 1290, rating: 4.7, reviews: 89, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Ceiling-mount 12in head with thermostatic valve" },
+    { id: 3, name: "Wall-Mount Vanity", category: "Bathrooms", price: 980, rating: 4.5, reviews: 67, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Floating oak vanity with integrated basin" },
+    { id: 4, name: "Steam Shower Enclosure", category: "Bathrooms", price: 3450, rating: 4.9, reviews: 43, tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Frameless tempered glass with steam generator" },
+    { id: 5, name: "Clawfoot Bathtub", category: "Bathrooms", price: 3200, rating: 4.8, reviews: 58, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Victorian cast-iron with brushed brass feet" },
+    { id: 6, name: "Modular Kitchen Island", category: "Kitchen", price: 2100, rating: 4.6, reviews: 201, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid walnut top with integrated wine rack" },
+    { id: 7, name: "Farmhouse Sink", category: "Kitchen", price: 760, rating: 4.7, reviews: 155, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Apron-front fireclay in antique white" },
+    { id: 8, name: "Pot Filler Faucet", category: "Kitchen", price: 390, rating: 4.5, reviews: 88, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Articulated brass wall-mount, matte black" },
+    { id: 9, name: "Linen Storage Cabinet", category: "Bedroom", price: 670, rating: 4.4, reviews: 73, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid oak with rattan panel doors" },
+    { id: 10, name: "Statement Pendant Light", category: "Lighting", price: 520, rating: 4.7, reviews: 112, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Hand-blown smoked glass, antique brass" },
+    { id: 11, name: "Marble Console Table", category: "Living Room", price: 1850, rating: 4.8, reviews: 39, tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Calacatta marble top with brass hairpin legs" },
+    { id: 12, name: "Heated Towel Rail", category: "Bathrooms", price: 340, rating: 4.6, reviews: 198, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Stainless ladder rail, polished chrome" },
 ];
 
 const categories = ["All", "Bathrooms", "Kitchen", "Bedroom", "Living Room", "Lighting"];
@@ -154,7 +154,7 @@ export default function ShopPage() {
             <div className="flex">
 
                 {/* Sidebar */}
-                <aside className={`hidden h-full lg:block fixed top-[15%] -mt-11 sidebar-transition overflow-hidden flex-shrink-0 bg-[var(--teal-dark-light)]`}
+                <aside className={`hidden h-full lg:block fixed top-40 sidebar-transition overflow-hidden flex-shrink-0 bg-white`}
                     style={{
                         width: sidebarOpen ? "268px" : "0px", minWidth: sidebarOpen ? "268px" : "0px",
                         padding: sidebarOpen ? "28px 24px" : "0px"
@@ -169,7 +169,7 @@ export default function ShopPage() {
                                     style={{
                                         background: selectedCategory === c ? "#005461" : "transparent",
                                         borderLeftColor: selectedCategory === c ? "#fff" : "transparent",
-                                        color: selectedCategory === c ? "#fff" : "#ffffff",
+                                        color: selectedCategory === c ? "#ffffff" : "#000000",
                                         fontWeight: selectedCategory === c ? 500 : 400
                                     }}
     
@@ -179,15 +179,15 @@ export default function ShopPage() {
 
                         {/* Price */}
                         <div className="mb-8">
-                            <div className="font-jost  tracking-tight uppercase mb-4 flex items-center gap-2 text-white text-md">
+                            <div className="font-jost  tracking-tight uppercase mb-4 flex items-center gap-2 text-black text-md">
                                 Price Range
                                 {selectedPrices.length > 0 && (
-                                    <button className="font-jost text-[10px] tracking-tight uppercase underline cursor-pointer text-white"
+                                    <button className="font-jost text-[10px] tracking-tight uppercase underline cursor-pointer text-black"
                                         onClick={() => setSelectedPrices([])}>Clear</button>
                                 )}
                             </div>
                             {priceRanges.map(r => (
-                                <label key={r.label} className="font-jost flex items-center gap-2.5 py-1.5 text-sm cursor-pointer text-white">
+                                <label key={r.label} className="font-jost flex items-center gap-2.5 py-1.5 text-sm cursor-pointer text-black">
                                     <input type="checkbox" className="w-4 h-4 cursor-pointer flex-shrink-0"
                                         checked={selectedPrices.includes(r.label)} onChange={() => togglePriceRange(r.label)} />
                                     {r.label}
@@ -233,16 +233,12 @@ export default function ShopPage() {
                             <p className="font-jost text-sm mt-2 text-[var(--teal-light)]">Try adjusting your search or filters</p>
                         </div>
                     ) : filtered.map(p => (
-                        <div key={p.id} className="card-hover min-w-32 border relative flex flex-col mt-30 lg:mt-20"
-                            style={{ background: C.cream, borderColor: C.sand }}>
+                        <div key={p.id} className="card-hover border min-w-32 shadow-md relative flex flex-col mt-30 lg:mt-20 rounded-md"
+                        >
 
                             {/* Image */}
                             <div className="relative flex items-center justify-center text-6xl h-[210px] bg-white">
-                                <span className="relative z-10">{p.img}</span>
-                                {p.tag && (
-                                    <span className="font-jost absolute top-3 left-3 text-xs tracking-[2px] uppercase p-2 rounded-md"
-                                        style={tagStyle(p.tag)}>{p.tag}</span>
-                                )}
+                                <img src={p.img} className="w-full"/>
                             </div>
 
                             {/* Card Body */}
@@ -277,7 +273,7 @@ export default function ShopPage() {
 
 function SidebarTitle({ label }: { label: string }) {
     return (
-        <div className="font-jost tracking-tight uppercase mb-4 flex items-center gap-2 text-white text-md">
+        <div className="font-jost tracking-tight uppercase mb-4 flex items-center gap-2 text-black text-md">
             {label}
         </div>
     );

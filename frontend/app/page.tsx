@@ -3,11 +3,13 @@ import LandingPage from "./pages/test/test";
 import NavigationBar from "./page-components/navigationbar";
 import HomePage from "./page-components/Home";
 import AboutPage from "./pages/about/page";
+import Services from "./pages/services/page";
 export default function Home() {
   return (
     <div className="">
       <HomePage />
       <AboutPage />
+      <Services />
     </div>
   );
 }

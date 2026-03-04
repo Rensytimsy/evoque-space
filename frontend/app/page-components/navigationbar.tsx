@@ -1,8 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2 } from 'lucide-react';
+import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2, User2 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from "next/link"
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,16 +33,18 @@ const NavigationBar = () => {
   console.log(path)
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+    <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white backdrop-blur-md shadow-md py-3' : path != "/" ? 'bg-[var(--teal-dark-light)] py-5' : 'bg-transparent backdrop-blur-md py-5'}
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         
         {/* LOGO */}
         <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-15 h-15 rounded-lg flex items-center justify-center group-hover:bg-[#3BC1A8] transition-colors">
+          <Link href="/">
+            <div className="w-15 h-15 rounded-lg flex items-center justify-center transition-colors">
             <img src="/esl-logo.png" alt="evoque space logo" className='h-12'/>
           </div>
+          </Link>
         </div>
 
         {/* DESKTOP LINKS */}
@@ -63,11 +66,11 @@ const NavigationBar = () => {
 
         {/* DESKTOP ACTIONS */}
         <div className="hidden md:flex items-center gap-5">
-          <button className={`p-2 ${isScrolled ? "text-[var(--teal-dark-light)]" : "text-white"} hover:bg-slate-100 rounded-full transition-all`}>
-            <Search size={20} />
+          <button className={`p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-white"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full transition-all`}>
+            <User2 size={24} className=''/>
           </button>
-          <div className={`relative p-2 ${isScrolled ? "text-[var(--site-light)]" : "text-white"} hover:bg-[var(--teal-light)] rounded-full cursor-pointer`}>
-            <ShoppingCart size={20} />
+          <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-white"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
+            <ShoppingCart size={24} />
             <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
           </div>
           <button className="bg-[#005461] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
