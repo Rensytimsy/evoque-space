@@ -37,7 +37,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'datalib',
+    'users'
 ]
+
+ALLOWED_HOSTS = [
+    'api.evoquespaces.com',
+    'localhost',
+    '127.0.0.1'
+]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
