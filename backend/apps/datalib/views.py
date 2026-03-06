@@ -8,5 +8,5 @@ from rest_framework import (
 @decorators.api_view(["GET"])
 def test_endpoint(request):
     return response.Response({
-        "message": "Hello world the api is working just find!"
+        "message": "Hello world the api is working just find!,....."
     }, status=status.HTTP_200_OK)
