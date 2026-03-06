@@ -1,117 +1,142 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2 } from 'lucide-react';
+import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2, User2, Sun, Moon, Phone, Info, LogIn } from 'lucide-react';
 import { usePathname } from 'next/navigation';
+import Link from "next/link"
 
 const NavigationBar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isDark, setIsDark] = useState(false)
 
-  // Handle scroll effect for glassmorphism
-  useEffect(() => {
-      if (typeof window !== 'undefined') {
-        window.onscroll = () => {
-          setIsScrolled(window.scrollY > 20);
-        };
-      }
-  }, [])
+    // Handle scroll effect for glassmorphism
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.onscroll = () => {
+                setIsScrolled(window.scrollY > 20);
+            };
+        }
+    }, [])
 
-  const navLinks = [
-    { name: 'Home', href: '/', icon: <Building2 size={25} /> },
-    { name: 'Properties', href: '/pages/properties', icon: <Building2 size={25} /> },
-    { name: 'Services', href: '/pages/services', icon: <Hammer size={25} /> },
-    { name: 'About', href: '/pages/about', icon: <Hammer size={25} /> },
-    { name: 'Shop', href: '/pages/shop', icon: <ShoppingCart size={25} /> },
-    { name: 'Portfolio', href: '#portfolio', icon: <Home size={25} /> },
-  ];
+    const navLinks = [
+        { name: 'Home', href: '/', icon: <Building2 size={25} /> },
+        { name: 'Services', href: '/pages/services', icon: <Hammer size={25} /> },
+        { name: 'About', href: '/pages/about', icon: <Info size={25} /> },
+        { name: 'Shop', href: '/pages/shop', icon: <ShoppingCart size={25} /> },
+        { name: 'contact', href: '/pages/contact', icon: <Phone size={25} /> },
+    ];
 
-  console.log(isScrolled)
+    const path = usePathname()
 
-  const path = usePathname()
-  console.log(path)
-
-  return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-white backdrop-blur-md shadow-md py-3' : path != "/" ? 'bg-[var(--teal-dark-light)] py-5' : 'bg-transparent backdrop-blur-md py-5'}
+    return (
+        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
     }`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        
-        {/* LOGO */}
-        <div className="flex items-center gap-2 group cursor-pointer">
-          <div className="w-15 h-15 rounded-lg flex items-center justify-center group-hover:bg-[#3BC1A8] transition-colors">
-            <img src="/esl-logo.png" alt="evoque space logo" className='h-12'/>
-          </div>
-        </div>
+            <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
-        {/* DESKTOP LINKS */}
-        <div className={`hidden md:flex items-center gap-10 bg-[var(--teal-dark-dark)]/50 p-4 pr-6 pl-6 rounded-full`}>
-          {navLinks.map((link) => (
-            <a 
-              key={link.name}
-              href={link.href}
-              className={`flex items-center gap-1.5 font-semibold flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-white"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-white transition-colors`}
-            >
-              {link.name}
-              {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
+                {/* LOGO */}
+                <div className="flex items-center gap-2 group cursor-pointer">
+                    <Link href="/">
+                        <div className="w-15 h-15 rounded-lg flex items-center justify-center transition-colors">
+                            <img src="/esl-logo.png" alt="evoque space logo" className='h-12' />
+                        </div>
+                    </Link>
+                </div>
 
-              </div>}
-            </a>
-            
-          ))}
-        </div>
+                {/* DESKTOP LINKS */}
+                <div className={`hidden md:flex items-center gap-10  p-4 pr-6 pl-6 rounded-full`}>
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            className={`flex items-center gap-1.5 font-normal flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-light)] transition-colors`}
+                        >
+                            {link.name}
+                            {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
 
-        {/* DESKTOP ACTIONS */}
-        <div className="hidden md:flex items-center gap-5">
-          <button className={`p-2 ${isScrolled ? "text-[var(--teal-dark-light)]" : "text-white"} hover:bg-slate-100 rounded-full transition-all`}>
-            <Search size={20} />
-          </button>
-          <div className={`relative p-2 ${isScrolled ? "text-[var(--site-light)]" : "text-white"} hover:bg-[var(--teal-light)] rounded-full cursor-pointer`}>
-            <ShoppingCart size={20} />
-            <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
-          </div>
-          <button className="bg-[#005461] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
-            Sign In
-          </button>
-        </div>
+                            </div>}
+                        </a>
 
-        {/* MOBILE MENU TOGGLE */}
-        <button 
-          className={`md:hidden p-2 ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-white"} text-xl`}
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-      </div>
+                    ))}
+                </div>
 
-      {/* MOBILE OVERLAY MENU */}
-      <div className={`fixed h-full inset-0 top-[72px] mt-3 ${isScrolled ? "bg-white min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${
-        isOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
-        <div className="flex flex-col p-6 gap-6 ">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-4 text-xl font-bold ${isScrolled ? "text-[var(--teal-dark-dark)] " : "text-[var(--teal-dark-dark)]"} border-b border-slate-100 pb-4`}
-            >
-              <span className={`${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"}`}>{link.icon}</span>
-              {link.name}
-            </a>
-          ))}
-          <div className="mt-4 flex flex-col gap-4">
-            <button className="w-full bg-slate-100 text-[#005461] py-4 rounded-2xl font-bold">
-              My Cart (3 Items)
-            </button>
-            <button className="w-full bg-[#005461] text-white py-4 rounded-2xl font-bold shadow-xl shadow-[#005461]/20">
-              Sign In
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+                {/* DESKTOP ACTIONS */}
+                <div className="hidden md:flex items-center gap-5">
+                    <button
+                        onClick={() => setIsDark(!isDark)}
+                        className={`p-2 rounded-lg dark:bg-gray-800 transition-colors duration-300 ${isScrolled ? "bg-[var(--teal-dark-light)] text-white" : "bg-[var(--teal-dark-dark)] text-white"}`}
+                        aria-label="Toggle Theme"
+                    >
+                        {isDark ? (
+                            <Sun className={`w-5 h-5 text-black ${isScrolled ? "text-[var(--teal-dark-dark)] text-white" : "text-[var(--teal-dark-dark)] text-white"}`} />
+                        ) : (
+                            <Moon className={`w-5 h-5 text-slate-700 ${isScrolled ? "text-[var(--teal-dark-dark)] text-white" : "text-[var(--teal-dark-dark)] text-white"}`} />
+                        )}
+                    </button>
+                    <button className={`p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full transition-all`}>
+                        <User2 size={24} className='' />
+                    </button>
+                    <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
+                        <ShoppingCart size={24} />
+                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
+                    </div>
+                    <button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 rounded-md font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
+                        <p className='text-md font-normal md:hidden lg:block'>Sign In</p>
+                        <LogIn className='' size={22}/>
+                    </button>
+                </div>
+
+
+
+                {/* MOBILE MENU TOGGLE */}
+
+                <button
+                    onClick={() => setIsDark(!isDark)}
+                    className={`absolute lg:hidden md:hidden right-20 p-2 rounded-lg dark:bg-gray-800 transition-colors duration-300 ${isScrolled ? "bg-[var(--teal-light)] text-white" : "bg-[var(--teal-dark-light)] text-white"}`}
+                    aria-label="Toggle Theme"
+                >
+                    {isDark ? (
+                        <Sun className={`w-5 h-5 text-black ${isScrolled ? "text-[var(--teal-dark-dark)] text-white" : "text-[var(--teal-dark-dark)] text-white"}`} />
+                    ) : (
+                        <Moon className={`w-5 h-5 text-slate-700 ${isScrolled ? "text-[var(--teal-dark-dark)] text-white" : "text-[var(--teal-dark-dark)] text-white"}`} />
+                    )}
+                </button>
+                <button
+                    className={`md:hidden p-2 ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} text-xl`}
+                    onClick={() => setIsOpen(!isOpen)}
+                >
+                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                </button>
+            </div>
+
+            {/* MOBILE OVERLAY MENU */}
+            <div className={`fixed h-full inset-0 top-[72px] mt-3 ${isScrolled ? "bg-white min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'
+                }`}>
+                <div className="flex flex-col p-6 gap-6 ">
+
+                    {navLinks.map((link) => (
+                        <a
+                            key={link.name}
+                            href={link.href}
+                            onClick={() => setIsOpen(false)}
+                            className={`flex items-center gap-4 text-xl font-bold ${isScrolled ? "text-[var(--teal-dark-dark)] " : "text-[var(--teal-dark-dark)]"} border-b border-slate-100 pb-4`}
+                        >
+                            <span className={`${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"}`}>{link.icon}</span>
+                            {link.name}
+                        </a>
+                    ))}
+                    <div className="mt-4 flex flex-col gap-4">
+                        <button className="w-full bg-slate-100 text-[#005461] py-4 rounded-2xl font-bold">
+                            My Cart (3 Items)
+                        </button>
+                        <button className="w-full bg-[#005461] text-white py-4 rounded-2xl font-bold shadow-xl shadow-[#005461]/20">
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    );
 };
 
 export default NavigationBar;

@@ -1,144 +1,202 @@
 "use client"
 import React, { useState, useEffect } from "react"
 
-import { Search, Home, Hammer, ShoppingCart, Paintbrush, ArrowRight, Menu, MapPin, CheckCircle, Phone, Star, House } from 'lucide-react';
+import { Search, Hammer, ShoppingCart, Paintbrush, ArrowRight, Shield, Sun, Cpu, ShieldCheck, Video, Lock, Droplets, ChevronRight, ChevronLeft } from 'lucide-react';
+import Link from "next/link";
+const INFRA_SERVICES = [
+    {
+        title: "Renewable Energy & Power",
+        desc: "Tier-1 Solar PV installations and smart battery storage for energy independence.",
+        image: "/services/renewable_energy.jpeg",
+        icon: <Sun className="text-[var(--teal-dark-dark)]" />,
+        link: "/services/solar"
+    },
+    {
+        title: "Security & Surveillance Solutions",
+        desc: "AI-powered CCTV systems with 24/7 remote monitoring and thermal imaging.",
+        image: "/services/security_and_surveliance.jpg",
+        icon: <Video className="text-[var(--teal-dark-dark)]" />,
+        link: "/services/security_and_surveliance.jpg"
+    },
+    {
+        title: "Perimeter Security",
+        desc: "Advanced electric fencing and seismic sensors for total boundary protection.",
+        image: "/services/perimeter_security.jpg",
+        icon: <ShieldCheck className="text-[var(--teal-dark-dark)]" />,
+        link: "/services/perimeter"
+    },
+    {
+        title: "Access Control Solutions",
+        desc: "Biometric and RFID systems to manage personnel flow securely and efficiently.",
+        image: "/services/access_control.webp",
+        icon: <Lock className="text-[var(--teal-dark-dark)]" />,
+        link: "/services/access"
+    },
+    {
+        title: "Plumbing & Sanitary Solutions",
+        desc: "Precision engineering for modern water reticulation and waste management.",
+        image: "/services/Plumbing_and_sanitary.jpeg",
+        icon: <Droplets className="text-[var(--teal-dark-dark)]" />,
+        link: "/services/plumbing"
+    }
+];
 
-const testimonials = [
-    {
-        name: "Timothy",
-        message: "with evoque space, your feature dream house will come true",
-        date: Date.now(),
-        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    },
-    {
-        name: "Sarah Jenkins",
-        message: "The attention to detail is unmatched. They didn't just build a house; they created a sanctuary for my family.",
-        date: Date.now(),
-        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    },
-    {
-        name: "Marcus Chen",
-        message: "Evoque Space turned my vague sketches into a modern architectural masterpiece. Truly a seamless experience.",
-        date: Date.now(),
-        avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    },
-    // {
-    //     name: "Elena Rodriguez",
-    //     message: "I never thought the renovation process could be this stress-free. Professional, creative, and highly recommended!",
-    //     date: Date.now(),
-    //     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    // },
-    // {
-    //     name: "David V.",
-    //     message: "Elegance meets functionality. They maximized every square inch of my property while maintaining a stunning aesthetic.",
-    //     date: Date.now(),
-    //     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    // },
-    // {
-    //     name: "Amara Okafor",
-    //     message: "From the first consultation to the final walkthrough, Evoque Space exceeded every expectation I had.",
-    //     date: Date.now(),
-    //     avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0KZzfY42l0J1xR6WFbnzH_Sc3pJIvXCJMaA&s"
-    // }
-]
 
 export default function HomePage() {
-    const [activeTab, setActiveTab] = useState('buy');
+    const [current, setCurrent] = useState(0);
+
+    // Auto-play logic
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrent((prev) => (prev === INFRA_SERVICES.length - 1 ? 0 : prev + 1));
+        }, 10000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const nextSlide = () => setCurrent(current === INFRA_SERVICES.length - 1 ? 0 : current + 1);
+    const prevSlide = () => setCurrent(current === 0 ? INFRA_SERVICES.length - 1 : current - 1);
+
     return (
-        <div className="min-h-screen lg:max-h-[90vh] bg-[#F4F9F9]">
-            <div
-                className="absolute inset-0 w-full h-screen bg-[var(--teal-dark-dark)] bg-[url('/hero-bg.jpg')] bg-cover bg-center bg-no-repeat bg-blend-multiply opacity-90"
-                aria-hidden="true"
-            />
-            <header className="h-auto relative pt-16 pb-32 overflow-hidden mt-23">
-                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-                    <div className="z-10">
-                        <span className="inline-block rounded-full bg-[var(--teal-dark-dark)] p-2 text-white font-bold text-sm mb-6">
-                            Evoque Spaces Limited
-                        </span>
-                        <h1 className="text-6xl font-extrabold text-white leading-[1.1] mb-6">
-                            Building Dreams <br />
-                            <span className="text-[var(--teal-light)]">
-                                Creating Spaces
-                            </span>
-                        </h1>
-                        <p className="text-lg text-white mb-10 max-w-lg font-semibold mt-5">
-                            Transform your vision into reality with Evoque Spaces. We specialize in designing, building, and renovating exceptional properties across Kenya.
-                        </p>
+        <div className="relative min-h-screen flex items-center overflow-hidden">
+            <div className="absolute -inset-0 lg:-left-55 lg:w-2/3 w-2/2 lg:bg-[var(--teal-dark-light)] bg-[var(--teal-dark-light)] md:bg-white dark:bg-[var(--teal-dark-dark)] lg:skew-x-25 md:skew-x-54 md:left-10 md:w-3/2 skew-x-30 -left-85"></div>
 
-                        <div className="flex flex-wrap gap-4 mb-10">
-                            <button className="bg-[#249E94] hover:bg-[#1d827a] text-white px-8 py-4 rounded-xl font-bold transition-all shadow-lg shadow-[#249E94]/20">
-                                Enquire Now
-                            </button>
-                            <button className="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 px-8 py-4 rounded-xl font-bold transition-all">
-                                View Projects
-                            </button>
-                        </div>
+            {/* Subtle Grid Overlay for "Technical" feel */}
+            {/* <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none" /> */}
 
-                        {/* Search/Filter UI */}
-                        <div className="bg-white p-2 rounded-2xl shadow-2xl border border-slate-100 max-w-xl">
-                            <div className="flex gap-2 p-2 border-b border-slate-100 mb-2">
-                                {['Buy', 'Rent', 'Renovate', 'Shop'].map((tab) => (
-                                    <button
-                                        key={tab}
-                                        onClick={() => setActiveTab(tab.toLowerCase())}
-                                        className={`px-4 py-1.5 rounded-lg text-sm font-bold transition-all ${activeTab === tab.toLowerCase() ? 'bg-[#249E94] text-white' : 'text-slate-400 hover:bg-slate-50'}`}
-                                    >
-                                        {tab}
+            <header className="relative w-full pt-20 pb-12 z-10">
+                <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+
+                    {/* Left Column: Mission & Authority */}
+                    <div>
+                        <div className="space-y-8 mt-10">
+                            <div className="space-y-4">
+                                <h1 className="text-4xl lg:text-7xl leading-[1.1] tracking-tight">
+                                    {/* Line 1: Power */}
+                                    <span className="block lg:text-white dark:text-white">
+                                        High-Performance <span className="sm:text-[var(--teal-dark-dark)] ">Power</span>
+                                    </span>
+
+                                    {/* Line 2: Security */}
+                                    <span className="block dark:text-slate-100 lg:text-white">
+                                        Precision Security
+                                    </span>
+
+                                    {/* Line 3: Integration */}
+                                    <span className="block relative">
+                                        <span className="relative z-10 text-[var(--teal-dark-dark)] dark:text-[var(--teal-light)]">
+                                            Smart Integration
+                                        </span>
+                                        {/* Subtle underline for the final punchy word */}
+                                        <span className="absolute bottom-2 left-0 h-3 w-48 bg-[var(--teal-light)]/20 -z-10 hidden lg:block" />
+                                    </span>
+                                </h1>
+                            </div>
+
+                            <p className="text-lg lg:text-white max-w-lg leading-relaxed">
+                                Evoque Spaces Limited is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
+                            </p>
+
+                            <div className="flex flex-wrap gap-4">
+                                <Link href={{ pathname: "/pages/shop" }}>
+                                    <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 group">
+                                        Shop
+                                        <ShoppingCart className="text-white" size={20} />
                                     </button>
+                                </Link>
+                                {/* <button className="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold transition-all">
+                                    View Our Projects
+                                </button> */}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Visual Component */}
+                    <div className="relative">
+                        {/* Main Architectural Image */}
+                        <div className="relative z-10 group w-full max-w-[650px] mx-auto">
+                            {/* Soft Glow Background */}
+                            <div className="absolute -inset-4  rounded-[3rem]" />
+
+                            {/* Main Container */}
+                            <div className="relative border-white/5 overflow-hidden rounded-md bg-transparent aspect-[4/5] sm:aspect-square md:aspect-[4/5]">
+
+                                {/* Slides */}
+                                {INFRA_SERVICES.map((service, index) => (
+                                    <div
+                                        key={index}
+                                        className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-110"
+                                            }`}
+                                    >
+                                        {/* Background Image */}
+                                        <img
+                                            src={service.image}
+                                            alt={service.title}
+                                            className="w-full h-full object-contain"
+                                        />
+
+                                        {/* Overlay Gradient */}
+                                        <div className="absolute inset-0  to-transparent" />
+
+                                        {/* Content Overlay */}
+                                        <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
+                                            <div className="flex items-center gap-3 mb-4">
+                                                <div>
+                                                    <div className="p-2 bg-[var(--teal-light)] backdrop-blur-md rounded-lg w-10">
+                                                        {service.icon}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="bg-[var(--teal-dark-dark)]/20 p-4 rounded-md">
+                                                <h3 className="text-3xl font-bold text-white mb-3">
+                                                    {service.title}
+                                                </h3>
+                                                {/* 
+                                                <p className="text-slate-300 text-sm leading-relaxed mb-8 max-w-sm">
+                                                    {service.desc}
+                                                </p> */}
+
+                                                <button
+                                                    onClick={() => window.location.href = service.link}
+                                                    className="flex items-center gap-3 bg-[var(--teal-light)] text-white hover:text-[var(--teal-dark-dark)] px-6 py-3 rounded-xl font-bold text-sm transition-all hover:pr-8"
+                                                >
+                                                    Get Service or Products
+                                                    <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 ))}
-                            </div>
-                            <div className="flex flex-col md:flex-row gap-4 p-2">
-                                <div className="flex-1 flex items-center gap-3 px-3 py-2 bg-slate-50 rounded-xl">
-                                    <MapPin className="text-[#249E94]" size={20} />
-                                    <input type="text" placeholder="Location or Product..." className="bg-transparent outline-none w-full text-sm" />
+
+                                {/* Navigation Arrows */}
+                                <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4 z-20">
+                                    <button
+                                        onClick={prevSlide}
+                                        className="p-2 rounded-full bg-[var(--teal-dark-dark)]/25 backdrop-blur-md border border-white/10 text-white hover:bg-[var(--teal-light)] hover:text-black transition-all"
+                                    >
+                                        <ChevronLeft size={24} />
+                                    </button>
+                                    <button
+                                        onClick={nextSlide}
+                                        className="p-2 rounded-full bg-[var(--teal-dark-dark)]/25 backdrop-blur-md border border-white/10 text-white hover:bg-[var(--teal-light)] hover:text-black transition-all"
+                                    >
+                                        <ChevronRight size={24} />
+                                    </button>
                                 </div>
-                                <button className="bg-[#005461] text-white px-8 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-[#0C7779]">
-                                    <Search size={18} /> Search
-                                </button>
+
+                                {/* Slide Indicators */}
+                                <div className="absolute top-8 right-8 flex gap-2 z-20">
+                                    {INFRA_SERVICES.map((_, i) => (
+                                        <div
+                                            key={i}
+                                            className={`h-1 transition-all duration-500 rounded-full ${i === current ? "w-8 bg-[var(--teal-light)]" : "w-2 bg-white/30"
+                                                }`}
+                                        />
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="relative mb-10">
-                        <div className="absolute -top-10 -right-10 w-72 h-72 bg-[#3BC1A8]/20 rounded-full blur-3xl"></div>
-                        <img
-                            src="/homes/homeOne.jpeg"
-                            alt="Modern House"
-                            className="rounded-[2.5rem] border-8 border-white relative z-10 max-h-[650px]"
-                        />
-                        {/* Floating Badge */}
-                        <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl z-20 flex items-center gap-5 border border-slate-100 min-w-[280px] transform transition-transform duration-300">
-                            {/* Icon Container with soft pulse effect */}
-                            <div className="relative">
-                                <div className="w-14 h-14 bg-[#3BC1A8] rounded-full flex items-center justify-center text-white shadow-lg shadow-[#3BC1A8]/30">
-                                    <House size={28} />
-                                </div>
-                                <span className="absolute top-0 right-0 flex h-3 w-3">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3BC1A8] opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-[#3BC1A8]"></span>
-                                </span>
-                            </div>
-
-                            <div className="flex flex-col">
-                                <p className="text-[10px] text-slate-400 font-black uppercase tracking-[0.15em] mb-1">
-                                    New Listing
-                                </p>
-
-                                <div className="mb-2">
-                                    <p className="text-[#005461] font-extrabold text-lg leading-tight">4 Bedrooms</p>
-                                    <p className="text-slate-600 font-medium text-sm">
-                                        KES <span className="text-[#005461] font-bold">22 Million</span>
-                                    </p>
-                                </div>
-
-                                <button className="group flex items-center gap-1 text-[var(--teal-light)] underline font-bold hover:cursor-pointer text-xs font-bold uppercase tracking-wider hover:text-[#005461] transition-colors">
-                                    Check it out
-                                    <span className="group-hover:translate-x-1 transition-transform">→</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </header>
         </div>
