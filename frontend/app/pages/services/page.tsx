@@ -33,16 +33,6 @@ const SERVICES = [
     },
 ];
 
-const COLORS = {
-    teal: "#3BC1A8",
-    deep: "#005461",
-    mid: "#1FADAD",
-    white: "#ffffff",
-    darkBg: "#005461",
-    darkSurface: "#00404d",
-    darkCard: "#003a46",
-    darkBorder: "#0a6070",
-};
 
 export default function Services() {
     const [isDark, setIsDark] = useState()
@@ -95,19 +85,14 @@ export default function Services() {
                     <div>
                         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                             <div>
-                                <span className="text-[var(--teal-dark-dark)] font-bold tracking-widest uppercase text-sm block mb-2">
+                                <span className="font-bold text-[var(--teal-dark-dark)] font-bold tracking-widest uppercase text-sm block mb-2">
                                     Our Services
                                 </span>
-                                <h2 className="text-4xl md:text-5xl font-serif text-slate-900 leading-tight">
-                                    Integrated <em className="text-[var(--teal-dark-light)] not-italic font-medium">Solutions</em><br />
+                                <h2 className="font-bold text-4xl md:text-5xl text-slate-900 leading-tight">
+                                    Integrated <em className="text-[var(--teal-dark-light)] not-italic font-bold">Solutions</em><br />
                                     for Modern Spaces
                                 </h2>
                             </div>
-
-                            <button className="group flex items-center gap-2 text-white font-semibold bg-[var(--teal-dark-dark)] p-2 rounded-md transition-all hover:text-[var(--teal-light)]">
-                                Discuss Your Project
-                                <span className="transition-transform group-hover:translate-x-1">→</span>
-                            </button>
                         </div>
                     </div>
 

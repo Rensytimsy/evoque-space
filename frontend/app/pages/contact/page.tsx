@@ -41,13 +41,6 @@ export default function ContactPage() {
         );
     }
 
-    const bg = isDark ? COLORS.darkBg : COLORS.white;
-    const surface = isDark ? COLORS.darkSurface : "#f4fffe";
-    const card = isDark ? COLORS.darkCard : "#ffffff";
-    const border = isDark ? COLORS.darkBorder : "#cdeee9";
-    const text = isDark ? "#e8f8f6" : "#0a2e35";
-    const textMid = isDark ? "#9dd4cc" : "#2a6070";
-    const textLight = isDark ? "#6aacaa" : "#4a8a90";
 
     return (
 
@@ -62,12 +55,12 @@ export default function ContactPage() {
                     <Reveal>
                         <div className="space-y-8">
                             <div>
-                                <h1 className="text-[var(--teal-dark-dark)] dark:text-[var(--teal-light)] text-sm tracking-tight uppercase mb-4">
+                                <h1 className="font-bold text-[var(--teal-dark-dark)] dark:text-[var(--teal-light)] text-sm tracking-tight uppercase mb-4">
                                     Let's hear from you
                                 </h1>
-                                <h2 className="text-4xl md:text-5xl text-slate-900 dark:text-white leading-tight tracking-tight">
+                                <h2 className="font-bold text-4xl md:text-5xl text-slate-900 dark:text-white leading-tight tracking-tight">
                                     Let's Build Your<br />
-                                    <em className="text-[var(--teal-dark-light)] not-serif">Future-Ready</em> Space
+                                    <p className="text-[var(--teal-dark-light)]">Future-Ready</p> Space
                                 </h2>
                                 <p className="mt-6 text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">
                                     Tell us about your project and one of our engineers will respond within 24 hours with a tailored solution proposal.

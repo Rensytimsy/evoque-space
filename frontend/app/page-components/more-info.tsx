@@ -37,7 +37,7 @@ export default function MoreInfo() {
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
                     <div className="max-w-2xl">
 
-                        <h3 className="text-4xl md:text-5xl  text-white dark:text-white leading-tight">
+                        <h3 className="text-4xl md:text-5xl  text-white font-bold dark:text-white leading-tight">
                             Why leading developers <br />
                             <span className="text-[var(--teal-dark-dark)]">trust our expertise</span>
                         </h3>
