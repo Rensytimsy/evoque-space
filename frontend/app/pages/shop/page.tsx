@@ -242,7 +242,7 @@ export default function ShopPage() {
                             </div>
 
                             {/* Card Body */}
-                            <div className="flex flex-col flex-1 p-5 bg-[var(--teal-dark-dark)]">
+                            <div className="flex flex-col flex-1 p-5 bg-[var(--teal-dark-dark)] border-none">
                                 <h3 className="text-xl font-medium leading-snug mb-1 dark:text-white text-white">{p.name}</h3>
                                 <p className="font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.desc}</p>
                                 <div className="flex items-center justify-between mt-auto">
