@@ -1,182 +1,127 @@
-import React, { ReactNode } from 'react';
-import { Shield, Target, Leaf, Users, Award, Building } from 'lucide-react';
+"use client"
+
+import React, { ReactNode, useRef, useEffect, useState } from 'react';
+import { Shield, Target, Leaf, Users, Award, Building, Cpu, Handshake, Blocks, BadgeCheck, Headset, Smile } from 'lucide-react';
+
+const COLORS = {
+    teal: "#3BC1A8",
+    deep: "#005461",
+    mid: "#1FADAD",
+    white: "#ffffff",
+    darkBg: "#005461",
+    darkSurface: "#00404d",
+    darkCard: "#003a46",
+    darkBorder: "#0a6070",
+};
+
+const VALUES = [
+    { num: "1", icon: <Cpu size={24} />, title: "Technical Excellence", desc: "We uphold the highest engineering and installation standards to ensure reliability, safety, and long-term system performance." },
+    { num: "2", icon: "", title: "Integrity", desc: "We operate with transparency, accountability, and ethical business practices in every project and client engagement." },
+    { num: "3", icon: "", title: "Innovation", desc: "We embrace emerging technologies in renewable energy, surveillance, and smart infrastructure to deliver future-ready solutions." },
+    { num: "4", icon: "", title: "Reliability", desc: "We honor timelines, commitments, and service quality, ensuring clients can depend on our systems and support." },
+    { num: "5", icon: "", title: "Customer-Centric", desc: "We tailor every solution to the specific needs of homeowners, developers, and institutions, prioritising functionality and value." },
+    { num: "6", icon: "", title: "Sustainability", desc: "We promote environmentally responsible energy solutions that reduce carbon footprint and enhance long-term efficiency." },
+];
 
 const AboutPage = () => {
+    const [isDark, setIsDark] = useState()
+
+    function useScrollReveal() {
+        const ref = useRef<HTMLDivElement>(null);
+        const [visible, setVisible] = useState(false);
+        useEffect(() => {
+            const el = ref.current;
+            if (!el) return;
+            const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } }, { threshold: 0.1 });
+            io.observe(el);
+            return () => io.disconnect();
+        }, []);
+        return { ref, visible };
+    }
+
+    function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
+        const { ref, visible } = useScrollReveal();
+        return (
+            <div ref={ref} className={className} style={{ opacity: visible ? 1 : 0, transform: visible ? "translateY(0)" : "translateY(32px)", transition: `opacity 0.75s ease ${delay}ms, transform 0.75s ease ${delay}ms` }}>
+                {children}
+            </div>
+        );
+    }
+
+    function SectionLabel({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+        return (
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", fontFamily: "'IBM Plex Mono',monospace", fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: dark ? COLORS.teal : COLORS.deep, marginBottom: "16px" }}>
+                {children}
+            </div>
+        );
+    }
+
+    const bg = isDark ? COLORS.darkBg : COLORS.white;
+    const surface = isDark ? COLORS.darkSurface : "#f4fffe";
+    const card = isDark ? COLORS.darkCard : "#ffffff";
+    const border = isDark ? COLORS.darkBorder : "#cdeee9";
+    const text = isDark ? "#e8f8f6" : "#0a2e35";
+    const textMid = isDark ? "#9dd4cc" : "#2a6070";
+    const textLight = isDark ? "#6aacaa" : "#4a8a90";
+
     return (
-        <div className="bg-white min-h-screen">
-            {/* --- HERO SECTION --- */}
-            <section className="relative py-24 bg-[var(--teal-dark-light)] overflow-hidden">
-                <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1541888946425-d81bb19480c5?q=80&w=2060')] bg-cover bg-center mix-blend-overlay" />
-                <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-                    <div className='mt-4 mb-6'>
+        <div className="bg-white min-h-screen ">
+            <section className='min-w-screen flex justify-center align-center py-30'>
+                <div style={{ maxWidth: 1240, margin: "0 auto" }}>
 
-                    </div>
-                    <p className='text-white font-semibold text-lg'>About Us</p>
-                    <h1 className="text-3xl md:text-5xl font-extrabold text-gray-200 mb-8 mt-6">
-                        Evoque Space Building Excellence
-                    </h1>
-                    <div className="flex flex-col lg:flex-row gap-16 lg:items-start">
-                        <div className="lg:w-1/3 mt-8">
-                            <h2 className="text-white font-bold uppercase tracking-[0.2em] text-sm mb-4">
-                                Since 2014
+                    <div className='grid lg:grid-cols-2 space-x-10 '>
+                        <div className='ml-10'>
+                            <h1 className='text-[var(--teal-dark-dark)] mb-5 font-semibold'>About Evoque Spaces</h1>
+                            <h2 className="serif font-semibold text-4xl mb-4">
+                                Engineering Secure &<em className='text-[var(--teal-light)]'> Sustainable Spaces</em>
                             </h2>
-                            <p className="text-4xl font-extrabold text-white leading-tight">
-                                Decades of <br />
-                                <span className="text-white">Craftsmanship</span> <br />
-                                in every brick.
+                            <p style={{ fontSize: 16, lineHeight: 1.8, color: textMid, marginBottom: 18 }}>
+                                <strong style={{ color: text }}>Evoque Spaces Limited</strong>, is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
+                                We design and install reliable solar power systems, advanced CCTV and perimeter security solutions, and intelligent low-voltage networks that enhance safety, efficiency, and property value. From energy independence to complete surveillance coverage and smart building integration, we deliver systems engineered for performance and long-term reliability.
+                            </p>
+                            <p style={{ fontSize: 16, lineHeight: 1.8, color: textMid, marginBottom: 18 }}>
+                                Our team works closely with homeowners, developers, and contractors to provide tailored solutions that meet modern construction standards while embracing sustainability and innovation.
+                                At Evoque Spaces Limited, we don’t just install systems — we build secure, energy-efficient, and future-ready spaces.
                             </p>
                         </div>
-
-                        <div className="lg:w-2/3 space-y-8 mt-4">
-                            <div className="relative">
-
-                                <div className="absolute -left-6 top-0 bottom-0 w-[2px] h-[18em] bg-[var(--teal-light)] hidden md:block" />
-
-                                <p className="text-white text-xl leading-relaxed font-medium italic text-left">
-                                    "Evoque Spaces Limited is a premier construction firm in Kenya, dedicated to translating
-                                    <span className="text-white font-semibold not-italic"> ambitious architectural visions </span>
-                                    into tangible landmarks."
-                                </p>
-                            </div>
-
-                            <div className="grid md:grid-cols-1 gap-8 text-white text-base leading-relaxed">
-                                <p className='text-left'>
-                                    With a decade of mastery in the field, we lead the industry across residential, commercial,
-                                    and transformative renovation sectors. Our collective of seasoned architects and engineers
-                                    unite to deliver projects that redefine expectations.
-                                </p>
-                                <p className='text-left'>
-                                    At our core, we don’t just engineer structures; we cultivate enduring partnerships.
-                                    We focus on building the spaces where your future happens and the
-                                    <span className="text-white font-medium"> relationships that make them possible.</span>
-                                </p>
+                        <div>
+                            <div className='lg:mt-10 space-y-5 mt-10 max-w-[90%] ml-5 mb-5'>
+                                {[["Our Vision", "To be a leading provider of integrated renewable energy, security, and smart infrastructure solutions in Kenya and across Africa, transforming spaces into secure, sustainable, and intelligent environments."],
+                                ["Our Mission", "To design, deliver, and maintain high-performance solar, security, and electrical systems that enhance safety, energy independence, and operational efficiency — while upholding engineering excellence, innovation, and long-term client partnerships."]
+                                ].map(([tag, title, desc]) => (
+                                    <div key={tag} className='rounded-md  shadow-sm p-2'>
+                                        <div className="mt-5 text-[var(--teal-light)] text-extrabold text-xl">{tag}</div>
+                                        <h3 className="text-md mb-2 text-[var(--teal-dark-dark)]">{title}</h3>
+                                        <p className='text-gray-600'>{desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
+
+
                 </div>
             </section>
 
-            {/* --- THE MISSION SECTION --- */}
-            <section className="py-24 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
-                {/* --- LEFT SIDE: THE BRANDED VISUAL --- */}
-                <div className="relative group">
-                    {/* Abstract Background Decoration */}
-                    <div className="absolute -top-10 -left-10 w-64 h-64 bg-[#3BC1A8]/10 rounded-full blur-3xl" />
-                    <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-[#005461]/10 rounded-full blur-3xl" />
-
-                    <div className="relative">
-                        <div className="aspect-square bg-gradient-to-br from-[var(--teal-light)] to-[var(--teal-light-light)] rounded-[2.5rem] relative overflow-hidden shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]">
-                            {/* Subtle Pattern Overlay */}
-                            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-
-                            {/* The Frame Overlay */}
-                            <div className="absolute inset-6 border border-[var(--teal-light)] rounded-[1.8rem]" />
-
-                            {/* Central Logo Mark */}
-                            <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                                <div className="relative">
-                                    <span className="absolute -inset-4 bg-[#3BC1A8]/20 blur-xl rounded-full" />
-                                    <p className="relative font-display text-8xl md:text-9xl font-black text-[#3BC1A8] tracking-tighter">
-                                        ESL
-                                    </p>
-                                </div>
-                                <div className="mt-4 flex flex-col items-center">
-                                    <div className="w-12 h-1 bg-[#249E94] mb-3" />
-                                    <p className="text-black tracking-[0.4em] text-xs font-bold uppercase">
-                                        Evoque Spaces
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating Trust Badge */}
-                        <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 hidden md:flex items-center gap-4">
-                            <div className="w-12 h-12 bg-[#3BC1A8] rounded-full flex items-center justify-center text-white">
-                                <Award size={24} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* --- RIGHT SIDE: CONTENT & STATS --- */}
-                <div className="flex flex-col gap-10">
-                    <div className="space-y-6">
-                        <h2 className="text-5xl font-extrabold text-[#005461] leading-[1.1]">
-                            Driven by Precision, <br />
-                            <span className="text-[#249E94]">Inspired by People.</span>
-                        </h2>
-
-                        <div className="space-y-4">
-                            <p className="text-slate-600 text-lg leading-relaxed">
-                                Since our inception, <span className="text-[#005461] font-semibold">Evoque Spaces</span> has been committed to raising the standard of housing in East Africa. We realized that a home isn't just a structure; it's an ecosystem.
-                            </p>
-                            <p className="text-slate-600 text-lg leading-relaxed">
-                                By integrating professional renovation and bespoke interior design, we provide a seamless journey for homeowners and investors alike.
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Certifications Chips */}
-                    <div className="flex flex-wrap gap-4">
-                        <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 px-5 py-3 rounded-xl">
-                            <div className="w-8 h-8 rounded-lg bg-[#3BC1A8]/20 flex items-center justify-center text-[#0C7779]">
-                                <Award size={18} />
-                            </div>
-                            <span className="font-bold text-[#005461] text-sm">ISO 9001:2015</span>
-                        </div>
-                        <div className="flex items-center gap-3 bg-slate-50 border border-slate-200 px-5 py-3 rounded-xl">
-                            <div className="w-8 h-8 rounded-lg bg-[#3BC1A8]/20 flex items-center justify-center text-[#0C7779]">
-                                <Building size={18} />
-                            </div>
-                            <span className="font-bold text-[#005461] text-sm">NCA Class 1</span>
-                        </div>
-                    </div>
-
-                    {/* Stats Grid - Now properly aligned at the bottom */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4">
-                        {[
-                            { value: '500+', label: 'Projects' },
-                            { value: '12+', label: 'Years' },
-                            { value: '98%', label: 'Happy' },
-                            { value: '47', label: 'Counties' },
-                        ].map(({ value, label }) => (
-                            <div key={label} className="p-4 bg-[var(--teal-dark-dark)] rounded-2xl group  transition-colors duration-300">
-                                <p className="text-2xl font-black text-white">{value}</p>
-                                <p className="text-sm text-white font-bold uppercase tracking-widest">{label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* --- CORE VALUES --- */}
-            <section className="py-24 bg-slate-50">
+            <section className="bg-slate-50 mb-10">
                 <div className="max-w-7xl mx-auto px-6 text-center mb-16">
                     <h2 className="text-4xl font-bold text-[#005461]">Our Core Values</h2>
                     <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"></div>
                 </div>
 
                 <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-                    <ValueCard
-                        icon={<Shield />}
-                        title="Integrity First"
-                        desc="We believe in transparent pricing and honest timelines. No hidden costs, ever."
-                    />
-                    <ValueCard
-                        icon={<Target />}
-                        title="Unmatched Precision"
-                        desc="From the foundation to the final coat of paint, our detail-oriented approach ensures perfection."
-                    />
-                    <ValueCard
-                        icon={<Leaf />}
-                        title="Sustainability"
-                        desc="We prioritize eco-friendly materials and energy-efficient building techniques for a greener Kenya."
-                    />
+                    {VALUES.map((v, i) => (
+                        <ValueCard
+                            // icon={<Shield />}
+                            key={i}
+                            title={v.title}
+                            desc={v.desc}
+                        />
+                    ))}
                 </div>
             </section>
 
-            {/* --- TEAM TEASER --- */}
-            <section className="py-24 max-w-7xl mx-auto px-6">
+            {/* <section className="py-24 max-w-7xl mx-auto px-6">
                 <div className="bg-[#0C7779] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
                     <div className="relative z-10 max-w-xl">
                         <h2 className="text-4xl font-bold text-white mb-6">Meet the Visionaries</h2>
@@ -194,20 +139,16 @@ const AboutPage = () => {
                             </div>
                         ))}
                     </div>
-                    {/* Decorative background shape */}
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-[#3BC1A8] opacity-10 skew-x-12 translate-x-20"></div>
+                    <div className="absolute top-0 right-0 w-1/2 h-full bg-[var(--teal-dark-light)] opacity-10 skew-x-28 translate-x-20"></div>
                 </div>
-            </section>
+            </section> */}
         </div>
     );
 };
 
 // Sub-component for Value Cards
-const ValueCard = ({ icon, title, desc }: { icon: any, title: string, desc: string }) => (
+const ValueCard = ({ icon, title, desc }: { icon?: any, title: string, desc: string }) => (
     <div className="p-10 rounded-3xl border border-slate-100 shadow-xl bg-[var(--teal-dark-dark)] border-[var(--teal-dark-dark)]/30 transition-all group">
-        <div className="w-14 h-14 bg-[var(--teal-dark-light)] text-white rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            {React.cloneElement(icon, { size: 28 })}
-        </div>
         <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
         <p className="text-white leading-relaxed">{desc}</p>
     </div>

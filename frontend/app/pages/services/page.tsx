@@ -1,72 +1,151 @@
 "use client"
-import { Building2, Hammer, Home, PenTool, Ruler, Users } from "lucide-react";
+import { Award, Zap, ShieldCheck, Maximize, HeadphonesIcon } from 'lucide-react';
 
+import { useState, useRef, useEffect } from "react"
+
+const SERVICES = [
+    {
+        num: "01",
+        icon: "☀️",
+        tag: "Solar Energy",
+        title: "Solar Power Systems",
+        desc: "Complete solar energy design and installation for maximum efficiency. We assess your energy needs and deliver systems providing consistent output and significant long-term savings.",
+        features: ["Rooftop & Ground-Mount Installations", "Battery Storage & Backup", "Grid-Tied, Off-Grid & Hybrid", "Energy Monitoring & Management", "Maintenance & Performance Reports"],
+        highlight: true,
+    },
+    {
+        num: "02",
+        icon: "📷",
+        tag: "Security",
+        title: "CCTV & Perimeter Security",
+        desc: "Advanced surveillance and access control systems providing complete coverage and real-time monitoring for homes and commercial properties of every scale.",
+        features: ["HD & 4K Camera Systems", "Electric Fence & Perimeter Alarms", "Access Control & Biometrics", "Remote Monitoring & Alerts", "Intercom & Gate Automation"],
+        highlight: false,
+    },
+    {
+        num: "03",
+        icon: "🔌",
+        tag: "Smart Infrastructure",
+        title: "Low-Voltage Networks",
+        desc: "Intelligent building infrastructure including structured cabling, networking, home automation, and smart building integration systems built to last.",
+        features: ["Structured Data Cabling", "Home & Building Automation", "Fibre & Network Infrastructure", "AV & Public Address Systems", "Smart Lighting & Control"],
+        highlight: false,
+    },
+];
+
+const COLORS = {
+    teal: "#3BC1A8",
+    deep: "#005461",
+    mid: "#1FADAD",
+    white: "#ffffff",
+    darkBg: "#005461",
+    darkSurface: "#00404d",
+    darkCard: "#003a46",
+    darkBorder: "#0a6070",
+};
 
 export default function Services() {
-    const services = [
+    const [isDark, setIsDark] = useState()
+    function useScrollReveal() {
+        const ref = useRef<HTMLDivElement>(null);
+        const [visible, setVisible] = useState(false);
+        useEffect(() => {
+            const el = ref.current;
+            if (!el) return;
+            const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); io.disconnect(); } }, { threshold: 0.1 });
+            io.observe(el);
+            return () => io.disconnect();
+        }, []);
+        return { ref, visible };
+    }
+
+
+    const WHY_CHOOSE_US = [
         {
-            icon: PenTool,
-            title: "Architectural Design",
-            description: "Custom architectural designs that blend functionality with stunning aesthetics. We create spaces that inspire and endure.",
+            icon: <Award className="text-[var(--teal-light)]" size={24} />,
+            title: "Certified Technical Team",
+            desc: "Licensed engineers with specialized training in smart infrastructure."
         },
         {
-            icon: Building2,
-            title: "Commercial Construction",
-            description: "High-rise buildings, office complexes, and commercial spaces built to the highest standards of quality and safety.",
+            icon: <Zap className="text-[var(--teal-light)]" size={24} />,
+            title: "End-to-End Execution",
+            desc: "From initial survey to final testing, we handle the entire project lifecycle."
         },
         {
-            icon: Home,
-            title: "Residential Building",
-            description: "From modern villas to family homes, we bring your dream residence to life with precision craftsmanship.",
+            icon: <ShieldCheck className="text-[var(--teal-light)]" size={24} />,
+            title: "Premium Trusted Brands",
+            desc: "We exclusively use Tier-1 components and industry-leading hardware."
         },
         {
-            icon: Hammer,
-            title: "Renovation & Remodeling",
-            description: "Transform existing spaces with our expert renovation services. We breathe new life into properties.",
+            icon: <Maximize className="text-[var(--teal-light)]" size={24} />,
+            title: "Scalable Solutions",
+            desc: "Modular designs that grow alongside your property or business needs."
         },
         {
-            icon: Ruler,
-            title: "Project Management",
-            description: "End-to-end project management ensuring timely delivery, cost efficiency, and uncompromising quality.",
-        },
-        {
-            icon: Users,
-            title: "Consultation Services",
-            description: "Expert advice on construction feasibility, budgeting, and design optimization for your projects.",
-        },
+            icon: <HeadphonesIcon className="text-[var(--teal-light)]" size={24} />,
+            title: "After-Sales Support",
+            desc: "Dedicated technical maintenance and 24/7 emergency response lines."
+        }
     ];
+
     return (
         <div>
-            <section id="services" className="py-24 bg-white mt-24">
-                <div className="container mx-auto px-4 lg:px-8">
-                    {/* Section Header */}
-                    <div className="text-center max-w-3xl mx-auto mb-16">
-                        <span className="text-black font-medium tracking-wider uppercase text-sm">What We Do</span>
-                        <h2 className="font-display text-3xl md:text-5xl font-bold text-foreground mt-4 mb-6">
-                            Our Services
-                        </h2>
-                        <p className="text-lg text-black">
-                            Comprehensive construction and design services tailored to your unique vision and requirements.
-                        </p>
+            <section className="relative py-24 bg-white overflow-hidden">
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
+                    <div>
+                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                            <div>
+                                <span className="text-[var(--teal-dark-dark)] font-bold tracking-widest uppercase text-sm block mb-2">
+                                    Our Services
+                                </span>
+                                <h2 className="text-4xl md:text-5xl font-serif text-slate-900 leading-tight">
+                                    Integrated <em className="text-[var(--teal-dark-light)] not-italic font-medium">Solutions</em><br />
+                                    for Modern Spaces
+                                </h2>
+                            </div>
+
+                            <button className="group flex items-center gap-2 text-white font-semibold bg-[var(--teal-dark-dark)] p-2 rounded-md transition-all hover:text-[var(--teal-light)]">
+                                Discuss Your Project
+                                <span className="transition-transform group-hover:translate-x-1">→</span>
+                            </button>
+                        </div>
                     </div>
 
-                    {/* Services Grid */}
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {services.map((service, index) => (
-                            <div
-                                key={service.title}
-                                className="group bg-[var(--teal-dark-dark)] rounded-md p-8 text-white hover:shadow-elevated transition-all duration-500 hover:-translate-y-2"
-                                style={{ animationDelay: `${index * 0.1}s` }}
-                            >
-                                <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
-                                    <service.icon className="w-7 h-7 text-accent group-hover:text-accent-foreground transition-colors duration-300" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                        {SERVICES.map((s, i) => (
+                            <div key={s.num}>
+                                <div className="group h-full flex flex-col bg-slate-50 p-8 rounded-2xl border border-slate-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white">
+                                    {/* Service Tag/Icon area */}
+                                    <div className="mb-6 flex items-center justify-between">
+                                        <span className="text-xl font-mono font-bold tracking-tighter text-[var(--teal-light)] uppercase py-1  rounded-full">
+                                            {s.tag}
+                                        </span>
+                                    </div>
+
+                                    <h3 className="text-[var(--teal-dark-dark)] text-2xl font-semibold mb-4">
+                                        {s.title}
+                                    </h3>
+
+                                    <p className="text-slate-600 mb-8 leading-relaxed">
+                                        {s.desc}
+                                    </p>
+
+                                    <ul className="space-y-3 mb-10 flex-grow">
+                                        {s.features.map(f => (
+                                            <li key={f} className="flex items-start gap-3 text-slate-700 text-sm">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--teal-dark-dark)] shrink-0" />
+                                                {f}
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                    <button
+
+                                        className="mt-auto flex items-center gap-2 font-mono text-xs tracking-[0.12em] bg-[var(--teal-dark-dark)] rounded-md w-1/2 p-2 uppercase text-white font-bold hover:text-[var(--teal-light)] transition-all"
+                                    >
+                                        Learn More <span className="text-lg">→</span>
+                                    </button>
                                 </div>
-                                <h3 className="font-display text-xl text-white font-semibold text-foreground mb-3">
-                                    {service.title}
-                                </h3>
-                                <p className="text-white  leading-relaxed">
-                                    {service.description}
-                                </p>
                             </div>
                         ))}
                     </div>
