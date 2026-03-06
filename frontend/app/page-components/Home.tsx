@@ -57,33 +57,30 @@ export default function HomePage() {
     const prevSlide = () => setCurrent(current === 0 ? INFRA_SERVICES.length - 1 : current - 1);
 
     return (
-        <div className="relative min-h-screen flex items-center overflow-hidden">
-            <div className="absolute -inset-0 lg:-left-55 lg:w-2/3 w-2/2 lg:bg-[var(--teal-dark-light)] bg-[var(--teal-dark-light)] md:bg-white dark:bg-[var(--teal-dark-dark)] lg:skew-x-25 md:skew-x-54 md:left-10 md:w-3/2 skew-x-30 -left-85"></div>
+        <div className="relative min-h-screen flex items-center overflow-hidden bg-[var(--teal-dark-light)]">
+            {/* <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none" /> */}
 
-            {/* Subtle Grid Overlay for "Technical" feel */}
-            {/* <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none" /> */}
-
-            <header className="relative w-full pt-20 pb-12 z-10">
+            <header className="relative w-full pt-0 pb-12 z-10 lg:-mt-10">
                 <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
 
                     {/* Left Column: Mission & Authority */}
                     <div>
-                        <div className="space-y-8 mt-10">
+                        <div className="relative space-y-8 lg:mt-10 mt-25">
                             <div className="space-y-4">
-                                <h1 className="text-4xl lg:text-7xl leading-[1.1] tracking-tight">
+                                <h1 className="text-4xl lg:text-5xl leading-[1.1] tracking-tight">
                                     {/* Line 1: Power */}
-                                    <span className="block lg:text-white dark:text-white">
-                                        High-Performance <span className="sm:text-[var(--teal-dark-dark)] ">Power</span>
+                                    <span className="block lg:text-white text-white dark:text-white font-bold">
+                                        High-Performance <span className="sm:text-[var(--teal-dark-dark)] text-[var(--teal-dark-dark)] font-bold">Power</span>
                                     </span>
 
                                     {/* Line 2: Security */}
-                                    <span className="block dark:text-slate-100 lg:text-white">
+                                    <span className="block dark:text-slate-100 lg:text-[var(--teal-dark-dark)] text-white font-bold">
                                         Precision Security
                                     </span>
 
                                     {/* Line 3: Integration */}
                                     <span className="block relative">
-                                        <span className="relative z-10 text-[var(--teal-dark-dark)] dark:text-[var(--teal-light)]">
+                                        <span className="relative z-10 lg:text-white text-[var(--teal-dark-dark)] font-bold dark:text-[var(--teal-light)]">
                                             Smart Integration
                                         </span>
                                         {/* Subtle underline for the final punchy word */}
@@ -92,68 +89,52 @@ export default function HomePage() {
                                 </h1>
                             </div>
 
-                            <p className="text-lg lg:text-white max-w-lg leading-relaxed">
+                            <p className="text-lg lg:text-white text-white max-w-lg leading-relaxed">
                                 Evoque Spaces Limited is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
                             </p>
 
                             <div className="flex flex-wrap gap-4">
                                 <Link href={{ pathname: "/pages/shop" }}>
-                                    <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-2 group">
+                                    <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-full font-bold transition-all flex items-center gap-2 group">
                                         Shop
                                         <ShoppingCart className="text-white" size={20} />
                                     </button>
                                 </Link>
-                                {/* <button className="bg-transparent border border-white/30 hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold transition-all">
-                                    View Our Projects
-                                </button> */}
+                                <button className="flex space-x-2 bg-[var(--teal-dark-light)] rounded-full border border-white/30 hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 font-bold transition-all">
+                                    <p>View Solutions</p>
+                                    <ArrowRight size={20} className="mt-1"/>
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    {/* Right Column: Visual Component */}
                     <div className="relative">
-                        {/* Main Architectural Image */}
                         <div className="relative z-10 group w-full max-w-[650px] mx-auto">
-                            {/* Soft Glow Background */}
-                            <div className="absolute -inset-4  rounded-[3rem]" />
-
-                            {/* Main Container */}
-                            <div className="relative border-white/5 overflow-hidden rounded-md bg-transparent aspect-[4/5] sm:aspect-square md:aspect-[4/5]">
-
-                                {/* Slides */}
+                            <div className="relative border-white/5  overflow-hidden rounded-md aspect-[4/5] sm:aspect-square md:aspect-[4/5]">
                                 {INFRA_SERVICES.map((service, index) => (
                                     <div
                                         key={index}
-                                        className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-110"
+                                        className={`absolute inset-0 transition-all  duration-1000 rounded-md ease-in-out ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-110"
                                             }`}
                                     >
-                                        {/* Background Image */}
                                         <img
                                             src={service.image}
                                             alt={service.title}
-                                            className="w-full h-full object-contain"
+                                            className="w-full h-full object-contain lg:p-4"
                                         />
-
-                                        {/* Overlay Gradient */}
-                                        <div className="absolute inset-0  to-transparent" />
 
                                         {/* Content Overlay */}
                                         <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
                                             <div className="flex items-center gap-3 mb-4">
-                                                <div>
-                                                    <div className="p-2 bg-[var(--teal-light)] backdrop-blur-md rounded-lg w-10">
-                                                        {service.icon}
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div className="bg-[var(--teal-dark-dark)]/20 p-4 rounded-md">
                                                 <h3 className="text-3xl font-bold text-white mb-3">
                                                     {service.title}
                                                 </h3>
-                                                {/* 
-                                                <p className="text-slate-300 text-sm leading-relaxed mb-8 max-w-sm">
+                                                
+                                                <p className="hidden lg:block text-white text-sm leading-relaxed mb-8 max-w-sm">
                                                     {service.desc}
-                                                </p> */}
+                                                </p>
 
                                                 <button
                                                     onClick={() => window.location.href = service.link}

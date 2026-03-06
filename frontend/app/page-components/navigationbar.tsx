@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2, User2, Sun, Moon, Phone, Info, LogIn } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from "next/link"
+import { stylish } from '@/fonts';
 
 const NavigationBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ const NavigationBar = () => {
     const path = usePathname()
 
     return (
-        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
+        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} ${stylish.className} fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
     }`}>
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
@@ -49,7 +50,7 @@ const NavigationBar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className={`flex items-center gap-1.5 font-normal flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-light)] transition-colors`}
+                            className={`flex items-center gap-1.5 font-normal flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-light)] transition-colors text-lg`}
                         >
                             {link.name}
                             {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
@@ -80,9 +81,9 @@ const NavigationBar = () => {
                         <ShoppingCart size={24} />
                         <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
                     </div>
-                    <button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 rounded-md font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
+                    <button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
                         <p className='text-md font-normal md:hidden lg:block'>Sign In</p>
-                        <LogIn className='' size={22}/>
+                        <LogIn className='' size={20}/>
                     </button>
                 </div>
 
