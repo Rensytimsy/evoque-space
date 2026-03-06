@@ -233,7 +233,7 @@ export default function ShopPage() {
                             <p className="font-jost text-sm mt-2 text-[var(--teal-light)]">Try adjusting your search or filters</p>
                         </div>
                     ) : filtered.map(p => (
-                        <div key={p.id} className="card-hover border min-w-32 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
+                        <div key={p.id} className="card-hover mt-10 min-w-32 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
                         >
 
                             {/* Image */}
