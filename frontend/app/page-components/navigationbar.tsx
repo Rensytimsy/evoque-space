@@ -27,10 +27,7 @@ const NavigationBar = () => {
         { name: 'contact', href: '/pages/contact', icon: <Phone size={25} /> },
     ];
 
-    console.log(isScrolled)
-
     const path = usePathname()
-    console.log(path)
 
     return (
         <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
