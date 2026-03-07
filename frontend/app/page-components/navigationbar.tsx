@@ -114,7 +114,7 @@ const NavigationBar = () => {
                     )}
                 </button>
                 <button
-                    className={`md:hidden p-2 ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} text-xl`}
+                    className={`md:hidden p-2 dark:text-white ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} text-xl`}
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
