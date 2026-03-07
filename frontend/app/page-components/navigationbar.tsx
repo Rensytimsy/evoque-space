@@ -5,11 +5,15 @@ import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2, Us
 import { usePathname } from 'next/navigation';
 import Link from "next/link"
 import { stylish } from '@/fonts';
+import { useTheme } from 'next-themes';
 
 const NavigationBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(false)
+    const { setTheme } = useTheme()
+    const [currentTheme, setCurrentTheme] = useState<"light" | "dark" | "system">("light");
+
 
     // Handle scroll effect for glassmorphism
     useEffect(() => {
@@ -31,7 +35,7 @@ const NavigationBar = () => {
     const path = usePathname()
 
     return (
-        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} ${stylish.className} fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
+        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
     }`}>
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
@@ -50,7 +54,7 @@ const NavigationBar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className={`flex items-center gap-1.5 font-normal flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-light)] transition-colors text-lg`}
+                            className={`flex items-center gap-1.5 font-normal dark:text-white flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-light)] transition-colors text-lg`}
                         >
                             {link.name}
                             {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
@@ -64,7 +68,10 @@ const NavigationBar = () => {
                 {/* DESKTOP ACTIONS */}
                 <div className="hidden md:flex items-center gap-5">
                     <button
-                        onClick={() => setIsDark(!isDark)}
+                        onClick={() => {
+                            setIsDark(!isDark),
+                                isDark ? setTheme("light") : setTheme("dark")
+                        }}
                         className={`p-2 rounded-lg dark:bg-gray-800 transition-colors duration-300 ${isScrolled ? "bg-[var(--teal-dark-light)] text-white" : "bg-[var(--teal-dark-dark)] text-white"}`}
                         aria-label="Toggle Theme"
                     >
@@ -74,17 +81,18 @@ const NavigationBar = () => {
                             <Moon className={`w-5 h-5 text-slate-700 ${isScrolled ? "text-[var(--teal-dark-dark)] text-white" : "text-[var(--teal-dark-dark)] text-white"}`} />
                         )}
                     </button>
-                    <button className={`p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full transition-all`}>
+                    <button className={`p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full transition-all`}>
                         <User2 size={24} className='' />
                     </button>
-                    <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
+                    <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
                         <ShoppingCart size={24} />
-                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">{0}</span>
+                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{0}</span>
                     </div>
-                    <button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
+                    <Link href={{ pathname: "/pages/auth/signin" }}><button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 dark:bg-white dark:text-[var(--teal-dark-dark)] rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
                         <p className='text-md font-normal md:hidden lg:block'>Sign In</p>
-                        <LogIn className='' size={20}/>
+                        <LogIn className='' size={20} />
                     </button>
+                    </Link>
                 </div>
 
 
@@ -92,7 +100,10 @@ const NavigationBar = () => {
                 {/* MOBILE MENU TOGGLE */}
 
                 <button
-                    onClick={() => setIsDark(!isDark)}
+                    onClick={() => {
+                        setIsDark(!isDark),
+                            isDark ? setTheme("light") : setTheme("dark")
+                    }}
                     className={`absolute lg:hidden md:hidden right-20 p-2 rounded-lg dark:bg-gray-800 transition-colors duration-300 ${isScrolled ? "bg-[var(--teal-light)] text-white" : "bg-[var(--teal-dark-light)] text-white"}`}
                     aria-label="Toggle Theme"
                 >

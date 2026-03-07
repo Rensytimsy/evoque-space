@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "./page-components/navigationbar";
 import Footer from "./page-components/footer";
-
+import {ThemeProvider as NextThemesProvider} from "next-themes"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +36,16 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
-          <NavigationBar />
-          <div>
-            {children}
-          </div>
-          <Footer />
+        <NextThemesProvider
+        defaultTheme="system"
+        attribute="class"
+        >
+            <NavigationBar />
+            <div>
+                {children}
+            </div>
+            <Footer />
+        </NextThemesProvider>
       </body>
     </html>
   );

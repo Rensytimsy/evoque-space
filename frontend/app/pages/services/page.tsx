@@ -80,15 +80,15 @@ export default function Services() {
 
     return (
         <div>
-            <section className="relative py-24 bg-white overflow-hidden">
+            <section className="relative py-24 bg-white dark:bg-[var(--teal-dark-dark)]/20 overflow-hidden">
                 <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div>
                         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                             <div>
-                                <span className="font-bold text-[var(--teal-dark-dark)] font-bold tracking-widest uppercase text-sm block mb-2">
+                                <span className="dark:text-white font-bold text-[var(--teal-dark-dark)] font-bold tracking-widest uppercase text-sm block mb-2">
                                     Our Services
                                 </span>
-                                <h2 className="font-bold text-4xl md:text-5xl text-slate-900 leading-tight">
+                                <h2 className="dark:text-white font-bold text-4xl md:text-5xl text-slate-900 leading-tight">
                                     Integrated <em className="text-[var(--teal-dark-light)] not-italic font-bold">Solutions</em><br />
                                     for Modern Spaces
                                 </h2>
@@ -99,26 +99,26 @@ export default function Services() {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
                         {SERVICES.map((s, i) => (
                             <div key={s.num}>
-                                <div className="group h-full flex flex-col bg-slate-50 p-8 rounded-2xl border border-slate-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:bg-white">
+                                <div className="group dark:bg-[var(--teal-dark-dark)] h-full flex flex-col bg-slate-50 p-8 rounded-2xl hover:shadow-xl hover:-translate-y-2 hover:bg-white">
                                     {/* Service Tag/Icon area */}
                                     <div className="mb-6 flex items-center justify-between">
-                                        <span className="text-xl font-mono font-bold tracking-tighter text-[var(--teal-light)] uppercase py-1  rounded-full">
+                                        <span className="text-xl font-mono dark:text-white font-bold tracking-tighter text-[var(--teal-light)] uppercase py-1  rounded-full">
                                             {s.tag}
                                         </span>
                                     </div>
 
-                                    <h3 className="text-[var(--teal-dark-dark)] text-2xl font-semibold mb-4">
+                                    <h3 className="text-[var(--teal-dark-dark)] dark:text-white text-2xl font-semibold mb-4">
                                         {s.title}
                                     </h3>
 
-                                    <p className="text-slate-600 mb-8 leading-relaxed">
+                                    <p className="text-slate-600 dark:text-white mb-8 leading-relaxed">
                                         {s.desc}
                                     </p>
 
-                                    <ul className="space-y-3 mb-10 flex-grow">
+                                    <ul className="space-y-3 mb-10 flex-grow dark:text-white">
                                         {s.features.map(f => (
-                                            <li key={f} className="flex items-start gap-3 text-slate-700 text-sm">
-                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--teal-dark-dark)] shrink-0" />
+                                            <li key={f} className="flex dark:text-white items-start gap-3 text-slate-700 text-sm">
+                                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-light)] shrink-0" />
                                                 {f}
                                             </li>
                                         ))}
@@ -126,7 +126,7 @@ export default function Services() {
 
                                     <button
 
-                                        className="mt-auto flex items-center gap-2 font-mono text-xs tracking-[0.12em] bg-[var(--teal-dark-dark)] rounded-md w-1/2 p-2 uppercase text-white font-bold hover:text-[var(--teal-light)] transition-all"
+                                        className="mt-auto flex items-center gap-2 dark:bg-[var(--teal-light)] font-mono text-xs tracking-[0.12em] bg-[var(--teal-dark-dark)] rounded-sm dark:hover:text-[var(--teal-dark-dark)] w-1/2 p-2 uppercase text-white font-bold hover:text-[var(--teal-light)] transition-all"
                                     >
                                         Learn More <span className="text-lg">→</span>
                                     </button>

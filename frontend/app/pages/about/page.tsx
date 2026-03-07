@@ -65,21 +65,21 @@ const AboutPage = () => {
     const textLight = isDark ? "#6aacaa" : "#4a8a90";
 
     return (
-        <div className="bg-white min-h-screen ">
-            <section className='min-w-screen flex justify-center align-center py-30'>
-                <div style={{ maxWidth: 1240, margin: "0 auto" }}>
+        <div className="bg-white mb-10 dark:bg-[var(--teal-dark-dark)]/20">
+            <section className='min-w-screen flex justify-center align-center py-30 mb-10'>
+                <div className='max-w-[80%]'>
 
                     <div className='grid lg:grid-cols-2 space-x-10 '>
                         <div className='ml-10'>
-                            <h1 className='text-[var(--teal-dark-dark)] mb-5 font-semibold'>About Evoque Spaces</h1>
-                            <h2 className="serif font-semibold text-4xl mb-4">
+                            <h1 className='text-[var(--teal-dark-dark)] mb-5 font-semibold text-[var(--teal-dark-dark)] dark:text-white text-2xl'>About Evoque Spaces</h1>
+                            <h2 className="serif font-semibold text-5xl mb-4 text-[var(--teal-dark-dark)] dark:text-white">
                                 Engineering Secure &<em className='text-[var(--teal-light)]'> Sustainable Spaces</em>
                             </h2>
-                            <p style={{ fontSize: 16, lineHeight: 1.8, color: textMid, marginBottom: 18 }}>
-                                <strong style={{ color: text }}>Evoque Spaces Limited</strong>, is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
+                            <p className='text-[var(--teal-dark-dark)] dark:text-white text-md'>
+                                <strong className='text-[var(--teal-light)] dark:text-white'>Evoque Spaces Limited</strong>, is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
                                 We design and install reliable solar power systems, advanced CCTV and perimeter security solutions, and intelligent low-voltage networks that enhance safety, efficiency, and property value. From energy independence to complete surveillance coverage and smart building integration, we deliver systems engineered for performance and long-term reliability.
                             </p>
-                            <p style={{ fontSize: 16, lineHeight: 1.8, color: textMid, marginBottom: 18 }}>
+                            <p className='text-[var(--teal-dark-dark)] dark:text-white text-md mt-5'>
                                 Our team works closely with homeowners, developers, and contractors to provide tailored solutions that meet modern construction standards while embracing sustainability and innovation.
                                 At Evoque Spaces Limited, we don’t just install systems — we build secure, energy-efficient, and future-ready spaces.
                             </p>
@@ -89,9 +89,9 @@ const AboutPage = () => {
                                 {[["Our Vision", "To be a leading provider of integrated renewable energy, security, and smart infrastructure solutions in Kenya and across Africa, transforming spaces into secure, sustainable, and intelligent environments."],
                                 ["Our Mission", "To design, deliver, and maintain high-performance solar, security, and electrical systems that enhance safety, energy independence, and operational efficiency — while upholding engineering excellence, innovation, and long-term client partnerships."]
                                 ].map(([tag, title, desc]) => (
-                                    <div key={tag} className='rounded-md  shadow-sm p-2'>
-                                        <div className="mt-5 text-[var(--teal-light)] text-extrabold text-xl">{tag}</div>
-                                        <h3 className="text-md mb-2 text-[var(--teal-dark-dark)]">{title}</h3>
+                                    <div key={tag} className='rounded-md  shadow-sm p-3 dark:bg-[var(--teal-dark-light)]'>
+                                        <div className="mt-5 text-[var(--teal-light)] dark:text-white font-extrabold text-xl">{tag}</div>
+                                        <h3 className="text-md mb-2 text-[var(--teal-dark-dark)] dark:text-white">{title}</h3>
                                         <p className='text-gray-600'>{desc}</p>
                                     </div>
                                 ))}
@@ -103,9 +103,9 @@ const AboutPage = () => {
                 </div>
             </section>
 
-            <section className="bg-slate-50 mb-10">
-                <div className="max-w-7xl mx-auto px-6 text-center mb-16">
-                    <h2 className="text-4xl font-bold text-[#005461]">Our Core Values</h2>
+            <section className="mb-0 p-1">
+                <div className="max-w-7xl mx-auto px-6 text-center mb-6">
+                    <h2 className="text-4xl font-bold text-[#005461] dark:text-white">Our Core Values</h2>
                     <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"></div>
                 </div>
 

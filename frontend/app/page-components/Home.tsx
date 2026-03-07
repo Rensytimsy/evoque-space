@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react"
 
 import { Search, Hammer, ShoppingCart, Paintbrush, ArrowRight, Shield, Sun, Cpu, ShieldCheck, Video, Lock, Droplets, ChevronRight, ChevronLeft } from 'lucide-react';
 import Link from "next/link";
+import { useTheme } from "next-themes";
+
+
 const INFRA_SERVICES = [
     {
         title: "Renewable Energy & Power",
@@ -44,6 +47,9 @@ const INFRA_SERVICES = [
 
 export default function HomePage() {
     const [current, setCurrent] = useState(0);
+    const {theme} = useTheme()
+
+    console.log(theme)
 
     // Auto-play logic
     useEffect(() => {
@@ -57,7 +63,7 @@ export default function HomePage() {
     const prevSlide = () => setCurrent(current === 0 ? INFRA_SERVICES.length - 1 : current - 1);
 
     return (
-        <div className="relative min-h-screen flex items-center overflow-hidden bg-[var(--teal-dark-light)]">
+        <div className="relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-[var(--teal-dark-dark)]/20">
             {/* <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none" /> */}
 
             <header className="relative w-full pt-0 pb-12 z-10 lg:-mt-10">
@@ -69,38 +75,38 @@ export default function HomePage() {
                             <div className="space-y-4">
                                 <h1 className="text-4xl lg:text-5xl leading-[1.1] tracking-tight">
                                     {/* Line 1: Power */}
-                                    <span className="block lg:text-white text-white dark:text-white font-bold">
-                                        High-Performance <span className="sm:text-[var(--teal-dark-dark)] text-[var(--teal-dark-dark)] font-bold">Power</span>
+                                    <span className="block text-[var(--teal-dark-dark)] dark:text-white font-bold">
+                                        High-Performance <span className="text-[var(--teal-dark-light)] font-bold">Power</span>
                                     </span>
 
                                     {/* Line 2: Security */}
-                                    <span className="block dark:text-slate-100 lg:text-[var(--teal-dark-dark)] text-white font-bold">
+                                    <span className="block dark:text-slate-100 text-[var(--teal-dark-dark)] font-bold">
                                         Precision Security
                                     </span>
 
                                     {/* Line 3: Integration */}
                                     <span className="block relative">
-                                        <span className="relative z-10 lg:text-white text-[var(--teal-dark-dark)] font-bold dark:text-[var(--teal-light)]">
+                                        <span className="relative z-10 text-[var(--teal-dark-light)] font-bold dark:text-[var(--teal-light)]">
                                             Smart Integration
                                         </span>
                                         {/* Subtle underline for the final punchy word */}
-                                        <span className="absolute bottom-2 left-0 h-3 w-48 bg-[var(--teal-light)]/20 -z-10 hidden lg:block" />
+                                        <span className="absolute bottom-0 left-0 right-2 h-13 w-96 p-2 -skew-x-15 bg-[var(--teal-dark-light)]/30 -z-10 hidden lg:block" />
                                     </span>
                                 </h1>
                             </div>
 
-                            <p className="text-lg lg:text-white text-white max-w-lg leading-relaxed">
+                            <p className="text-lg font-semibold text-[var(--teal-dark-dark)] dark:text-white max-w-lg leading-relaxed">
                                 Evoque Spaces Limited is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
                             </p>
 
                             <div className="flex flex-wrap gap-4">
                                 <Link href={{ pathname: "/pages/shop" }}>
-                                    <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-full font-bold transition-all flex items-center gap-2 group">
+                                    <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
                                         Shop
                                         <ShoppingCart className="text-white" size={20} />
                                     </button>
                                 </Link>
-                                <button className="flex space-x-2 bg-[var(--teal-dark-light)] rounded-full border border-white/30 hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 font-bold transition-all">
+                                <button className="flex space-x-2  rounded-md border dark:text-white dark:border dark:border-2 dark:border-white border-4 text-[var(--teal-dark-dark)] hover:text-white hover:bg-[var(--teal-dark-dark)] px-8 py-4 font-bold transition-all">
                                     <p>View Solutions</p>
                                     <ArrowRight size={20} className="mt-1"/>
                                 </button>

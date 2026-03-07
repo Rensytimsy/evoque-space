@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from "react";
 import { Search, ShoppingBasket, ShoppingCart } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const products = [
     { id: 1, name: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840, rating: 4.8, reviews: 124, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Oval cast-iron soaker with matte white finish" },
@@ -58,6 +59,8 @@ export default function ShopPage() {
     const [cart, setCart] = useState<number[]>([]);
     const [isScrolled, setIsScrolled] = useState(false)
 
+    const {theme} = useTheme()
+
     const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
     const addToCart = (id: number) => setCart(p => p.includes(id) ? p : [...p, id]);
     const togglePriceRange = (label: string) => setSelectedPrices(p => p.includes(label) ? p.filter(x => x !== label) : [...p, label]);
@@ -92,27 +95,12 @@ export default function ShopPage() {
     console.log(isScrolled)
 
     return (
-        <div className="min-h-screen mt-20 bg-white">
+        <div className="min-h-screen mt-20 bg-white dark:bg-[var(--teal-dark-dark)]/20">
             <div className="relative overflow-hidden border-b rounded-br-4xl rounded-bl-4xl p-2">
-                {/* <div className="relative py-6 md:py-14 px-6 text-center">
-                    <div className="relative z-10">
-                        <h1 className="text-3xl md:text-6xl font-extrabold tracking-[10px] md:tracking-[15px] uppercase text-white mb-4">
-                            ESL Shop
-                        </h1>
-                        <div className="flex items-center justify-center gap-4">
-                            <p className="font-jost text-md md:text-md tracking-tight md:tracking-tight uppercase text-white/80 italic">
-                                Elevated essentials for the modern sanctuary
-                            </p>
-                        </div>
-                    </div>
-                </div> */}
-
-                {/* 2. Search & Filter Bar */}
-                <div className={`fixed top-18 w-full left-0 py-10  right-0 rounded-br-4xl rounded-bl-4xl z-20 px-4 md:px-10 py-4 md:py-6 bg-white dark:bg-[var(--teal-dark-light)]`}>
+                <div className={`fixed top-18 w-full left-0 py-10  right-0 rounded-br-4xl rounded-bl-4xl z-20 px-4 md:px-10 py-4 md:py-6 bg-white dark:bg-[var(--teal-dark-dark)]`}>
 
                     <div className="max-w-7xl mx-auto lg:mt-8 flex flex-col md:flex-row items-center gap-4">
 
-                        {/* Search Input Group */}
                         <div className="relative flex-1 w-full group lg:ml-[20%]">
                             <span className="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-sm transition-transform group-focus-within:scale-110">
                                 <Search size={23} className="text-[var(--teal-dark-dark)]" />
@@ -126,7 +114,6 @@ export default function ShopPage() {
                             />
                         </div>
 
-                        {/* Select & Count Group */}
                         <div className="flex items-center gap-4 w-full md:w-auto lg:mr-10">
                             <div className="relative flex-1 md:flex-none">
                                 <select
@@ -136,7 +123,6 @@ export default function ShopPage() {
                                 >
                                     {sortOptions.map(o => <option key={o} className="bg-white text-black">{o}</option>)}
                                 </select>
-                                {/* Custom Arrow for Select */}
                             </div>
 
                             <div className="hidden lg:flex items-center gap-2 pl-4 border-l">
@@ -152,9 +138,7 @@ export default function ShopPage() {
 
 
             <div className="flex">
-
-                {/* Sidebar */}
-                <aside className={`hidden h-full lg:block sticky top-40 sidebar-transition flex-shrink-0 bg-white`}
+                <aside className={`hidden h-full lg:block sticky top-40 sidebar-transition flex-shrink-0 bg-white dark:bg-[var(--teal-dark-dark)]/20`}
                     style={{
                         width: sidebarOpen ? "268px" : "0px", minWidth: sidebarOpen ? "268px" : "0px",
                         padding: sidebarOpen ? "28px 24px" : "0px"
@@ -165,11 +149,11 @@ export default function ShopPage() {
                         <div className="mb-8 mt-12">
                             <SidebarTitle label="Category" />
                             {categories.map(c => (
-                                <button key={c} className="font-jost block w-full text-left text-sm px-3 py-2 border-l-2 transition-all duration-200"
+                                <button key={c} className="font-jost block w-full dark:text-white text-left text-sm px-3 py-2 border-l-2 transition-all duration-200"
                                     style={{
                                         background: selectedCategory === c ? "#005461" : "transparent",
                                         borderLeftColor: selectedCategory === c ? "#fff" : "transparent",
-                                        color: selectedCategory === c ? "#ffffff" : "#000000",
+                                        // color: selectedCategory === c ? "#ffffff" : "#000000",
                                         fontWeight: selectedCategory === c ? 500 : 400
                                     }}
 
@@ -179,15 +163,15 @@ export default function ShopPage() {
 
                         {/* Price */}
                         <div className="mb-8">
-                            <div className="font-jost  tracking-tight uppercase mb-4 flex items-center gap-2 text-black text-md">
+                            <div className="font-jost  tracking-tight uppercase mb-4 font-extrabold flex items-center gap-2 text-black text-md dark:text-white">
                                 Price Range
                                 {selectedPrices.length > 0 && (
-                                    <button className="font-jost text-[10px] tracking-tight uppercase underline cursor-pointer text-black"
+                                    <button className="font-jost text-[10px] tracking-tight dark:text-white uppercase underline cursor-pointer text-black"
                                         onClick={() => setSelectedPrices([])}>Clear</button>
                                 )}
                             </div>
                             {priceRanges.map(r => (
-                                <label key={r.label} className="font-jost flex items-center gap-2.5 py-1.5 text-sm cursor-pointer text-black">
+                                <label key={r.label} className="font-jost flex items-center gap-2.5 py-1.5 text-sm cursor-pointer text-black dark:text-white">
                                     <input type="checkbox" className="w-4 h-4 cursor-pointer flex-shrink-0"
                                         checked={selectedPrices.includes(r.label)} onChange={() => togglePriceRange(r.label)} />
                                     {r.label}
@@ -200,12 +184,7 @@ export default function ShopPage() {
                             <SidebarTitle label="Tags" />
                             <div className="flex flex-wrap gap-1.5">
                                 {["Bestseller", "New", "Premium"].map(t => (
-                                    <button key={t} className="font-semibold text-sm tracking-[1px] uppercase px-3 py-1.5 transition-all duration-200 rounded-full"
-                                        style={{
-                                            border: `2px solid ${selectedTags.includes(t) ? "#005461" : "#005461"}`,
-                                            background: selectedTags.includes(t) ? "#fff" : "#fff",
-                                            color: selectedTags.includes(t) ? "#000" : "#000"
-                                        }}
+                                    <button key={t} className="font-semibold text-sm tracking-[1px] bg-[var(--teal-dark-dark)] text-white dark:text-white uppercase px-3 py-1.5 transition-all duration-200 rounded-full"
                                         onClick={() => toggleTag(t)}>{t}</button>
                                 ))}
                             </div>
@@ -284,7 +263,7 @@ export default function ShopPage() {
 
 function SidebarTitle({ label }: { label: string }) {
     return (
-        <div className="font-jost tracking-tight uppercase mb-4 flex items-center gap-2 text-black text-md">
+        <div className="font-jost tracking-tight uppercase dark:text-white font-extrabold mb-4 flex items-center gap-2 text-black text-md">
             {label}
         </div>
     );
