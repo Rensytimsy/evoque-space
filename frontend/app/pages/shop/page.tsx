@@ -3,6 +3,9 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, ShoppingBasket, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useShoppingCart } from "@/hooks/data_context";
+import { ProductData } from "@/hooks/data_context";
+
 
 const products = [
     { id: 1, name: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840, rating: 4.8, reviews: 124, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Oval cast-iron soaker with matte white finish" },
@@ -28,25 +31,7 @@ const priceRanges = [
 ];
 const sortOptions = ["Featured", "Low Price", "High Price", "Top Rated"];
 
-const C = {
-    cream: "#F7F3EE",
-    sand: "#E8DDD0",
-    warmMid: "#C9B99A",
-    terracotta: "#B5633A",
-    terracottaLight: "#D4845C",
-    dark: "#2C2416",
-    mid: "#6B5A45",
-    muted: "#9A8572",
-    heroStart: "#3D2E1E",
-    heroMid: "#5C4230",
-    gold: "#7A5A10",
-};
 
-const tagStyle = (tag: string | null) => {
-    if (tag === "New") return { background: "#005461", color: C.cream };
-    if (tag === "Premium") return { background: "#3BC1A8", color: C.cream };
-    return { background: C.terracotta, color: C.cream };
-};
 
 export default function ShopPage() {
     const [search, setSearch] = useState("");
@@ -56,13 +41,17 @@ export default function ShopPage() {
     const [sortBy, setSortBy] = useState("Featured");
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [wishlist, setWishlist] = useState<number[]>([]);
-    const [cart, setCart] = useState<number[]>([]);
+    // const [cart, setCart] = useState<number[]>([]);
     const [isScrolled, setIsScrolled] = useState(false)
 
     const {theme} = useTheme()
+    const {cart, addToCart} = useShoppingCart();
+
+    console.log(cart)
+
 
     const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
-    const addToCart = (id: number) => setCart(p => p.includes(id) ? p : [...p, id]);
+
     const togglePriceRange = (label: string) => setSelectedPrices(p => p.includes(label) ? p.filter(x => x !== label) : [...p, label]);
     const toggleTag = (tag: string) => setSelectedTags(p => p.includes(tag) ? p.filter(x => x !== tag) : [...p, tag]);
 
@@ -234,7 +223,7 @@ export default function ShopPage() {
                                         bg-[var(--teal-dark-light)] hover:bg-[#164d4d] text-white 
                                         dark:bg-[var(--teal-light)] dark:hover:bg-[#1fadad] dark:text-[var(--teal-dark-dark)]
                                         rounded-lg font-bold shadow-sm hover:shadow-md active:scale-[0.98]"
-                                        onClick={() => addToCart(p.id)}
+                                        onClick={() => addToCart({id: p.id, title: p.name, price: p.price})}
                                     >
                                         <ShoppingBasket size={18} strokeWidth={2.5} />
                                         <span>Buy</span>
@@ -246,7 +235,7 @@ export default function ShopPage() {
                                         bg-slate-100 hover:bg-slate-200 text-[var(--teal-dark-dark)]
                                         dark:bg-white/10 dark:hover:bg-white/20 dark:text-white
                                         rounded-lg font-bold border border-transparent dark:border-white/10 active:scale-[0.98]"
-                                        onClick={() => addToCart(p.id)}
+                                        onClick={() => addToCart({id: p.id, title: p.name, price:p.price})}
                                     >
                                         <ShoppingCart size={18} strokeWidth={2.5} />
                                         <span className="text-xs">Add to Cart</span>

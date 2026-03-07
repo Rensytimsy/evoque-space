@@ -130,23 +130,23 @@ export default function HomePage() {
                                         />
 
                                         {/* Content Overlay */}
-                                        <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12">
+                                        <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12 mt-2">
                                             <div className="flex items-center gap-3 mb-4">
                                             </div>
-                                            <div className="bg-[var(--teal-dark-dark)]/20 p-4 rounded-md">
+                                            <div className="bg-[var(--teal-dark-dark)]/80 p-4 rounded-md">
                                                 <h3 className="text-3xl font-bold text-white mb-3">
                                                     {service.title}
                                                 </h3>
                                                 
-                                                <p className="hidden lg:block text-white text-sm leading-relaxed mb-8 max-w-sm">
+                                                <p className="hidden lg:block text-white  text-md leading-relaxed mb-8 max-w-sm ">
                                                     {service.desc}
                                                 </p>
 
                                                 <button
                                                     onClick={() => window.location.href = service.link}
-                                                    className="flex items-center gap-3 bg-[var(--teal-light)] text-white hover:text-[var(--teal-dark-dark)] px-6 py-3 rounded-xl font-bold text-sm transition-all hover:pr-8"
+                                                    className="flex items-center gap-3 dark:bg-[var(--teal-light)] text-white hover:text-[var(--teal-dark-light)] px-6 py-3 rounded-md bg-[var(--teal-dark-dark)] font-bold text-sm transition-all hover:pr-8"
                                                 >
-                                                    Get Service or Products
+                                                    Get Quatation
                                                     <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
                                                 </button>
                                             </div>

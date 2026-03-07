@@ -4,6 +4,7 @@ import "./globals.css";
 import NavigationBar from "./page-components/navigationbar";
 import Footer from "./page-components/footer";
 import {ThemeProvider as NextThemesProvider} from "next-themes"
+import { ShoppingCartContextProvider } from "@/hooks/data_context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,10 +41,12 @@ export default function RootLayout({
         defaultTheme="system"
         attribute="class"
         >
-            <NavigationBar />
-            <div>
-                {children}
-            </div>
+          <ShoppingCartContextProvider>
+              <NavigationBar />
+              <div>
+                  {children}
+              </div>
+          </ShoppingCartContextProvider>
             <Footer />
         </NextThemesProvider>
       </body>

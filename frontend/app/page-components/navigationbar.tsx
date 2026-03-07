@@ -6,14 +6,15 @@ import { usePathname } from 'next/navigation';
 import Link from "next/link"
 import { stylish } from '@/fonts';
 import { useTheme } from 'next-themes';
+import { useShoppingCart } from '@/hooks/data_context';
+import { FaWhatsapp } from "react-icons/fa";
 
 const NavigationBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(false)
     const { setTheme } = useTheme()
-    const [currentTheme, setCurrentTheme] = useState<"light" | "dark" | "system">("light");
-
+    const { cart } = useShoppingCart()
 
     // Handle scroll effect for glassmorphism
     useEffect(() => {
@@ -37,6 +38,11 @@ const NavigationBar = () => {
     return (
         <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
     }`}>
+        <Link href={{pathname: "https://wa.me/254727576955"}} target='_blank'>
+            <div className='fixed right-0 top-22 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-md'>
+                <FaWhatsapp size={50} className='text-white dark:text-white'/>
+            </div>
+        </Link>
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
                 {/* LOGO */}
@@ -85,8 +91,8 @@ const NavigationBar = () => {
                         <User2 size={24} className='' />
                     </button>
                     <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
-                        <ShoppingCart size={24} />
-                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-[10px] w-4 h-4 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{0}</span>
+                        <ShoppingCart size={25} />
+                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-md w-5 h-5 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{cart && cart.length || 0}</span>
                     </div>
                     <Link href={{ pathname: "/pages/auth/signin" }}><button className="flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 dark:bg-white dark:text-[var(--teal-dark-dark)] rounded-full font-bold hover:bg-[#0C7779] hover:shadow-lg hover:shadow-[#005461]/20 transition-all">
                         <p className='text-md font-normal md:hidden lg:block'>Sign In</p>
@@ -98,6 +104,10 @@ const NavigationBar = () => {
 
 
                 {/* MOBILE MENU TOGGLE */}
+                    <div className={`relative p-2 lg:hidden ml-20 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
+                        <ShoppingCart size={28} />
+                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-md w-5 h-5 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{cart && cart.length || 0}</span>
+                    </div>
 
                 <button
                     onClick={() => {
