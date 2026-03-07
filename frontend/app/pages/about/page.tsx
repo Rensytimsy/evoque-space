@@ -67,7 +67,7 @@ const AboutPage = () => {
     return (
         <div className="bg-white mb-10 dark:bg-[var(--teal-dark-dark)]/20">
             <section className='min-w-screen flex justify-center align-center py-30 mb-10'>
-                <div className='max-w-[80%]'>
+                <div className='lg:max-w-[80%]'>
 
                     <div className='grid lg:grid-cols-2 space-x-10 '>
                         <div className='ml-10'>
