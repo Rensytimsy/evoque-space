@@ -27,10 +27,10 @@ export default function SignInPage() {
 
     return (
         <div className="flex justify-center align-center h-screen w-full bg-white dark:bg-[var(--teal-dark-dark)]/20">
-            <div className="mt-40 mx-auto border rounded-xl shadow-sm w-full max-w-md p-8 bg-card h-[60vh]">
+            <div className="mt-20 mx-auto border rounded-md bg-[var(--teal-dark-light)] shadow-sm w-full max-w-md p-8 h-[80vh]">
                 <div className="mb-8 text-center space-y-2">
-                    <h2 className="text-3xl text-[var(--teal-dark-dark)] font-semibold tracking-tight dark:text-white">Create Account</h2>
-                    <p className="text-sm text-muted-foreground">Provide Credentials</p>
+                    <h2 className="text-3xl text-white font-semibold tracking-tight dark:text-white">Create Account</h2>
+                    <p className="text-sm text-white">Provide Credentials</p>
                 </div>
 
                 <Form {...form}>
@@ -40,9 +40,9 @@ export default function SignInPage() {
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="text-white font-bold">Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="johndoe@examplemail.com" {...field} />
+                                        <Input className="text-black outline-none border border-white bg-white" placeholder="johndoe@examplemail.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -53,9 +53,9 @@ export default function SignInPage() {
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className="text-white font-bold">Password</FormLabel>
                                     <FormControl>
-                                        <Input type="password" {...field} />
+                                        <Input className="text-black outline-none border border-white bg-white" placeholder="" type="password" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -73,11 +73,11 @@ export default function SignInPage() {
 
                 <div className="mt-8">
                     <div className="relative mb-6">
-                        <div className="absolute inset-0 flex items-center">
+                        {/* <div className="absolute inset-0 flex items-center">
                             <span className="w-full border-t" />
-                        </div>
+                        </div> */}
                         <div className="relative flex justify-center text-md">
-                            <span className=" px-2 text-[var(--teal-dark-dark)] dark:text-white">Or Sign In Using</span>
+                            <span className=" px-2 text-white dark:text-white">Or Sign In Using</span>
                         </div>
                     </div>
 
