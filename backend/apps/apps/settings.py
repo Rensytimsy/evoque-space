@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'datalib',
-    'users'
+    'users',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 ALLOWED_HOSTS = [
@@ -47,6 +49,18 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1'
 ]
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name = "dzkxro6wu",
+    api_key = "223523611932414",
+    api_secret = "g1GSiIc9fNp7p2u1EI1Q02Hg2bI"
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 MIDDLEWARE = [

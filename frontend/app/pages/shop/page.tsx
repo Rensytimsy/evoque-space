@@ -22,7 +22,7 @@ const products = [
     { id: 12, name: "Heated Towel Rail", category: "Bathrooms", price: 340, rating: 4.6, reviews: 198, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Stainless ladder rail, polished chrome" },
 ];
 
-const categories = ["All", "Bathrooms", "Kitchen", "Bedroom", "Living Room", "Lighting"];
+const categories = ["All", "Bathrooms", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
 const priceRanges = [
     { label: "Under $500", min: 0, max: 500 },
     { label: "$500 - $1,000", min: 500, max: 1000 },
@@ -194,14 +194,14 @@ export default function ShopPage() {
                 </aside>
 
                 {/* Product Grid */}
-                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-5">
+                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-5 mt-25 lg:mt-15">
                     {filtered.length === 0 ? (
-                        <div className="col-span-full flex flex-col items-center justify-center mt-[20%] py-24 text-center">
-                            <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)]" >No products found</p>
-                            <p className="font-jost text-sm mt-2 text-[var(--teal-light)]">Try adjusting your search or filters</p>
+                        <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
+                            <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)] dark:text-white" >No products found</p>
+                            <p className="font-jost text-sm mt-2 text-[var(--teal-light)] dark:text-white">Try adjusting your search or filters</p>
                         </div>
                     ) : filtered.map(p => (
-                        <div key={p.id} className="card-hover mt-10 min-w-32 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
+                        <div key={p.id} className="card-hover mt-10 max-w-54 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
                         >
 
                             {/* Image */}
@@ -212,7 +212,7 @@ export default function ShopPage() {
                             {/* Card Body */}
                             <div className="flex flex-col flex-1 p-5 bg-[var(--teal-dark-dark)] border-none">
                                 <h3 className="text-xl font-medium leading-snug mb-1 dark:text-white text-white">{p.name}</h3>
-                                <p className="font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.desc}</p>
+                                <p className="hidden lg:block font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.desc}</p>
                                 <div className="flex items-center justify-between mt-auto">
                                     <span className="text-xl font-semibold dark:text-white text-white">KES: {p.price.toLocaleString()}</span>
                                 </div>

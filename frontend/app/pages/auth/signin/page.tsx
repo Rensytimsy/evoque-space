@@ -27,7 +27,7 @@ export default function SignInPage() {
 
     return (
         <div className="flex justify-center align-center h-screen w-full bg-white dark:bg-[var(--teal-dark-dark)]/20">
-            <div className="mt-20 mx-auto border rounded-md bg-[var(--teal-dark-light)] shadow-sm w-full max-w-md p-8 h-[80vh]">
+            <div className="mt-20 mx-auto rounded-md bg-[var(--teal-dark-light)] shadow-sm w-full max-w-md p-8 h-[80vh]">
                 <div className="mb-8 text-center space-y-2">
                     <h2 className="text-3xl text-white font-semibold tracking-tight dark:text-white">Create Account</h2>
                     <p className="text-sm text-white">Provide Credentials</p>
@@ -42,7 +42,7 @@ export default function SignInPage() {
                                 <FormItem>
                                     <FormLabel className="text-white font-bold">Email</FormLabel>
                                     <FormControl>
-                                        <Input className="text-black outline-none border border-white bg-white" placeholder="johndoe@examplemail.com" {...field} />
+                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="johndoe@examplemail.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -55,7 +55,7 @@ export default function SignInPage() {
                                 <FormItem>
                                     <FormLabel className="text-white font-bold">Password</FormLabel>
                                     <FormControl>
-                                        <Input className="text-black outline-none border border-white bg-white" placeholder="" type="password" {...field} />
+                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="" type="password" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

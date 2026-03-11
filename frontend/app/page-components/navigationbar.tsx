@@ -36,7 +36,7 @@ const NavigationBar = () => {
     const path = usePathname()
 
     return (
-        <nav className={`${path == "/admin/dashboard" ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
+        <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}
     }`}>
         <Link href={{pathname: "https://wa.me/254727576955"}} target='_blank'>
             <div className='fixed right-0 top-22 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-md'>
