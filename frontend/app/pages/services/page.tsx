@@ -2,6 +2,7 @@
 import { Award, Zap, ShieldCheck, Maximize, HeadphonesIcon } from 'lucide-react';
 
 import { useState, useRef, useEffect } from "react"
+import Link from "next/link";
 
 const SERVICES = [
     {
@@ -124,12 +125,14 @@ export default function Services() {
                                         ))}
                                     </ul>
 
-                                    <button
+                                    <Link href={{ pathname: "https://wa.me/254727576955"}} target="_blank">
+                                        <button
 
-                                        className="mt-auto flex items-center gap-2 dark:bg-[var(--teal-light)] font-mono text-xs tracking-[0.12em] bg-[var(--teal-dark-dark)] rounded-sm dark:hover:text-[var(--teal-dark-dark)] w-1/2 p-2 uppercase text-white font-bold hover:text-[var(--teal-light)] transition-all"
-                                    >
-                                        Learn More <span className="text-lg">→</span>
-                                    </button>
+                                            className="mt-auto flex items-center gap-2 dark:bg-[var(--teal-light)] font-mono text-xs tracking-[0.12em] bg-[var(--teal-dark-dark)] rounded-sm dark:hover:text-[var(--teal-dark-dark)] w-1/2 p-2 uppercase text-white font-bold hover:text-[var(--teal-light)] transition-all"
+                                        >
+                                            Get Quatation <span className="text-lg">→</span>
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         ))}

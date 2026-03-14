@@ -26,7 +26,7 @@ const NavigationBar = () => {
     }, [])
 
     const navLinks = [
-        { name: 'Home', href: '/', icon: <Building2 size={25} /> },
+        { name: 'Home', href: '/home', icon: <Building2 size={25} /> },
         { name: 'Services', href: '/pages/services', icon: <Hammer size={25} /> },
         { name: 'About', href: '/pages/about', icon: <Info size={25} /> },
         { name: 'Shop', href: '/pages/shop', icon: <ShoppingCart size={25} /> },
@@ -34,6 +34,7 @@ const NavigationBar = () => {
     ];
 
     const path = usePathname()
+    console.log(path)
 
     return (
         <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path != "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}

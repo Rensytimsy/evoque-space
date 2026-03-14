@@ -102,35 +102,35 @@ export default function HomePage() {
                             <div className="flex flex-wrap gap-4">
                                 <Link href={{ pathname: "/pages/shop" }}>
                                     <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
-                                        Shop
+                                        Explore Shop
                                         <ShoppingCart className="text-white" size={20} />
                                     </button>
                                 </Link>
-                                <button className="flex space-x-2  rounded-md border dark:text-white dark:border dark:border-2 dark:border-white border-4 text-[var(--teal-dark-dark)] hover:text-white hover:bg-[var(--teal-dark-dark)] px-8 py-4 font-bold transition-all">
+                                {/* <button className="flex space-x-2  rounded-md border dark:text-white dark:border dark:border-2 dark:border-white border-4 text-[var(--teal-dark-dark)] hover:text-white hover:bg-[var(--teal-dark-dark)] px-8 py-4 font-bold transition-all">
                                     <p>View Solutions</p>
                                     <ArrowRight size={20} className="mt-1"/>
-                                </button>
+                                </button> */}
                             </div>
                         </div>
                     </div>
 
                     <div className="relative">
                         <div className="relative z-10 group w-full max-w-[650px] mx-auto">
-                            <div className="relative border-white/5  overflow-hidden rounded-md aspect-[4/5] sm:aspect-square md:aspect-[4/5]">
+                            <div className="relative  overflow-hidden rounded-md aspect-[4/5] sm:aspect-square md:aspect-[4/5]">
                                 {INFRA_SERVICES.map((service, index) => (
                                     <div
                                         key={index}
-                                        className={`absolute inset-0 transition-all  duration-1000 rounded-md ease-in-out ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-110"
+                                        className={`absolute inset-0 transition-all lg:mt-30  duration-1000 rounded-md ease-in-out ${index === current ? "opacity-100 scale-100" : "opacity-0 scale-110"
                                             }`}
                                     >
                                         <img
                                             src={service.image}
                                             alt={service.title}
-                                            className="w-full h-full object-contain lg:p-4"
+                                            className="w-full h-full object-contain lg:p-4 rounded-md"
                                         />
 
                                         {/* Content Overlay */}
-                                        <div className="absolute bottom-0 left-0 w-full p-8 lg:p-12 mt-2">
+                                        <div className="absolute -bottom-2  0 left-0 w-full p-8 lg:p-12 mt-10">
                                             <div className="flex items-center gap-3 mb-4">
                                             </div>
                                             <div className="bg-[var(--teal-dark-dark)]/80 p-4 rounded-md">
@@ -141,14 +141,15 @@ export default function HomePage() {
                                                 <p className="hidden lg:block text-white  text-md leading-relaxed mb-8 max-w-sm ">
                                                     {service.desc}
                                                 </p>
-
-                                                <button
-                                                    onClick={() => window.location.href = service.link}
-                                                    className="flex items-center gap-3 dark:bg-[var(--teal-light)] text-white hover:text-[var(--teal-dark-light)] px-6 py-3 rounded-md bg-[var(--teal-dark-dark)] font-bold text-sm transition-all hover:pr-8"
-                                                >
-                                                    Get Quatation
-                                                    <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
-                                                </button>
+                                                <Link href={{ pathname: "https://wa.me/254727576955" }} target="_blank">
+                                                    <button
+                                                        onClick={() => window.location.href = service.link}
+                                                        className="flex items-center gap-3 dark:bg-[var(--teal-light)] text-white hover:text-[var(--teal-dark-light)] px-6 py-3 rounded-md bg-[var(--teal-dark-dark)] font-bold text-sm transition-all hover:pr-8"
+                                                    >
+                                                        Get Quatation
+                                                        <ArrowRight size={18} className="transition-transform group-hover/btn:translate-x-1" />
+                                                    </button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
