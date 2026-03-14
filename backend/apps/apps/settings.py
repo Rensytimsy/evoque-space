@@ -25,7 +25,14 @@ SECRET_KEY = 'django-insecure-9v_h=#lhc*4_b7@!%ofm+=e_fwh7cbg)9f_(b(8=is7$3&2e+o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "http://localhost:3000",
+    "https://evoque-space.onrender.com/"
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 
 # Application definition
@@ -41,7 +48,8 @@ INSTALLED_APPS = [
     'datalib',
     'users',
     'cloudinary',
-    'cloudinary_storage'
+    'cloudinary_storage',
+    'corsheaders'
 ]
 
 ALLOWED_HOSTS = [
@@ -64,6 +72,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -6,3 +6,4 @@ psycopg2-binary
 python-decouple
 django-cloudinary-storage
 gunicorn
+django-cors-headers
