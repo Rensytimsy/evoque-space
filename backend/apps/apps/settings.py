@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "http://localhost:3000",
-    "https://evoque-space.onrender.com"
+    "evoque-space.onrender.com"
 ]
 
 CORS_ALLOWED_ORIGINS = [
