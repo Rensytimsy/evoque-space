@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9v_h=#lhc*4_b7@!%ofm+=e_fwh7cbg)9f_(b(8=is7$3&2e+o
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "http://localhost:3000",
+    "localhost:3000",
     "evoque-space.onrender.com"
 ]
 
