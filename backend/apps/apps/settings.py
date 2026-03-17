@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from decouple import config
+import dj_database_url
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +28,14 @@ SECRET_KEY = 'django-insecure-9v_h=#lhc*4_b7@!%ofm+=e_fwh7cbg)9f_(b(8=is7$3&2e+o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost:3000",
+    "evoque-space.onrender.com"
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 
 # Application definition
@@ -41,7 +51,9 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'datalib',
-    'users'
+    'users',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 ALLOWED_HOSTS = [
@@ -49,6 +61,18 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1'
 ]
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name = config("CLOUDINARY_NAME", default=""),
+    api_key = config("CLOUDINARY_KEY", default=""),
+    api_secret = config("CLOUDINARY_SECRET", default="")
+)
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
@@ -112,12 +136,22 @@ WSGI_APPLICATION = 'apps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+database_url = config("DATABASE_URL", default="")
+if database_url:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=database_url,
+            conn_max_age=600, 
+            conn_health_checks=True, 
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation

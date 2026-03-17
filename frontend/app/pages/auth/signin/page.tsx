@@ -132,9 +132,9 @@ export default function SignInPage() {
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="text-white font-bold">Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="johndoe@examplemail.com" {...field} />
+                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="johndoe@examplemail.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -145,9 +145,9 @@ export default function SignInPage() {
                             control={form.control}
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className="text-white font-bold">Password</FormLabel>
                                     <FormControl>
-                                        <Input type="password" {...field} />
+                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="" type="password" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -166,11 +166,11 @@ export default function SignInPage() {
 
                 <div className="mt-8">
                     <div className="relative mb-6">
-                        <div className="absolute inset-0 flex items-center">
+                        {/* <div className="absolute inset-0 flex items-center">
                             <span className="w-full border-t" />
-                        </div>
+                        </div> */}
                         <div className="relative flex justify-center text-md">
-                            <span className=" px-2 text-[var(--teal-dark-dark)] dark:text-white">Or Sign In Using</span>
+                            <span className=" px-2 text-white dark:text-white">Or Sign In Using</span>
                         </div>
                     </div>
 

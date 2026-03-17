@@ -1,13 +1,16 @@
 "use client"
 import { Linkedin, Twitter, Facebook, ArrowUpRight } from "lucide-react"
 import { stylish } from "@/fonts"
+import { usePathname } from "next/navigation"
+
 export default function Footer() {
 
-    const nowDate = new Date()
+    const nowDate = new Date();
+    const path = usePathname();
 
 
     return (
-        <footer className={`bg-[var(--teal-dark-dark)] pt-20 pb-10 px-6 lg:px-12 z-100 ${stylish.className}`}>
+        <footer className={`${path.startsWith("/admin/dashboard")  && "hidden"} bg-[var(--teal-dark-dark)] pt-20 pb-10 px-6 lg:px-12 z-100 ${stylish.className}`}>
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-16 pb-16 mb-12">
 

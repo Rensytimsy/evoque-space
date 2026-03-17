@@ -3,25 +3,27 @@
 import { useState, useMemo, useEffect } from "react";
 import { Search, ShoppingBasket, ShoppingCart } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useShoppingCart } from "@/hooks/use-context";
-import { ProductData } from "@/hooks/use-context";
+import { useShoppingCart } from "@/hooks/data_context";
+import { ProductData } from "@/hooks/data_context";
+import axios from "axios"
 
-const products:Partial<ProductData[]> = [
-    { id: 1, title: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840,  tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Oval cast-iron soaker with matte white finish" },
-    { id: 2, title: "Rainfall Shower System", category: "Bathrooms", price: 1290,  tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Ceiling-mount 12in head with thermostatic valve" },
-    { id: 3, title: "Wall-Mount Vanity", category: "Bathrooms", price: 980,  tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Floating oak vanity with integrated basin" },
-    { id: 4, title: "Steam Shower Enclosure", category: "Bathrooms", price: 3450, tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Frameless tempered glass with steam generator" },
-    { id: 5, title: "Clawfoot Bathtub", category: "Bathrooms", price: 3200,  tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Victorian cast-iron with brushed brass feet" },
-    { id: 6, title: "Modular Kitchen Island", category: "Kitchen", price: 2100,  tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid walnut top with integrated wine rack" },
-    { id: 7, title: "Farmhouse Sink", category: "Kitchen", price: 760,  tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Apron-front fireclay in antique white" },
-    { id: 8, title: "Pot Filler Faucet", category: "Kitchen", price: 390,  tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Articulated brass wall-mount, matte black" },
-    { id: 9, title: "Linen Storage Cabinet", category: "Bedroom", price: 670,  tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid oak with rattan panel doors" },
-    { id: 10, title: "Statement Pendant Light", category: "Lighting", price: 520,  tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Hand-blown smoked glass, antique brass" },
-    { id: 11, title: "Marble Console Table", category: "Living Room", price: 1850,  tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Calacatta marble top with brass hairpin legs" },
-    { id: 12, title: "Heated Towel Rail", category: "Bathrooms", price: 340,  tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Stainless ladder rail, polished chrome" },
+
+const products = [
+    { id: 1, name: "Freestanding Soaking Tub", category: "Bathrooms", price: 2840, rating: 4.8, reviews: 124, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Oval cast-iron soaker with matte white finish" },
+    { id: 2, name: "Rainfall Shower System", category: "Bathrooms", price: 1290, rating: 4.7, reviews: 89, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Ceiling-mount 12in head with thermostatic valve" },
+    { id: 3, name: "Wall-Mount Vanity", category: "Bathrooms", price: 980, rating: 4.5, reviews: 67, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Floating oak vanity with integrated basin" },
+    { id: 4, name: "Steam Shower Enclosure", category: "Bathrooms", price: 3450, rating: 4.9, reviews: 43, tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Frameless tempered glass with steam generator" },
+    { id: 5, name: "Clawfoot Bathtub", category: "Bathrooms", price: 3200, rating: 4.8, reviews: 58, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Victorian cast-iron with brushed brass feet" },
+    { id: 6, name: "Modular Kitchen Island", category: "Kitchen", price: 2100, rating: 4.6, reviews: 201, tag: "Bestseller", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid walnut top with integrated wine rack" },
+    { id: 7, name: "Farmhouse Sink", category: "Kitchen", price: 760, rating: 4.7, reviews: 155, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Apron-front fireclay in antique white" },
+    { id: 8, name: "Pot Filler Faucet", category: "Kitchen", price: 390, rating: 4.5, reviews: 88, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Articulated brass wall-mount, matte black" },
+    { id: 9, name: "Linen Storage Cabinet", category: "Bedroom", price: 670, rating: 4.4, reviews: 73, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Solid oak with rattan panel doors" },
+    { id: 10, name: "Statement Pendant Light", category: "Lighting", price: 520, rating: 4.7, reviews: 112, tag: "New", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Hand-blown smoked glass, antique brass" },
+    { id: 11, name: "Marble Console Table", category: "Living Room", price: 1850, rating: 4.8, reviews: 39, tag: "Premium", img: "https://i.sstatic.net/y9DpT.jpg", desc: "Calacatta marble top with brass hairpin legs" },
+    { id: 12, name: "Heated Towel Rail", category: "Bathrooms", price: 340, rating: 4.6, reviews: 198, tag: null, img: "https://i.sstatic.net/y9DpT.jpg", desc: "Stainless ladder rail, polished chrome" },
 ];
 
-const categories = ["All", "Bathrooms", "Kitchen", "Bedroom", "Living Room", "Lighting"];
+const categories = ["All", "Bathrooms", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
 const priceRanges = [
     { label: "Under $500", min: 0, max: 500 },
     { label: "$500 - $1,000", min: 500, max: 1000 },
@@ -30,25 +32,13 @@ const priceRanges = [
 ];
 const sortOptions = ["Featured", "Low Price", "High Price", "Top Rated"];
 
-const C = {
-    cream: "#F7F3EE",
-    sand: "#E8DDD0",
-    warmMid: "#C9B99A",
-    terracotta: "#B5633A",
-    terracottaLight: "#D4845C",
-    dark: "#2C2416",
-    mid: "#6B5A45",
-    muted: "#9A8572",
-    heroStart: "#3D2E1E",
-    heroMid: "#5C4230",
-    gold: "#7A5A10",
-};
-
-const tagStyle = (tag: string | null) => {
-    if (tag === "New") return { background: "#005461", color: C.cream };
-    if (tag === "Premium") return { background: "#3BC1A8", color: C.cream };
-    return { background: C.terracotta, color: C.cream };
-};
+interface Product {
+    title: string,
+    price: number,
+    description: string,
+    image: string,
+    id: string
+}
 
 export default function ShopPage() {
     const [search, setSearch] = useState("");
@@ -58,6 +48,7 @@ export default function ShopPage() {
     const [sortBy, setSortBy] = useState("Featured");
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [wishlist, setWishlist] = useState<number[]>([]);
+    const [product, setProducts] = useState<Product[]>([]);
     // const [cart, setCart] = useState<number[]>([]);
     const [isScrolled, setIsScrolled] = useState(false)
 
@@ -66,36 +57,66 @@ export default function ShopPage() {
 
     console.log(cart);
     const {theme} = useTheme()
+    const {cart, addToCart} = useShoppingCart();
+
+    console.log(cart)
+
 
     const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
-    // const addToCart = (id: number) => setCart(p => p.includes(id) ? p : [...p, id]);
+
     const togglePriceRange = (label: string) => setSelectedPrices(p => p.includes(label) ? p.filter(x => x !== label) : [...p, label]);
     const toggleTag = (tag: string) => setSelectedTags(p => p.includes(tag) ? p.filter(x => x !== tag) : [...p, tag]);
 
-    const filtered = useMemo(() => {
-        let list = [...products];
-        if (search && list) list = list.filter(p => p.title.toLowerCase().includes(search.toLowerCase()) || p.desc.toLowerCase().includes(search.toLowerCase()));
-        if (selectedCategory !== "All") list = list.filter(p => p.category === selectedCategory);
-        if (selectedPrices.length > 0) {
-            list = list.filter(p => selectedPrices.some(label => {
-                const range = priceRanges.find(r => r.label === label)!;
-                return p.price >= range.min && p.price < range.max;
-            }));
-        }
-        if (selectedTags.length > 0) list = list.filter(p => p.tag && selectedTags.includes(p.tag));
-        if (sortBy === "Price: Low to High") list.sort((a, b) => a.price - b.price);
-        return list;
-    }, [search, selectedCategory, selectedPrices, selectedTags, sortBy]);
-
-    const hasFilters = selectedPrices.length > 0 || selectedTags.length > 0 || selectedCategory !== "All" || !!search;
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.onscroll = () => {
                 setIsScrolled(window.scrollY > 20);
             };
         }
+        const get_products = async() => {
+            try{
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}products`)
+                setProducts(res?.data?.data);
+            }catch(error){
+                console.log(error)
+            }
+        }
+
+        get_products();
     }, [])
 
+    const filtered = useMemo(() => {
+    // Ensure product is an array before trying to spread it
+    let list = Array.isArray(product) ? [...product] : [];
+    
+    if (search) {
+        list = list.filter(p => 
+            p.title.toLowerCase().includes(search.toLowerCase()) || 
+            p.description.toLowerCase().includes(search.toLowerCase())
+        );
+    }
+    
+    if (selectedPrices.length > 0) {
+        list = list.filter(p => 
+            selectedPrices.some(label => {
+                const range = priceRanges.find(r => r.label === label);
+                return range && p.price >= range.min && p.price < range.max;
+            })
+        );
+    }
+    
+    if (sortBy === "Price: Low to High") {
+        list.sort((a, b) => a.price - b.price);
+    } else if (sortBy === "Price: High to Low") {
+        list.sort((a, b) => b.price - a.price);
+    }
+    
+    return list;
+}, [search, selectedPrices, selectedTags, sortBy, product]);
+
+    const hasFilters = selectedPrices.length > 0 || selectedTags.length > 0 || selectedCategory !== "All" || !!search;
+
+    console.log(`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}`)
 
     return (
         <div className="min-h-screen mt-20 bg-white dark:bg-[var(--teal-dark-dark)]/20">
@@ -156,7 +177,6 @@ export default function ShopPage() {
                                     style={{
                                         background: selectedCategory === c ? "#005461" : "transparent",
                                         borderLeftColor: selectedCategory === c ? "#fff" : "transparent",
-                                        // color: selectedCategory === c ? "#ffffff" : "#000000",
                                         fontWeight: selectedCategory === c ? 500 : 400
                                     }}
 
@@ -208,25 +228,25 @@ export default function ShopPage() {
                 </aside>
 
                 {/* Product Grid */}
-                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-4 gap-5">
+                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 border md:grid-cols-3 space-x-2 mt-25 lg:mt-15">
                     {filtered.length === 0 ? (
-                        <div className="col-span-full flex flex-col items-center justify-center mt-[20%] py-24 text-center">
-                            <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)]" >No products found</p>
-                            <p className="font-jost text-sm mt-2 text-[var(--teal-light)]">Try adjusting your search or filters</p>
+                        <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
+                            <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)] dark:text-white" >No products found</p>
+                            <p className="font-jost text-sm mt-2 text-[var(--teal-light)] dark:text-white">Try adjusting your search or filters</p>
                         </div>
-                    ) : filtered.map((p, idx) => (
-                        <div key={idx} className="card-hover mt-10 min-w-32 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
+                    ) : filtered.map(p => (
+                        <div key={p.id} className="max-h-[210px] mt-10 max-w-64 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
                         >
 
                             {/* Image */}
-                            <div className="relative flex items-center justify-center text-6xl h-[210px] bg-white">
-                                <img src={p.img} className="w-full" />
+                            <div className="relative flex items-center justify-center text-6xl min-h-[200px] bg-white">
+                                <img src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${p.image}`} className="w-full max-h-[200px]" />
                             </div>
 
                             {/* Card Body */}
                             <div className="flex flex-col flex-1 p-5 bg-[var(--teal-dark-dark)] border-none">
                                 <h3 className="text-xl font-medium leading-snug mb-1 dark:text-white text-white">{p.title}</h3>
-                                <p className="font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.desc}</p>
+                                <p className="hidden lg:block font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.description}</p>
                                 <div className="flex items-center justify-between mt-auto">
                                     <span className="text-xl font-semibold dark:text-white text-white">KES: {p.price.toLocaleString()}</span>
                                 </div>
@@ -237,7 +257,7 @@ export default function ShopPage() {
                                         bg-[var(--teal-dark-light)] hover:bg-[#164d4d] text-white 
                                         dark:bg-[var(--teal-light)] dark:hover:bg-[#1fadad] dark:text-[var(--teal-dark-dark)]
                                         rounded-lg font-bold shadow-sm hover:shadow-md active:scale-[0.98]"
-                                        onClick={() => addToCart(p)}
+                                        onClick={() => addToCart({id: p.id, title: p.title, price: p.price})}
                                     >
                                         <ShoppingBasket size={18} strokeWidth={2.5} />
                                         <span>Buy</span>
@@ -249,7 +269,7 @@ export default function ShopPage() {
                                         bg-slate-100 hover:bg-slate-200 text-[var(--teal-dark-dark)]
                                         dark:bg-white/10 dark:hover:bg-white/20 dark:text-white
                                         rounded-lg font-bold border border-transparent dark:border-white/10 active:scale-[0.98]"
-                                        onClick={() => addToCart(p.id)}
+                                        onClick={() => addToCart({id: p.id, title: p.title, price:p.price})}
                                     >
                                         <ShoppingCart size={18} strokeWidth={2.5} />
                                         <span className="text-xs">Add to Cart</span>

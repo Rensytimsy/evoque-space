@@ -1,0 +1,9 @@
+django
+djangorestframework
+cloudinary
+dj_database_url
+psycopg2-binary
+python-decouple
+django-cloudinary-storage
+gunicorn
+django-cors-headers

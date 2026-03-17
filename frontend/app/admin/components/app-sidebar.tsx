@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import {FC, ReactNode} from "react"
 import {
   IconCamera,
   IconChartBar,
@@ -17,6 +18,9 @@ import {
   IconSearch,
   IconSettings,
   IconUsers,
+  IconTax,
+  IconBrandXbox,
+  IconBrandDropbox
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "../components/nav-documents"
@@ -31,6 +35,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset
 } from "@/components/ui/sidebar"
 
 const data = {
@@ -46,146 +53,55 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Properties",
-      url: "#",
-      icon: IconListDetails,
+      title: "Products",
+      url: "/admin/dashboard/products",
+      icon: IconBrandDropbox,
     },
     {
-      title: "Products",
+      title: "Payments",
       url: "#",
-      icon: IconChartBar,
-    },
-    // {
-    //   title: "Projects",
-    //   url: "#",
-    //   icon: IconFolder,
-    // },
-    // {
-    //   title: "Team",
-    //   url: "#",
-    //   icon: IconUsers,
-    // },
-  ],
-//   navClouds: [
-//     {
-//       title: "Capture",
-//       icon: IconCamera,
-//       isActive: true,
-//       url: "#",
-//       items: [
-//         {
-//           title: "Active Proposals",
-//           url: "#",
-//         },
-//         {
-//           title: "Archived",
-//           url: "#",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Proposal",
-//       icon: IconFileDescription,
-//       url: "#",
-//       items: [
-//         {
-//           title: "Active Proposals",
-//           url: "#",
-//         },
-//         {
-//           title: "Archived",
-//           url: "#",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Prompts",
-//       icon: IconFileAi,
-//       url: "#",
-//       items: [
-//         {
-//           title: "Active Proposals",
-//           url: "#",
-//         },
-//         {
-//           title: "Archived",
-//           url: "#",
-//         },
-//       ],
-//     },
-//   ],
-//   navSecondary: [
-//     {
-//       title: "Settings",
-//       url: "#",
-//       icon: IconSettings,
-//     },
-//     {
-//       title: "Get Help",
-//       url: "#",
-//       icon: IconHelp,
-//     },
-//     {
-//       title: "Search",
-//       url: "#",
-//       icon: IconSearch,
-//     },
-//   ],
-//   documents: [
-//     {
-//       name: "Data Library",
-//       url: "#",
-//       icon: IconDatabase,
-//     },
-//     {
-//       name: "Reports",
-//       url: "#",
-//       icon: IconReport,
-//     },
-//     {
-//       name: "Word Assistant",
-//       url: "#",
-//       icon: IconFileWord,
-//     },
-//   ],
+      icon: IconTax,
+    }
+  ]
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  return (
-    <div
-    className="mt-30"
-    >
-        <Sidebar collapsible="offcanvas" {...props}
-        className="bg-[var(--teal-dark-dark)] "
-        >
-        <SidebarHeader
-        className="bg-[var(--teal-dark-dark)]"
-        >
-            <SidebarMenu className="">
-            <SidebarMenuItem>
-                <SidebarMenuButton
-                asChild
-                className="data-[slot=sidebar-menu-button]:p-1.5!"
+export const AppSidebar: FC<{ children: ReactNode }> = ({ children }) => {
+
+    const [isOpen, setIsOpened] = React.useState<boolean>(true)
+
+    return (
+        <div className="relative">
+            <SidebarProvider>
+                <Sidebar collapsible="icon" className="bg-blue-300">
+                    <SidebarHeader className="bg-[var(--teal-dark-dark)] text-white font-bold">
+                        <p>Evoque Space</p>
+                    </SidebarHeader>
+                    <SidebarContent className="bg-[var(--teal-dark-dark)] text-white font-bold">
+                        <NavMain items={data.navMain} />
+                    </SidebarContent>
+                    <SidebarFooter className="bg-[var(--teal-dark-dark)] text-white font-bold">
+                        <NavUser user={data.user} />
+                    </SidebarFooter>
+                </Sidebar>
+                <SidebarTrigger
+                    className={`
+                        absolute top-0 z-10 transition-all duration-300 ease-in-out
+                    ${isOpen
+                            ? 'left-4 lg:left-[16rem]'
+                            : 'left-4 lg:left-12'
+                        }
+    `}
+                    onClick={
+                        () => setIsOpened(!isOpen)
+                    }
                 >
-                <a href="#">
-                    <img src="/esl-logo.png" className="h-8 w-8"/>
-                    <span className="text-white text-lg tracking-tight font-semibold">Evoque Spaces</span>
-                </a>
-                </SidebarMenuButton>
-            </SidebarMenuItem>
-            </SidebarMenu>
-        </SidebarHeader>
-        <SidebarContent
-        className="bg-[var(--teal-dark-dark)]"
-        >
-            <NavMain items={data.navMain} />
-            {/* <NavDocuments items={data.documents} />
-            <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
-        </SidebarContent>
-        <SidebarFooter className="bg-[var(--teal-dark-dark)]">
-            <NavUser user={data.user} />
-        </SidebarFooter>
-        </Sidebar>
-    </div>
-  )
+                </SidebarTrigger>
+                <SidebarInset>
+                    <div>
+                        {children}
+                    </div>
+                </SidebarInset>
+            </SidebarProvider>
+        </div>
+    )
 }

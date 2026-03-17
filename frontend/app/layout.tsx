@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationBar from "./page-components/navigationbar";
 import Footer from "./page-components/footer";
-import { ThemeProvider as NextThemesProvider } from "next-themes"
+import {ThemeProvider as NextThemesProvider} from "next-themes"
+import { DashboardProvider } from "./dashboardProvider";
 import { ShoppingCartContextProvider } from "@/hooks/use-context";
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import Providers from "@/providers";
@@ -19,12 +20,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Evoque Space Limited",
-    description: "Building Dreams Creating Spaces",
-    icons: {
-        icon: "/esl-logo.png",
-        apple: "/esl-logo.png",
-    },
+  title: "Evoque Space Limited",
+  description: "Transform your vision into reality with Evoque Spaces. We specialize in designing, building, and renovating exceptional properties across Kenya.",
+  icons: {
+    icon: "/esl-logo.png",
+    apple: "/esl-logo.png",
+  },
 };
 
 import { inter } from "@/fonts"
