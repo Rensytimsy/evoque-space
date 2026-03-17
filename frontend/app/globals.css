@@ -173,4 +173,60 @@
         @apply bg-background text-foreground;
         overflow-x: hidden;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap');
+
+    .font-bebas {
+        font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .font-outfit {
+        font-family: 'Outfit', sans-serif;
+    }
+
+    @keyframes ticker {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .animate-ticker {
+        animation: ticker 20s linear infinite;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .animate-slide-in {
+        animation: slideIn 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .eyebrow-line::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 1px;
+        background: #F5C518;
+    }
+
+    .section-line::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 1px;
+        background: #F5C518;
+    }
 }

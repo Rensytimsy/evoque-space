@@ -10,6 +10,7 @@ import ContactPage from "./pages/contact/page";
 import { Sun, BatteryMedium, Zap, PanelTop, Leaf, House } from 'lucide-react';
 import Footer from "./page-components/footer";
 import MoreInfo from "./page-components/more-info";
+import { TopServices } from "./page-components/top-services";
 
 
 const SOLAR_ITEMS = [
@@ -24,9 +25,9 @@ export default function Home() {
     return (
         <div className="">
             <HomePage />
+            <TopServices />
             <AboutPage />
             <MoreInfo />
-            <Services />
             <div>
                 <div className="w-full bg-[var(--teal-dark-dark)] py-6 border-y border-teal-800/30">
                     <div className="max-w-7xl mx-auto px-6">
