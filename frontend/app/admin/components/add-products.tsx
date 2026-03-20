@@ -25,7 +25,7 @@ interface ProductForm {
   description: string;
   category: string;
   price: string;
-  image: File | null;
+  image: File | Blob | null | string ;
   imagePreview: string | null;
 }
 
@@ -35,7 +35,7 @@ export default function AddProductPage() {
     description: "",
     category: "",
     price: "",
-    image: null,
+    image: null ,
     imagePreview: null,
   });
   const [dragOver, setDragOver] = useState(false);
@@ -98,18 +98,20 @@ export default function AddProductPage() {
 
       const {title, category, description, price, image}:ProductForm = form;
       const formData = new FormData();
-      formData.append("title", title)
-      formData.append("price", price),
-      formData.append("description", description),
-      formData.append("image", image),
-      formData.append("category", category)
-
-
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}upload/`, formData, {
-        headers: {
-          "Content-Type" : "multipart/form-data"
-        }
-      })
+      if (image !== null){
+          formData.append("title", title)
+          formData.append("price", price),
+          formData.append("description", description),
+          formData.append("image", image),
+          formData.append("category", category)
+    
+    
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}upload/`, formData, {
+            headers: {
+              "Content-Type" : "multipart/form-data"
+            }
+          })
+      }
       setErrors({});
       setSubmitted(true);
     }catch(error){

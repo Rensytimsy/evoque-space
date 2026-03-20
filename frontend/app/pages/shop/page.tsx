@@ -52,13 +52,11 @@ export default function ShopPage() {
     // const [cart, setCart] = useState<number[]>([]);
     const [isScrolled, setIsScrolled] = useState(false)
 
-    const {theme} = useTheme()
-    const {cart, addToCart} = useShoppingCart();
-
-    console.log(cart)
+    // shopping cart context
+    // const {cart, checkout, addToCart} = useShoppingCart()
 
 
-    const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
+    // const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
 
     const togglePriceRange = (label: string) => setSelectedPrices(p => p.includes(label) ? p.filter(x => x !== label) : [...p, label]);
     const toggleTag = (tag: string) => setSelectedTags(p => p.includes(tag) ? p.filter(x => x !== tag) : [...p, tag]);
@@ -253,7 +251,7 @@ export default function ShopPage() {
                                         bg-[var(--teal-dark-light)] hover:bg-[#164d4d] text-white 
                                         dark:bg-[var(--teal-light)] dark:hover:bg-[#1fadad] dark:text-[var(--teal-dark-dark)]
                                         rounded-lg font-bold shadow-sm hover:shadow-md active:scale-[0.98]"
-                                        onClick={() => addToCart({id: p.id, title: p.title, price: p.price})}
+                                        // onClick={() => addToCart({id: p.id, title: p.title, price: p.price})}
                                     >
                                         <ShoppingBasket size={18} strokeWidth={2.5} />
                                         <span>Buy</span>
@@ -265,7 +263,7 @@ export default function ShopPage() {
                                         bg-slate-100 hover:bg-slate-200 text-[var(--teal-dark-dark)]
                                         dark:bg-white/10 dark:hover:bg-white/20 dark:text-white
                                         rounded-lg font-bold border border-transparent dark:border-white/10 active:scale-[0.98]"
-                                        onClick={() => addToCart({id: p.id, title: p.title, price:p.price})}
+                                        // onClick={() => addToCart({id: p.id, title: p.title, price:p.price})}
                                     >
                                         <ShoppingCart size={18} strokeWidth={2.5} />
                                         <span className="text-xs">Add to Cart</span>

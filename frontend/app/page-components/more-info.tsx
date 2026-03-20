@@ -32,14 +32,14 @@ const WHY_CHOOSE_US = [
 
 export default function MoreInfo() {
     return (
-        <section className="py-24 bg-[var(--teal-dark-light)] dark:bg-[#0a1a1a]">
+        <section className="py-24 bg-[var(--teal-dark-dark)] dark:bg-[#0a1a1a]">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-16 gap-8">
                     <div className="max-w-2xl">
 
-                        <h3 className="text-4xl md:text-5xl  text-white font-bold dark:text-white leading-tight">
+                        <h3 className="text-4xl md:text-5xl font-extrabold text-[var(--teal-light)] font-bold dark:text-white leading-tight">
                             Why leading developers <br />
-                            <span className="text-[var(--teal-dark-dark)]">trust our expertise</span>
+                            <span className="text-white">trust our expertise</span>
                         </h3>
                     </div>
                 </div>
@@ -48,7 +48,7 @@ export default function MoreInfo() {
                     {WHY_CHOOSE_US.map((item, index) => (
                         <div key={index} className="flex gap-5 group">
                             {/* Icon Container */}
-                            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[var(--teal-dark-dark)] dark:bg-white/5 flex items-center justify-center transition-all duration-300 group-hover:text-white">
+                            <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-[var(--teal-dark-light)] dark:bg-white/5 flex items-center justify-center transition-all duration-300 group-hover:text-white">
                                 {item.icon}
                             </div>
 

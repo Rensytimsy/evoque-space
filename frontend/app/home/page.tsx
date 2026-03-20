@@ -7,6 +7,7 @@ import MoreInfo from "@/app/page-components/more-info";
 import Services from "../pages/services/page";
 import { PanelTop, BatteryMedium, Zap, House, Leaf, Sun } from "lucide-react";
 import ContactPage from "../pages/contact/page";
+import { TopServices } from "../page-components/top-services";
 
 
 const SOLAR_ITEMS = [
@@ -21,48 +22,9 @@ export default function Home() {
     return (
         <div className="">
             <HomePage />
+            <TopServices />
             <AboutPage />
             <MoreInfo />
-            <Services />
-            <div>
-                <div className="w-full bg-[var(--teal-dark-dark)] py-6 border-y border-teal-800/30">
-                    <div className="max-w-7xl mx-auto px-6">
-                        <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-8">
-
-                            {/* Label / Branding */}
-                            <div className="flex items-center gap-3 shrink-0">
-                                <div className="p-2 bg-[var(--teal-light)] rounded-full text-white">
-                                    <Sun className="animate-pulse" size={18} />
-                                </div>
-                                <span className="text-white font-bold uppercase tracking-widest text-xs">
-                                    Solar Solutions
-                                </span>
-                            </div>
-
-                            {/* Vertical Divider (Desktop Only) */}
-                            <div className="hidden md:block h-8 w-px bg-teal-700/50" />
-
-                            {/* Scrollable/Flex List */}
-                            <div className="flex flex-1 items-center justify-between overflow-x-auto no-scrollbar gap-8">
-                                {SOLAR_ITEMS.map((item, index) => (
-                                    <div
-                                        key={index}
-                                        className="flex items-center gap-3 group cursor-default shrink-0"
-                                    >
-                                        <span className="text-[var(--teal-light)] group-hover:scale-110 transition-transform duration-300">
-                                            {item.icon}
-                                        </span>
-                                        <span className="text-teal-50/80 text-sm font-medium whitespace-nowrap group-hover:text-white transition-colors">
-                                            {item.label}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
             <ContactPage />
         </div>
     );

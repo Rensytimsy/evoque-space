@@ -1,8 +1,21 @@
-from rest_framework import serializers
 from . import models
+from rest_framework import serializers
 
-
+class ServicesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Services
+        fields = "__all__"
+        
+        
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Category
+        fields = "__all__"
+        
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Products
         fields = "__all__"
+        
+        
+

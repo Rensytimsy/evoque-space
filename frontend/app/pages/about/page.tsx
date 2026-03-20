@@ -65,84 +65,102 @@ const AboutPage = () => {
     const textLight = isDark ? "#6aacaa" : "#4a8a90";
 
     return (
-        <div className="bg-white mb-10 dark:bg-[var(--teal-dark-dark)]/20">
-            <section className='min-w-screen flex justify-center align-center py-30 mb-10'>
-                <div className='lg:min-w-[90%]'>
-
-                    <div className='grid lg:grid-cols-2 space-x-10 '>
-                        <div className='ml-10'>
-                            <h1 className='text-[var(--teal-dark-dark)] mb-5 font-semibold text-[var(--teal-dark-dark)] dark:text-white text-2xl'>About Evoque Spaces</h1>
-                            <h2 className="serif font-semibold text-5xl mb-4 text-[var(--teal-dark-dark)] dark:text-white">
-                                Engineering Secure &<em className='text-[var(--teal-light)]'> Sustainable Spaces</em>
-                            </h2>
-                            <p className='text-[var(--teal-dark-dark)] dark:text-white text-md'>
-                                <strong className='text-[var(--teal-light)] dark:text-white'>Evoque Spaces Limited</strong>, is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
-                                We design and install reliable solar power systems, advanced CCTV and perimeter security solutions, and intelligent low-voltage networks that enhance safety, efficiency, and property value. From energy independence to complete surveillance coverage and smart building integration, we deliver systems engineered for performance and long-term reliability.
-                            </p>
-                            <p className='text-[var(--teal-dark-dark)] dark:text-white text-md mt-5'>
-                                Our team works closely with homeowners, developers, and contractors to provide tailored solutions that meet modern construction standards while embracing sustainability and innovation.
-                                At Evoque Spaces Limited, we don’t just install systems — we build secure, energy-efficient, and future-ready spaces.
-                            </p>
-                        </div>
-                        <div>
-                            <div className='lg:mt-10 space-y-5 mt-10 max-w-[90%] ml-5 mb-5'>
-                                {[["Our Vision", "To be a leading provider of integrated renewable energy, security, and smart infrastructure solutions in Kenya and across Africa, transforming spaces into secure, sustainable, and intelligent environments."],
-                                ["Our Mission", "To design, deliver, and maintain high-performance solar, security, and electrical systems that enhance safety, energy independence, and operational efficiency — while upholding engineering excellence, innovation, and long-term client partnerships."]
-                                ].map(([tag, title, desc]) => (
-                                    <div key={tag} className='rounded-md  shadow-sm p-3 dark:bg-[var(--teal-dark-light)]'>
-                                        <div className="mt-5 text-[var(--teal-light)] dark:text-white font-extrabold text-xl">{tag}</div>
-                                        <h3 className="text-md mb-2 text-[var(--teal-dark-dark)] dark:text-white">{title}</h3>
-                                        <p className='text-gray-600'>{desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </section>
-
-            <section className="mb-0 p-1">
-                <div className="max-w-7xl mx-auto px-6 text-center mb-6">
-                    <h2 className="text-4xl font-bold text-[#005461] dark:text-white">Our Core Values</h2>
-                    <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"></div>
+        <div className="relative mb-10 bg-white dark:bg-[var(--teal-dark-dark)]/20">
+            <div className='lg:max-w-6xl lg:m-auto p-2'>
+    <section className='w-full flex justify-center items-center py-20 mb-10'>
+        <div className='max-w-7xl mx-auto px-6'>
+            <div className='grid lg:grid-cols-2 gap-10 items-center'>
+                <div className='lg:pr-10'>
+                    <h1 className='text-[var(--teal-dark-dark)] mb-5 font-semibold dark:text-white text-2xl'>
+                        About Evoque Spaces
+                    </h1>
+                    <h2 className="serif font-semibold text-5xl mb-6 text-[var(--teal-dark-dark)] dark:text-white leading-tight">
+                        Engineering Secure & <em className='text-[var(--teal-light)]'>Sustainable Spaces</em>
+                    </h2>
+                    <p className='text-[var(--teal-dark-dark)] dark:text-white text-md leading-relaxed'>
+                        <strong className='text-[var(--teal-light)] dark:text-white'>Evoque Spaces Limited</strong>, is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
+                        We design and install reliable solar power systems, advanced CCTV and perimeter security solutions, and intelligent low-voltage networks that enhance safety, efficiency, and property value.
+                    </p>
+                    <p className='text-[var(--teal-dark-dark)] dark:text-white text-md mt-5 leading-relaxed'>
+                        At Evoque Spaces Limited, we don’t just install systems — we build secure, energy-efficient, and future-ready spaces.
+                    </p>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-                    {VALUES.map((v, i) => (
-                        <ValueCard
-                            // icon={<Shield />}
-                            key={i}
-                            title={v.title}
-                            desc={v.desc}
-                        />
-                    ))}
-                </div>
-            </section>
-
-            {/* <section className="py-24 max-w-7xl mx-auto px-6">
-                <div className="bg-[#0C7779] rounded-[3rem] p-12 md:p-20 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-10">
-                    <div className="relative z-10 max-w-xl">
-                        <h2 className="text-4xl font-bold text-white mb-6">Meet the Visionaries</h2>
-                        <p className="text-white/80 text-lg mb-8">
-                            Our team consists of seasoned architects, master builders, and creative interior designers with over a decade of collective experience in the Kenyan market.
-                        </p>
-                        <button className="bg-white text-[#005461] px-10 py-4 rounded-xl font-bold hover:bg-[#3BC1A8] hover:text-white transition-all shadow-xl shadow-black/20">
-                            Hear From The Team
-                        </button>
-                    </div>
-                    <div className="relative z-10 flex -space-x-6">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="w-20 h-20 md:w-32 md:h-32 rounded-full border-4 border-[#0C7779] bg-slate-200 overflow-hidden shadow-2xl">
-                                <img src={`https://i.pravatar.cc/150?u=${i + 10}`} alt="Team Member" />
+                <div className='flex justify-center lg:justify-end'>
+                    <div className='space-y-6 w-full max-w-md'>
+                        {[
+                            ["Our Vision", "To be a leading provider of integrated renewable energy, security, and smart infrastructure solutions in Kenya and across Africa, transforming spaces into secure, sustainable, and intelligent environments."],
+                            ["Our Mission", "To design, deliver, and maintain high-performance solar, security, and electrical systems that enhance safety, energy independence, and operational efficiency."]
+                        ].map(([tag, desc]) => (
+                            <div key={tag} className='rounded-xl shadow-sm p-6 bg-slate-50 dark:bg-[var(--teal-dark-light)] border border-slate-100 dark:border-white/10'>
+                                <div className="text-[var(--teal-light)] dark:text-white font-extrabold text-xl mb-3">{tag}</div>
+                                <p className='text-gray-600 dark:text-teal-50/80 text-sm leading-relaxed'>{desc}</p>
                             </div>
                         ))}
                     </div>
-                    <div className="absolute top-0 right-0 w-1/2 h-full bg-[var(--teal-dark-light)] opacity-10 skew-x-28 translate-x-20"></div>
                 </div>
-            </section> */}
+            </div>
         </div>
+    </section>
+
+    {/* Values Section */}
+    <section className="relative left-0 right-0 mb-20 px-6 ">
+        <div className="max-w-7xl mx-auto text-center mb-12">
+            <h2 className="text-4xl font-bold text-[#005461] dark:text-white">Our Core Values</h2>
+            <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            {VALUES.map((v, i) => (
+                <ValueCard
+                    key={i}
+                    title={v.title}
+                    desc={v.desc}
+                />
+            ))}
+        </div>
+    </section>
+    <section className="py-24 max-w-7xl mx-auto px-6">
+        <div className="bg-[#0C7779] rounded-[2rem] p-10 md:p-20 relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-12">
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-white/5 skew-x-12 translate-x-24 pointer-events-none"></div>
+            <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-teal-400/10 rounded-full blur-3xl"></div>
+
+            <div className="relative z-10 max-w-xl text-center lg:text-left">
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                    Join Our Community
+                </h2>
+                <p className="text-teal-50 text-lg mb-10 leading-relaxed">
+                    Stay up to date with tech, innovations, solutions, and energy trends. 
+                </p>
+
+                <form className="flex flex-col sm:flex-row gap-3 p-2 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+                    <input 
+                        type="email" 
+                        required
+                        placeholder="Enter your email" 
+                        className="flex-1 bg-transparent px-6 py-4 text-white placeholder:text-teal-100 outline-none w-full" 
+                    />
+                    <button className="bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-xl font-bold hover:bg-[var(--teal-dark-light)] transition-all active:scale-95 whitespace-nowrap">
+                        Subscribe Now
+                    </button>
+                </form>
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center gap-4">
+                <div className="flex -space-x-4 md:-space-x-6">
+                    {[1, 2, 3, 4].map((i) => (
+                        <div key={i} className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-[#0C7779] bg-slate-200 overflow-hidden shadow-xl">
+                            <img src={`https://i.pravatar.cc/150?u=${i + 60}`} alt="Member" className="w-full h-full object-cover" />
+                        </div>
+                    ))}
+                    <div className="w-16 h-16 md:w-24 md:h-24 rounded-full border-4 border-[#0C7779] bg-teal-800 flex items-center justify-center text-white font-bold">+500</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+</div>
+    
     );
 };
 

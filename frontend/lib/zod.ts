@@ -1,7 +1,7 @@
 import {object, string, email} from "zod"
 
 export const signInSchema = object({
-    username: string().min(3, 'username or email is required'),
+    email: email('provide a valid email'),
     password: string().min(4, 'password is required')
 })
 
