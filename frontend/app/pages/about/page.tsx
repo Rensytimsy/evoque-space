@@ -107,10 +107,10 @@ const AboutPage = () => {
     <section className="relative left-0 right-0 mb-20 px-6 ">
         <div className="max-w-7xl mx-auto text-center mb-12">
             <h2 className="text-4xl font-bold text-[#005461] dark:text-white">Our Core Values</h2>
-            <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"></div>
+            <div className="w-20 h-1.5 bg-[var(--teal-light)] mx-auto mt-4 rounded-full"/>
         </div>
 
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 border-none">
             {VALUES.map((v, i) => (
                 <ValueCard
                     key={i}
@@ -166,7 +166,7 @@ const AboutPage = () => {
 
 // Sub-component for Value Cards
 const ValueCard = ({ icon, title, desc }: { icon?: any, title: string, desc: string }) => (
-    <div className="p-10 rounded-3xl border border-slate-100 shadow-xl bg-[var(--teal-dark-dark)] border-[var(--teal-dark-dark)]/30 transition-all group">
+    <div className="p-10 rounded-3xl border  shadow-xl bg-[var(--teal-dark-dark)] border-[var(--teal-dark-dark)]/30 transition-all group">
         <h3 className="text-2xl font-bold text-white mb-4">{title}</h3>
         <p className="text-white leading-relaxed">{desc}</p>
     </div>
