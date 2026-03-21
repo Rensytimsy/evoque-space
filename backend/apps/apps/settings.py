@@ -31,6 +31,8 @@ DEBUG = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://www.evoquespaces.com",
+    "https://evoquespaces.com",
 ]
 
 
