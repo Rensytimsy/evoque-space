@@ -59,7 +59,8 @@ INSTALLED_APPS = [
 ALLOWED_HOSTS = [
     'api.evoquespaces.com',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'evoquespaces.com'
 ]
 
 import cloudinary
@@ -136,22 +137,17 @@ WSGI_APPLICATION = 'apps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-database_url = config("DATABASE_URL", default="")
-if database_url:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=database_url,
-            conn_max_age=600, 
-            conn_health_checks=True, 
-        )
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':config("DB_DATABASE", default=""),
+        'USER':config("DB_USER", default=""),
+        'HOST':config("DB_HOST", default=""),
+        'PASSWORD':config("DB_PASSWORD", default=""),
+        'PORT':config("DB_PORT", default=""),  
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
 
 
 # Password validation
