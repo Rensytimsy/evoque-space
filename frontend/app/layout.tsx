@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Evoque Space Limited",
+  title: "Evoque Spaces Limited | Design, Build & Renovate | Kenya",
   description: "Transform your vision into reality with Evoque Spaces. We specialize in designing, building, and renovating exceptional properties across Kenya.",
   icons: {
     icon: "/esl-logo.png",
