@@ -4,14 +4,14 @@ from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Category(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, editable=False, unique=True, default=uuid.uuid4)
     title = models.CharField(max_length=50, default="")
     
     def __str__(self):
         return "{}".format(self.title)
 
 class Services(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
     title = models.CharField(max_length=50, default="")
     subtitle = models.CharField(max_length=50, default="")
     category = models.ForeignKey(

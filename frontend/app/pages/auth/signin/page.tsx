@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import z from "zod"
 import { Input } from "@/components/ui/input"
-import { Facebook, LoaderCircle } from "lucide-react"
+import { Facebook, LoaderCircle, EyeClosed, Eye, EyeOff } from "lucide-react"
 import { FaGoogle } from "react-icons/fa";
 import axios, { AxiosError } from "axios"
 import { DataTable } from '../../../admin/components/data-table';
@@ -19,6 +19,7 @@ export default function SignInPage() {
     const [loginError, setLoginError] = useState<string>("")
     const [successLogin, setSuccessLogin] = useState<string>("")
     const [loading, setLoading] = useState<boolean>(false)
+    const [showPassword, setShowPassword] = useState<boolean>(false)
 
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
@@ -96,10 +97,10 @@ export default function SignInPage() {
 
     return (
         <div className="flex justify-center align-center w-full bg-white dark:bg-[var(--teal-dark-dark)]/20">
-            <div className="mt-40 mx-auto rounded-xl w-full h-[600px] mb-20 border max-w-md p-8 bg-card h-[60vh]">
+            <div className="mt-40 mx-auto rounded-xl w-full h-[600px] mb-20 bg-[var(--teal-light)] dark:bg-[var(--teal-dark-dark)]  max-w-md p-8 h-[60vh]">
                 <div className="mb-8 text-center space-y-2">
                     <h2 className="text-3xl text-[var(--teal-dark-dark)] font-semibold tracking-tight dark:text-white">Log in</h2>
-                    <p className="text-sm text-muted-foreground">Provide Credentials</p>
+                    <p className="text-sm text-white">Provide Credentials</p>
                 </div>
 
                 <div className={`
@@ -147,7 +148,10 @@ export default function SignInPage() {
                                 <FormItem>
                                     <FormLabel className="text-white font-bold">Password</FormLabel>
                                     <FormControl>
-                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="" type="password" {...field} />
+                                        <div className="relative flex bg-white p-1 rounded-md">
+                                          <Input className="dark:bg-white text-black outline-none border-white bg-white" placeholder="" type={`${showPassword ? "text" : "password"}`} {...field} />
+                                         {showPassword ?  <EyeOff onClick={() => setShowPassword(prevState => !prevState)} className="absolute right-3 mt-2" /> : <Eye onClick={() => setShowPassword(prevState => !prevState)} size={23}   className="absolute right-3 mt-2"/>}
+                                        </div>
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -175,11 +179,11 @@ export default function SignInPage() {
                     </div>
 
                     <div className="flex justify-center space-x-4">
-                        <button className="flex items-center justify-center w-12 h-12 rounded-sm border bg-[var(--teal-dark-dark)] transition-all hover:bg-[var(--teal-dark-dark)]/90 text-white">
+                        {/* <button className="flex items-center justify-center w-12 h-12 rounded-sm  bg-[var(--teal-dark-dark)] transition-all hover:bg-[var(--teal-dark-dark)]/90 text-white">
                             <Facebook size={24} fill="currentColor" />
-                        </button>
+                        </button> */}
                         <button
-                            className="flex items-center justify-center w-12 h-12 rounded-sm border transition-all bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)]/90 text-white"
+                            className="flex items-center justify-center w-12 h-12 rounded-sm  transition-all bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)]/90 text-white"
                             onClick={() => google_login()}
                         >
                             <FaGoogle size={24} fill="currentColor" />

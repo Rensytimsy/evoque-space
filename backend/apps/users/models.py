@@ -7,6 +7,7 @@ class Users(AbstractUser, PermissionsMixin):
     username = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']

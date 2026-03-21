@@ -174,8 +174,6 @@
         overflow-x: hidden;
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap');
-
     .font-bebas {
         font-family: 'Bebas Neue', sans-serif;
     }

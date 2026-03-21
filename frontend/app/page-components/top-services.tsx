@@ -16,7 +16,7 @@ interface Service {
 
 export const TopServices = () => {
     const { data, isLoading, error } = useServices()
-    const [close, setClose] = useState<boolean>(true)
+    const [open, setOpen] = useState<boolean>(false)
     const [selectedService, setSelectedService] = useState<Service | null>({
         id: "",
         title: "",
@@ -27,27 +27,37 @@ export const TopServices = () => {
         price: undefined
     });
     const [showNumber, setShowNumber] = useState(false)
+    console.log(selectedService)
 
     return (
-        <div className="p-6">
-            <h1 className="text-3xl font-bold mb-6">Top Services</h1>
+        <div className="p-6 dark:bg-[var(--teal-dark-dark)]/20 dark:border-b-2 bg-white dark:border-b-[var(--teal-light)]">
+<div className="flex flex-col items-center justify-center w-full py-10">
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 h-[200px] mb-10 ">
-                {data?.slice(0, 3).map((s:Service) => (
-                    <div 
-                        key={s.id} 
-                        onClick={() => setSelectedService(s)}
-                        className="relative p-4 border rounded-lg cursor-pointer hover:shadow-md transition-shadow"
-                    >
-                        <h3 className="font-bold text-2xl">{s.title}</h3>
-                        <p>{s.subtitle}</p>
-                        <p className="mb-4 mt-2 text-md mb-10 ">{s.description}</p>
-                        <button className="absolute bottom-0 mb-2 text-sm bg-[var(--teal-dark-light)] text-white font-semibold p-2">View Solution →</button>
-                    </div>
-                ))}
+    <h1 className="text-3xl font-extrabold mb-10 text-center dark:text-white text-[var(--teal-dark-dark)]">Top Services</h1>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4 ">
+        {data?.slice(0, 3).map((s: Service) => (
+            <div
+                key={s.id}
+                onClick={() => { setSelectedService(s); setOpen(true); }}
+                className="relative p-6 border rounded-xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1 bg-white dark:bg-[var(--teal-dark-light)] flex flex-col"
+            >
+                <h3 className="font-extrabold text-2xl mb-2 text-slate-800 dark:text-white">{s.title}</h3>
+                <p className="text-teal-600 font-semibold text-md mb-3 dark:text-[var(--teal-dark-dark)]">{s.subtitle}</p>
+                
+                <p className="text-slate-600 dark:text-slate-300 text-sm mb-16">
+                    {s.description}
+                </p>
+
+                <button className="absolute bottom-4 left-6 right-6 text-sm bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-light)] text-white font-semibold py-2 rounded-md">
+                    View Solution →
+                </button>
             </div>
+        ))}
+    </div>
+</div>
 
-            {selectedService && (
+            {open && selectedService && (
                 <div 
                     onClick={() => setSelectedService(null)}
                     className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm"

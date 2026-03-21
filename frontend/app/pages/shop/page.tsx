@@ -53,16 +53,10 @@ export default function ShopPage() {
     const [isScrolled, setIsScrolled] = useState(false)
 
     // shopping cart context
-    const {cart, checkout, addToCart} = useShoppingCart()
-
-    console.log(cart);
-    const {theme} = useTheme()
-    const {cart, addToCart} = useShoppingCart();
-
-    console.log(cart)
+    // const {cart, checkout, addToCart} = useShoppingCart()
 
 
-    const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
+    // const toggleWishlist = (id: number) => setWishlist(p => p.includes(id) ? p.filter(x => x !== id) : [...p, id]);
 
     const togglePriceRange = (label: string) => setSelectedPrices(p => p.includes(label) ? p.filter(x => x !== label) : [...p, label]);
     const toggleTag = (tag: string) => setSelectedTags(p => p.includes(tag) ? p.filter(x => x !== tag) : [...p, tag]);
@@ -227,8 +221,7 @@ export default function ShopPage() {
                     </div>
                 </aside>
 
-                {/* Product Grid */}
-                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 border md:grid-cols-3 space-x-2 mt-25 lg:mt-15">
+                <main className="flex-1 p-7 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 space-x-2 mt-25 lg:mt-15">
                     {filtered.length === 0 ? (
                         <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
                             <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)] dark:text-white" >No products found</p>
@@ -238,12 +231,10 @@ export default function ShopPage() {
                         <div key={p.id} className="max-h-[210px] mt-10 max-w-64 shadow-md relative flex flex-col mt-5 lg:mt-10 rounded-md"
                         >
 
-                            {/* Image */}
                             <div className="relative flex items-center justify-center text-6xl min-h-[200px] bg-white">
                                 <img src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${p.image}`} className="w-full max-h-[200px]" />
                             </div>
 
-                            {/* Card Body */}
                             <div className="flex flex-col flex-1 p-5 bg-[var(--teal-dark-dark)] border-none">
                                 <h3 className="text-xl font-medium leading-snug mb-1 dark:text-white text-white">{p.title}</h3>
                                 <p className="hidden lg:block font-jost text-xs leading-relaxed mb-3 dark:text-white text-white">{p.description}</p>
@@ -251,13 +242,12 @@ export default function ShopPage() {
                                     <span className="text-xl font-semibold dark:text-white text-white">KES: {p.price.toLocaleString()}</span>
                                 </div>
                                 <div className="flex flex-col sm:flex-row md:flex-col gap-3 mt-4">
-                                    {/* Buy Now Button - High Contrast / Primary */}
                                     <button
                                         className="flex items-center justify-center gap-2 w-full py-3 px-4 text-sm tracking-wide uppercase transition-all duration-300 
                                         bg-[var(--teal-dark-light)] hover:bg-[#164d4d] text-white 
                                         dark:bg-[var(--teal-light)] dark:hover:bg-[#1fadad] dark:text-[var(--teal-dark-dark)]
                                         rounded-lg font-bold shadow-sm hover:shadow-md active:scale-[0.98]"
-                                        onClick={() => addToCart({id: p.id, title: p.title, price: p.price})}
+                                        // onClick={() => addToCart({id: p.id, title: p.title, price: p.price})}
                                     >
                                         <ShoppingBasket size={18} strokeWidth={2.5} />
                                         <span>Buy</span>
@@ -269,7 +259,7 @@ export default function ShopPage() {
                                         bg-slate-100 hover:bg-slate-200 text-[var(--teal-dark-dark)]
                                         dark:bg-white/10 dark:hover:bg-white/20 dark:text-white
                                         rounded-lg font-bold border border-transparent dark:border-white/10 active:scale-[0.98]"
-                                        onClick={() => addToCart({id: p.id, title: p.title, price:p.price})}
+                                        // onClick={() => addToCart({id: p.id, title: p.title, price:p.price})}
                                     >
                                         <ShoppingCart size={18} strokeWidth={2.5} />
                                         <span className="text-xs">Add to Cart</span>

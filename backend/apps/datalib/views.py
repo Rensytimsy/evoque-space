@@ -116,11 +116,45 @@ def _get_services(request):
     try:
         services = models.Services.objects.all()
         services_serilizers = serializers.ServicesSerializer(services, many=True)
-        
 
             
         return response.Response({
             "data": services_serilizers.data,
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return response.Response({
+            "error" : str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+@decorators.api_view(["GET"])
+def _get_categories(request):
+    try:
+        category = models.Category.objects.all()
+        category_serilizers = serializers.CategorySerializer(category, many=True)
+        
+
+            
+        return response.Response({
+            "data": category_serilizers.data,
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return response.Response({
+            "error" : str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@decorators.api_view(["PUT"])
+def _update_service(request):
+    try:
+        print(request.data.get("id"))
+        service = models.Services.objects.filter(id=request.data.get("id")).update(**request.data)
+        service_serilizers = serializers.CategorySerializer(service)
+        
+
+            
+        return response.Response({
+            "data": service_serilizers.data,
         }, status=status.HTTP_200_OK)
     except Exception as e:
         return response.Response({

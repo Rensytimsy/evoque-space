@@ -20,7 +20,8 @@ import {
   IconUsers,
   IconTax,
   IconBrandXbox,
-  IconBrandDropbox
+  IconBrandDropbox,
+  IconDeviceGamepad3
 } from "@tabler/icons-react"
 
 import { NavDocuments } from "../components/nav-documents"
@@ -58,6 +59,11 @@ const data = {
       icon: IconBrandDropbox,
     },
     {
+      title: "Services",
+      url: "/admin/dashboard/services",
+      icon: IconDeviceGamepad3,
+    },
+    {
       title: "Payments",
       url: "#",
       icon: IconTax,
@@ -72,9 +78,12 @@ export const AppSidebar: FC<{ children: ReactNode }> = ({ children }) => {
     return (
         <div className="relative">
             <SidebarProvider>
-                <Sidebar collapsible="icon" className="bg-blue-300">
+                <Sidebar collapsible="icon">
                     <SidebarHeader className="bg-[var(--teal-dark-dark)] text-white font-bold">
-                        <p>Evoque Space</p>
+                        <div className="flex space-x-3x">
+                          <img src={"/esl-logo.png"} className={isOpen ? "h-10" : "h-10"} />
+                          <p className={isOpen ? "" : "hidden"}>Admin</p>
+                        </div>
                     </SidebarHeader>
                     <SidebarContent className="bg-[var(--teal-dark-dark)] text-white font-bold">
                         <NavMain items={data.navMain} />

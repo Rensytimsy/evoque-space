@@ -9,3 +9,12 @@ export const useServices = () => {
         return res.data.data
     }
 })}
+
+export const useCategories = () => {
+    return useQuery({
+    queryKey: ["categories"],
+    queryFn: async() => {
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}categories`)
+        return res.data.data
+    }
+})}

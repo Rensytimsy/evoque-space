@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 export const DashboardProvider:FC<{children: ReactNode}> = ({children}) => {
     const pathname = usePathname()
 
-    const EXCLUDED_PATHNAMES = ["/pages/auth/signin", "/pages/auth/signup", "/pages", "/home","/page"]
+    const EXCLUDED_PATHNAMES = ["/pages/auth/signin", "/pages/auth/signup", "/pages", "/home","/page", "/services"]
     const should_display = !EXCLUDED_PATHNAMES.some(path => pathname.startsWith(path))
 
     if (should_display) {
