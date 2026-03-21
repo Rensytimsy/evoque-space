@@ -8,6 +8,7 @@ import { DashboardProvider } from "./dashboardProvider";
 import { ShoppingCartContextProvider } from "@/hooks/use-context";
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import Providers from "@/providers";
+import {Analytics} from "@vercel/analytics/next"
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -56,6 +57,7 @@ export default function RootLayout({
                         <Footer />
                     </GoogleOAuthProvider>
                 </NextThemesProvider>
+                <Analytics />
             </body>
         </html>
     );
