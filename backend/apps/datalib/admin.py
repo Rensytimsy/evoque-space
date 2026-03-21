@@ -12,6 +12,7 @@ class Category(ModelAdmin):
 @admin.register(models.Services)
 class Service(ModelAdmin):
     list_display = ["title", "price"]
+    
 @admin.register(models.Products)
 class Products(ModelAdmin):
     list_display = ["title", "price", "description"]
