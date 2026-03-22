@@ -69,7 +69,7 @@ export default function ShopPage() {
         }
         const get_products = async() => {
             try{
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}products`)
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}products`)
                 setProducts(res?.data?.data);
             }catch(error){
                 console.log(error)
@@ -110,7 +110,6 @@ export default function ShopPage() {
 
     const hasFilters = selectedPrices.length > 0 || selectedTags.length > 0 || selectedCategory !== "All" || !!search;
 
-    console.log(`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}`)
 
     return (
         <div className="min-h-screen mt-20 bg-white dark:bg-[var(--teal-dark-dark)]/20">
