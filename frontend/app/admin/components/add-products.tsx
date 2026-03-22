@@ -106,7 +106,7 @@ export default function AddProductPage() {
           formData.append("category", category)
     
     
-          const res = await axios.post(`${process.env.NEXT_PUBLIC_URL}upload/`, formData, {
+          const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}upload/`, formData, {
             headers: {
               "Content-Type" : "multipart/form-data"
             }
