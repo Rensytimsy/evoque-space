@@ -27,7 +27,7 @@ export const TopServices = () => {
         price: undefined
     });
     const [showNumber, setShowNumber] = useState(false)
-    console.log(selectedService)
+    // console.log(selectedService)
 
     return (
         <div className="p-6 dark:bg-[var(--teal-dark-dark)]/20 dark:border-b-2 bg-white dark:border-b-[var(--teal-light)]">
