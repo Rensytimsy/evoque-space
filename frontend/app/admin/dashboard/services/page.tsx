@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form'
 import axios from 'axios'
 import Link from 'next/link'
 import {useServices, useCategories} from "@/hooks/datafetch"
-// --- Types ---
 type Service = {
   id?: string
   title: string
@@ -39,9 +38,7 @@ export default function UnifiedAdminPage() {
   const [editCategory, setEditCategory] = useState<Category | null>(null)
   const [formSelected, setFormSelected] = useState<string>("")
 
-  // --- 1. Data Fetching ---
   const {data, isLoading, error} = useServices()
-//   const {dataCategory, isLoading, error} = useServices()
   useEffect(() => {
     const get_services = async() => {
         try{
@@ -54,8 +51,6 @@ export default function UnifiedAdminPage() {
     get_services()
   }, [])
 
-
-  // --- 2. Form Logic ---
   const { register, handleSubmit, reset, setValue } = useForm<Service>()
 
   const openForm = (service?: Service) => {
@@ -79,7 +74,6 @@ export default function UnifiedAdminPage() {
     }
   }
 
-  // --- 3. Mutations (Create, Update, Delete) ---
   const saveMutation = useMutation({
     mutationFn: (data: Service) => {
       return editingService 

@@ -92,35 +92,6 @@ export default function Services() {
 
     console.log(services)
 
-
-    const WHY_CHOOSE_US = [
-        {
-            icon: <Award className="text-[var(--teal-light)]" size={24} />,
-            title: "Certified Technical Team",
-            desc: "Licensed engineers with specialized training in smart infrastructure."
-        },
-        {
-            icon: <Zap className="text-[var(--teal-light)]" size={24} />,
-            title: "End-to-End Execution",
-            desc: "From initial survey to final testing, we handle the entire project lifecycle."
-        },
-        {
-            icon: <ShieldCheck className="text-[var(--teal-light)]" size={24} />,
-            title: "Premium Trusted Brands",
-            desc: "We exclusively use Tier-1 components and industry-leading hardware."
-        },
-        {
-            icon: <Maximize className="text-[var(--teal-light)]" size={24} />,
-            title: "Scalable Solutions",
-            desc: "Modular designs that grow alongside your property or business needs."
-        },
-        {
-            icon: <HeadphonesIcon className="text-[var(--teal-light)]" size={24} />,
-            title: "After-Sales Support",
-            desc: "Dedicated technical maintenance and 24/7 emergency response lines."
-        }
-    ];
-
     return (
         <div>
             <section className="relative py-24 bg-white dark:bg-[var(--teal-dark-dark)]/20 overflow-hidden">
