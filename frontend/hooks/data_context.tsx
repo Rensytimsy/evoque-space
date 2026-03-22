@@ -25,10 +25,8 @@ interface CartContextType {
     setCheckout: (status: boolean) => void;
 }
 
-// Create the context - this is a const, not a namespace
 const ShoppingCartContext = createContext<CartContextType | null>(null);
 
-// Provider component
 export const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
     const [checkout, setCheckout] = useState<boolean>(false);
@@ -48,7 +46,7 @@ export const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ child
             const newItem: CartItem = {
                 ...product,
                 quantity: quantity,
-                id: product.id || Date.now(), // Provide a default id if none exists
+                id: product.id || Date.now(),
                 title: product.title || '',
                 price: product.price || 0
             };
@@ -111,7 +109,6 @@ export const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ child
     );
 };
 
-// Custom hook for using the cart context
 import { useContext } from 'react';
 
 export const useShoppingCart = () => {
@@ -124,3 +121,9 @@ export const useShoppingCart = () => {
     return context;
 };
 
+
+interface UserData {
+    username: string
+    email: string
+    isAdmin: boolean
+}

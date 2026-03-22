@@ -1,10 +1,11 @@
 django
 djangorestframework
-cloudinary
-dj_database_url
 psycopg2-binary
-python-decouple
+cloudinary
 django-cloudinary-storage
-gunicorn
+python-decouple
+djangorestframework-simplejwt[crypto]
 django-cors-headers
-djangorestframework-smiplejwt
+requests
+dj_database_url
+gunicorn

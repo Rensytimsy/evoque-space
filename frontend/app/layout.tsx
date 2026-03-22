@@ -8,6 +8,7 @@ import { DashboardProvider } from "./dashboardProvider";
 import { ShoppingCartContextProvider } from "@/hooks/use-context";
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import Providers from "@/providers";
+import {Analytics} from "@vercel/analytics/next"
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -20,7 +21,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Evoque Space Limited",
+  title: "Evoque Spaces Limited | Design, Build & Renovate | Kenya",
   description: "Transform your vision into reality with Evoque Spaces. We specialize in designing, building, and renovating exceptional properties across Kenya.",
   icons: {
     icon: "/esl-logo.png",
@@ -56,6 +57,7 @@ export default function RootLayout({
                         <Footer />
                     </GoogleOAuthProvider>
                 </NextThemesProvider>
+                <Analytics />
             </body>
         </html>
     );

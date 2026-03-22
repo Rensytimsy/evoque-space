@@ -28,13 +28,20 @@ SECRET_KEY = 'django-insecure-9v_h=#lhc*4_b7@!%ofm+=e_fwh7cbg)9f_(b(8=is7$3&2e+o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "localhost:3000",
-    "evoque-space.onrender.com"
-]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://www.evoquespaces.com",
+    "https://evoquespaces.com",
+]
+
+CORS_ALLOW_METHODS = [
+    'POST',
+    'GET',
+    'PUT',
+    'DELETE',
+    'PATCH',
+    'OPTIONS'
 ]
 
 
@@ -59,7 +66,9 @@ INSTALLED_APPS = [
 ALLOWED_HOSTS = [
     'api.evoquespaces.com',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
+    'evoquespaces.com',
+    'evoque-space.onrender.com'
 ]
 
 import cloudinary
@@ -75,7 +84,8 @@ cloudinary.config(
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://www.evoquespaces.com"
 ]
 
 SIMPLE_JWT = {
@@ -136,13 +146,14 @@ WSGI_APPLICATION = 'apps.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-database_url = config("DATABASE_URL", default="")
-if database_url:
+
+datbase_url = config("DATABASE_URL", default="")
+if datbase_url:
     DATABASES = {
         'default': dj_database_url.config(
-            default=database_url,
-            conn_max_age=600, 
-            conn_health_checks=True, 
+            default=datbase_url,
+            conn_max_age=600,
+            conn_health_checks=True
         )
     }
 else:
@@ -152,6 +163,7 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+    
 
 
 # Password validation
