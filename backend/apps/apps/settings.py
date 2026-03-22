@@ -35,6 +35,15 @@ CORS_ALLOWED_ORIGINS = [
     "https://evoquespaces.com",
 ]
 
+CORS_ALLOW_METHODS = [
+    'POST',
+    'GET',
+    'PUT',
+    'DELETE',
+    'PATCH',
+    'OPTIONS'
+]
+
 
 # Application definition
 
