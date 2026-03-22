@@ -1,15 +1,12 @@
 "use client"
 
-import React from 'react';
-import { ShoppingCart, ArrowRight, ChevronLeft, ChevronRight, Zap, Shield, Cpu } from 'lucide-react';
-import Link from 'next/link';
+import { getProducts } from "@/hooks/datafetch"
+import { Product } from "@/hooks/datafetch"
 
-const SolarHero = () => {
-  return (
+export const TestPage = async() => {
+  return(
     <div>
-      hello this is the test page
+      test page
     </div>
   )
-};
-
-export default  SolarHero;
+}
