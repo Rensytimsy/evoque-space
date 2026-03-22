@@ -40,7 +40,7 @@ export const TopServices = () => {
             <div
                 key={s.id}
                 onClick={() => { setSelectedService(s); setOpen(true); }}
-                className="relative p-6 border rounded-xl cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1 bg-white dark:bg-[var(--teal-dark-light)] flex flex-col"
+                className="relative p-6 rounded-md cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1 bg-white dark:bg-[var(--teal-dark-light)] flex flex-col"
             >
                 <h3 className="font-extrabold text-2xl mb-2 text-slate-800 dark:text-white">{s.title}</h3>
                 <p className="text-teal-600 font-semibold text-md mb-3 dark:text-[var(--teal-dark-dark)]">{s.subtitle}</p>
