@@ -140,7 +140,6 @@ const filtered = useMemo(() => {
                     }}>
                     <div style={{ opacity: sidebarOpen ? 1 : 0, transition: "opacity 0.2s" }}>
 
-                        {/* Categories */}
                         <div className="mb-8 mt-12">
                             <SidebarTitle label="Category" />
                             <div className="bg-white dark:bg-transparent flex flex-col text-left space-y-3 p-4">
@@ -151,7 +150,6 @@ const filtered = useMemo(() => {
                             </div>
                         </div>
 
-                        {/* Price */}
                         <div className="mb-8">
                             <div className="font-jost  tracking-tight uppercase mb-4 font-extrabold flex items-center gap-2 text-black text-md dark:text-white">
                                 Price Range
@@ -169,7 +167,6 @@ const filtered = useMemo(() => {
                             ))}
                         </div>
 
-                        {/* Tags */}
                         <div className="mb-8">
                             <SidebarTitle label="Tags" />
                             <div className="flex flex-wrap gap-1.5">
@@ -180,7 +177,6 @@ const filtered = useMemo(() => {
                             </div>
                         </div>
 
-                        {/* Clear All */}
                         {hasFilters && (
                             <div className="mb-8">
                                 <SidebarTitle label="Active Filters" />
@@ -205,7 +201,7 @@ const filtered = useMemo(() => {
       </p>
     </div>
   ) : (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {filtered.map((p) => (
         <div 
           key={p.id} 

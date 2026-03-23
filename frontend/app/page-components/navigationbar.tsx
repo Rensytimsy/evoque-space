@@ -61,11 +61,11 @@ const NavigationBar = () => {
 
     return (
         <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${inter.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-100 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path !== "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}`}>
-            <Link href={{ pathname: "https://wa.me/254727576955" }} target='_blank'>
+            {/* <Link href={{ pathname: "https://wa.me/254727576955" }} target='_blank'>
                 <div className='fixed right-0 top-19 lg:top-20 md:top-20 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-sm'>
                     <FaWhatsapp size={50} className='text-white dark:text-white' />
                 </div>
-            </Link>
+            </Link> */}
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
                 {/* LOGO */}

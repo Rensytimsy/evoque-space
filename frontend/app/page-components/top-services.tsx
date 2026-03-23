@@ -106,11 +106,13 @@ export default function TopServices ({servicesdata}: {servicesdata: Service[]}) 
 
 
                         <div className="p-6 bg-gray-50 flex flex-col gap-3">
-                            <button 
-                            onClick={() => setShowNumber(true)}
-                            className="w-full py-3 px-4 bg-[var(--teal-dark-dark)] hover:opacity-90 text-white font-semibold rounded-md transition-all">
-                                {!showNumber ? "Get Solution": "call : +254 727 494 414"}
-                            </button>
+                            <Link href={{ pathname: "tel:254 727 494 414"}}>
+                                <button 
+                                onClick={() => setShowNumber(true)}
+                                className="w-full py-3 px-4 bg-[var(--teal-dark-dark)] hover:opacity-90 text-white font-semibold rounded-md transition-all">
+                                    {!showNumber ? "Get Solution": "call : +254 727 494 414"}
+                                </button>
+                            </Link>
                             <Link href="https://wa.me/" className="w-full">
                                 <button className="w-full py-3 px-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold rounded-md transition-all">
                                     Request Quotation
