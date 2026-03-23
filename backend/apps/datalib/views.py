@@ -21,6 +21,7 @@ def _upload_product(request):
         price = request.data.get("price")
         description = request.data.get("description")
         image_file = request.FILES.get("image") 
+        category=request.data.get("category")
         
         if not all([title, price, image_file]):
             return response.Response({
@@ -31,7 +32,8 @@ def _upload_product(request):
             title=title,
             price=price,
             description=description,
-            image=image_file 
+            image=image_file ,
+            category=category
         )
 
         product_data = serializers.ProductSerializer(product)
@@ -155,6 +157,23 @@ def _update_service(request):
             
         return response.Response({
             "data": service_serilizers.data,
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return response.Response({
+            "error" : str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+@decorators.api_view(["PUT"])
+def _update_product(request):
+    try:
+        print(request.data.get("id"))
+        product = models.Products.objects.filter(id=request.data.get("id")).update(**request.data)
+        product_serilizers = serializers.ProductSerializer(product)
+        
+
+        return response.Response({
+            "data": product_serilizers.data,
         }, status=status.HTTP_200_OK)
     except Exception as e:
         return response.Response({

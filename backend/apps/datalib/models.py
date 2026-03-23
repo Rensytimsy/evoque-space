@@ -27,7 +27,7 @@ class Products(models.Model):
     title = models.CharField(max_length=30, default="")
     price = models.FloatField(default=0.00)
     image = CloudinaryField('image')
-    description = models.CharField(default="", max_length=200)
+    description = models.CharField(default="", max_length=500)
     products_category = (
         ("furniture" , "furniture & furnishing"),
         ("kitchen" , "Kichen Essentials"),
@@ -41,6 +41,7 @@ class Products(models.Model):
         ("security", "Saftey and Security"),
         ("cleaning", "Cleaning Supplies & Equipment"),
         ("staircase" , "Stair Case & Hallway"),
+        ("surveillance" , "Cttv and access point"),
     )
     category = models.CharField(
         choices=products_category,
