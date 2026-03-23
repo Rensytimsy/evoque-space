@@ -1,6 +1,3 @@
-// Delete or rename: pages/shop.tsx
-// Create: app/shop/page.tsx
-
 import { unstable_cache } from "next/cache";
 import axios from "axios";
 import ShopPage from "../page-components/shopPage";

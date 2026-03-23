@@ -124,9 +124,7 @@ const defaultSolutions: Solution[] = [
 
 export default function HomePage() {
     const [current, setCurrent] = useState(0);
-    const { theme } = useTheme()
 
-    console.log(theme)
 
     // Auto-play logic
     useEffect(() => {
