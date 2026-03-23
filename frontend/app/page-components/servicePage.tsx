@@ -91,7 +91,7 @@ export default function ServicePageData({servicesdata}:{servicesdata: Service[]}
 
                     <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-8 mt-12">
                         {servicesdata.map((s, i) => (
-                            <div key={i} className="border shadow-xs rounded-xl">
+                            <div key={i} className="shadow-xs rounded-xl">
                                 <div className="relative group dark:bg-[var(--teal-dark-dark)] h-full flex flex-col bg-white p-8 rounded-2xl">
 
                                     <h3 className="text-[var(--teal-dark-dark)] dark:text-white text-2xl font-semibold mb-4">
