@@ -46,15 +46,15 @@ export default function RootLayout({
                     attribute="class"
                 >
                     <GoogleOAuthProvider clientId={`${process.env.GOOGLE_CLIENT_ID}`}>
+                    <ShoppingCartContextProvider>
                             <NavigationBar />
                             <div>
                                 <Providers>
-                    <ShoppingCartContextProvider>
                                     <DashboardProvider>{children} </DashboardProvider> 
-                    </ShoppingCartContextProvider>
                                 </Providers>
                             </div>
                         <Footer />
+                    </ShoppingCartContextProvider>
                     </GoogleOAuthProvider>
                 </NextThemesProvider>
                 <Analytics />

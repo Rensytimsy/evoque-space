@@ -95,7 +95,7 @@ export default function Footer() {
                 </div>
                 <br />
                 <div className="flex justify-center align-center">
-                    <a href="https://www.linkedin.com/in/timothy-mutwiri-9900a2262/" className="text-white underline text-sm text-center">( Website Developed and Designed by Timothy +254746964592 )</a>
+                    <a href="https://www.linkedin.com/in/timothy-mutwiri-9900a2262/" className="text-white underline text-md text-center">( Website Developed and Designed by Timothy +254746964592 )</a>
                 </div>
             </div>
         </footer>
