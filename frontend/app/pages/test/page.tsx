@@ -1,46 +1,20 @@
-"use client"
-import { Products } from "@/lib/datafetch"
-import { getProducts } from "@/lib/datafetch"
-import { GetStaticProps } from "next"
-import { FC } from "react"
+import { getProducts } from "@/hooks/datafetch"
+import { Product } from "@/hooks/datafetch"
 import { unstable_cache } from "next/cache"
+import { useShoppingCart } from "@/hooks/use-context"
 
-export const dynamic = "force-static";
-export const regenerate = 300;
-
-const cacheAllProducts = unstable_cache(
-    async () => {
-        const productsdata = await getProducts();
-        return productsdata;
-    },
-    ['products'],
-    {
-        revalidate: regenerate,
-        tags: ['products']
-    }
-)
+export const dynamic = "force-static"
+export const regenerate = 300
 
 
+const TestPage = () => {
+  
 
-const TestPage:FC<{ productsdata : Products }> = async() => {
-    const products = await cacheAllProducts();
-    if (!products || products.length < 1){
-        return <div>No products were found</div>
-    }
-    return(
-        <div className="flex justify-cente align-center h-full">
-            <div className="grid grid-cols-6">
-                {products.map((p, i) => (
-                    <div className="">
-                        <div>
-                            <img src={p.image} alt="product image" />
-                        </div>
-                        {p.title}
-                    </div>
-                ))}
-            </div>
-        </div>
-    )
+  return(
+    <div className="min-h-[100vh]">
+      test page
+    </div>
+  )
 }
 
 export default TestPage;

@@ -1,5 +1,17 @@
 import {useQuery} from "@tanstack/react-query"
 import axios from "axios"
+export type Product = {
+    id: number,
+    title: string,
+    price: number,
+    description: string,
+    category: string,
+    image: string,
+    rating: {
+        rate: number,
+        count: number
+    }
+}
 
 export const useServices = () => {
     return useQuery({
@@ -18,3 +30,9 @@ export const useCategories = () => {
         return res.data.data
     }
 })}
+
+
+export const getProducts = async():Promise<Product[]> => {
+    const response = await axios.get("https://fakestoreapi.com/products")
+    return response.data
+}

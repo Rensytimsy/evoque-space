@@ -1,23 +1,26 @@
 "use client"
 
-import React, { createContext, useState, FC, ReactNode } from 'react';
+import React, { createContext, useState, FC, ReactNode, useContext } from 'react';
 
-export interface ProductData {
-    id?: string | number | null;
-    title: string ;
-    price: number;
-    category: string,
-    tag: string | any,
-    img: string,
-    desc: string
+// Base product data that comes from your shop/API
+export type ProductData = {
+    id: string | number;
+    title: string;
+    price: number | string;
+    image: string;
+    category?: string;      
+    tag?: string;         
+    description?: string;   
 }
+
 
 interface CartItem extends ProductData {
     quantity: number;
-}   
+    price: number; 
+}
 
 interface CartContextType {
-    cart: CartItem[] | null;
+    cart: CartItem[];
     checkout: boolean;
     addToCart: (product: ProductData, quantity?: number) => void;
     removeFromCart: (productId: string | number) => void;
@@ -30,16 +33,21 @@ interface CartContextType {
 
 const ShoppingCartContext = createContext<CartContextType | null>(null);
 
-const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
+export const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
     const [checkout, setCheckout] = useState<boolean>(false);
 
+    // Helper to ensure price is a number
+    const normalizePrice = (price: number | string): number => {
+        return typeof price === 'string' ? parseFloat(price) : price;
+    };
+
     const addToCart = (product: ProductData, quantity: number = 1) => {
-        console.log(product.title)
         setCart(prevCart => {
             const existingItem = prevCart.find(item => item.id === product.id);
             
             if (existingItem) {
+                // Update existing item
                 return prevCart.map(item =>
                     item.id === product.id
                         ? { ...item, quantity: item.quantity + quantity }
@@ -47,12 +55,17 @@ const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) 
                 );
             }
             
+            // Create new cart item with normalized price
             const newItem: CartItem = {
-                ...product,
+                id: product.id,
+                title: product.title,
+                price: normalizePrice(product.price), // Ensure price is number
+                image: product.image,
                 quantity: quantity,
-                id: product.id || Date.now(),
-                title: product.title || '',
-                price: product.price || 0
+                // Include optional fields if they exist
+                ...(product.category && { category: product.category }),
+                ...(product.tag && { tag: product.tag }),
+                ...(product.description && { description: product.description })
             };
             
             return [...prevCart, newItem];
@@ -83,9 +96,7 @@ const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) 
 
     const getCartTotal = (): number => {
         return cart.reduce((total, item) => {
-            const itemPrice = typeof item.price === 'string' 
-                ? parseFloat(item.price) 
-                : item.price || 0;
+            const itemPrice = typeof item.price === 'number' ? item.price : parseFloat(item.price as any);
             return total + (itemPrice * item.quantity);
         }, 0);
     };
@@ -106,7 +117,6 @@ const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) 
         setCheckout
     };
 
-    // This is correct - ShoppingCartContext is the const from above
     return (
         <ShoppingCartContext.Provider value={value}>
             {children}
@@ -115,9 +125,7 @@ const ShoppingCartContextProvider: FC<{ children: ReactNode }> = ({ children }) 
 };
 
 // Custom hook for using the cart context
-import { useContext } from 'react';
-
-const useShoppingCart = () => {
+export const useShoppingCart = () => {
     const context = useContext(ShoppingCartContext);
     
     if (!context) {
@@ -126,5 +134,3 @@ const useShoppingCart = () => {
     
     return context;
 };
-
-export { ShoppingCartContext, ShoppingCartContextProvider, useShoppingCart };

@@ -10,4 +10,5 @@ urlpatterns = [
     urls.path("products/", views._get_products, name="all_products"),
     urls.path("categories/", views._get_categories, name="all_categories"),
     urls.path("update-service/", views._update_service, name="update_service"),
+    urls.path("update-product/", views._update_service, name="update_product"),
 ]

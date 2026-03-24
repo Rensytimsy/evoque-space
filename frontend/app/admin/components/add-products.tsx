@@ -17,7 +17,8 @@ const CATEGORIES = [
   "storage",
   "security",
   "cleaning",
-  "staircase"
+  "staircase",
+  "surveillance"
 ];
 
 interface ProductForm {
@@ -25,8 +26,8 @@ interface ProductForm {
   description: string;
   category: string;
   price: string;
-  image: File | Blob | null | string ;
-  imagePreview: string | null;
+  image: File | null;
+  imagePreview: string | null ;
 }
 
 export default function AddProductPage() {
@@ -46,7 +47,7 @@ export default function AddProductPage() {
   useEffect(() => {
     const getProducts = async() => {
       try{
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}products`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}products/`);
         console.log(response);
       }catch(error){
         console.log(error)
@@ -88,7 +89,8 @@ export default function AddProductPage() {
     return newErrors;
   };
 
-  const handleSubmit = async() => {
+const handleSubmit = async(e: React.FormEvent) => {
+  // e.preventDefault()
     try{
       const newErrors = validate();
       if (Object.keys(newErrors).length > 0) {
@@ -99,18 +101,18 @@ export default function AddProductPage() {
       const {title, category, description, price, image}:ProductForm = form;
       const formData = new FormData();
       if (image !== null){
-          formData.append("title", title)
-          formData.append("price", price),
-          formData.append("description", description),
-          formData.append("image", image),
-          formData.append("category", category)
-    
+          formData.append("title", title);
+          formData.append("price", price);
+          formData.append("description", description);
+          formData.append("image", image);
+          formData.append("category", category);
     
           const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}upload/`, formData, {
             headers: {
               "Content-Type" : "multipart/form-data"
             }
-          })
+          });
+          console.log(res.data)
       }
       setErrors({});
       setSubmitted(true);
@@ -127,14 +129,14 @@ export default function AddProductPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-[var(--teal-light)] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-white flex items-center justify-center p-6">
         <div className="text-center max-w-md">
           {form.imagePreview && (
-            <img src={form.imagePreview} alt="Product" className="w-32 h-32 object-contain rounded-sm mx-auto mb-6 shadow-sm" />
+            <img src={form.imagePreview} alt="Product" className="w-32 h-32 object-cover rounded-md mx-auto mb-6 shadow-sm" />
           )}
-          <h2 className="text-3xl font-bold text-white mb-2">Product Added!</h2>
-          <p className="text-black text-lg mb-1 font-sans font-bold text-white">{form.title}</p>
-          <p className="text-2xl font-bold text-white mb-6">${Number(form.price).toFixed(2)}</p>
+          <h2 className="text-3xl font-bold text-green-400">Product Added!</h2>
+          <p className="text-lg mb-1 font-sans font-bold text-[var(--teal-dark-dark)]">{form.title}</p>
+          <p className="text-2xl font-bold text-[var(--teal-dark-dark)] mb-6">${Number(form.price).toFixed(2)}</p>
           <div className="space-x-4">
             <Link href={{ pathname: "/admin/dashboard/products"}}>
               <button

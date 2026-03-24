@@ -5,12 +5,12 @@ import LandingPage from "./pages/test/page";
 import NavigationBar from "./page-components/navigationbar";
 import HomePage from "./page-components/Home";
 import AboutPage from "./pages/about/page";
-import Services from "./pages/services/page";
+import Services from "./services/page";
 import ContactPage from "./pages/contact/page";
 import { Sun, BatteryMedium, Zap, PanelTop, Leaf, House } from 'lucide-react';
 import Footer from "./page-components/footer";
 import MoreInfo from "./page-components/more-info";
-import { TopServices } from "./page-components/top-services";
+import TopRequestedServices from "./page-components/services";
 
 
 const SOLAR_ITEMS = [
@@ -25,7 +25,7 @@ export default function Home() {
     return (
         <div className="">
             <HomePage />
-            <TopServices />
+            <TopRequestedServices />
             <AboutPage />
             <MoreInfo />
             <div>

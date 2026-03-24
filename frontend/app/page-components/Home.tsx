@@ -124,9 +124,7 @@ const defaultSolutions: Solution[] = [
 
 export default function HomePage() {
     const [current, setCurrent] = useState(0);
-    const { theme } = useTheme()
 
-    console.log(theme)
 
     // Auto-play logic
     useEffect(() => {
@@ -171,7 +169,7 @@ export default function HomePage() {
                         Evoque Spaces Limited is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
-                        <Link href={{ pathname: "/pages/shop" }}>
+                        <Link href={{ pathname: "/shop" }}>
                             <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
                                 Visit Shop
                                 <ShoppingCart className="text-white" size={20} />

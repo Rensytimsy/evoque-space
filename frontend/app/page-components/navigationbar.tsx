@@ -4,19 +4,19 @@ import React, { useState, useEffect } from 'react';
 import { Home, Menu, X, ShoppingCart, ChevronDown, Search, Hammer, Building2, User2, Sun, Moon, Phone, Info, LogIn } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from "next/link"
-import { stylish } from '@/fonts';
+import { stylish, inter } from '@/fonts';
 import { useTheme } from 'next-themes';
-// import { useShoppingCart } from '@/hooks/data_context';
 import { FaWhatsapp } from "react-icons/fa";
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import axios from "axios"
+import { useShoppingCart } from '@/hooks/use-context';
 
 const NavigationBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isDark, setIsDark] = useState(false)
     const { setTheme } = useTheme()
-    // const { cart } = useShoppingCart()
+    const { cart } = useShoppingCart()
 
 
     useGoogleOneTapLogin({
@@ -51,22 +51,21 @@ const NavigationBar = () => {
 
     const navLinks = [
         { name: 'Home', href: '/home', icon: <Building2 size={25} /> },
-        { name: 'Services', href: '/pages/services', icon: <Hammer size={25} /> },
+        { name: 'Services', href: '/services', icon: <Hammer size={25} /> },
         { name: 'About', href: '/pages/about', icon: <Info size={25} /> },
-        { name: 'Shop', href: '/pages/shop', icon: <ShoppingCart size={25} /> },
+        { name: 'Shop', href: '/shop', icon: <ShoppingCart size={25} /> },
         { name: 'contact', href: '/pages/contact', icon: <Phone size={25} /> },
     ];
 
     const path = usePathname()
-    console.log(path)
 
     return (
-        <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${stylish.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path !== "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}`}>
-            <Link href={{ pathname: "https://wa.me/254727576955" }} target='_blank'>
-                <div className='fixed right-0 top-22 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-md'>
+        <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${inter.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-100 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path !== "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}`}>
+            {/* <Link href={{ pathname: "https://wa.me/254727576955" }} target='_blank'>
+                <div className='fixed right-0 top-19 lg:top-20 md:top-20 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-sm'>
                     <FaWhatsapp size={50} className='text-white dark:text-white' />
                 </div>
-            </Link>
+            </Link> */}
             <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
 
                 {/* LOGO */}
@@ -85,7 +84,7 @@ const NavigationBar = () => {
                         <a
                             key={link.name}
                             href={link.href}
-                            className={`flex items-center gap-1.5 font-normal dark:text-white flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-dark)] text-xl`}
+                            className={`flex items-center gap-1.5 font-normal dark:text-white flex-col ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"} ${path === link.href && "text-[var(--teal-dark-dark)]"} hover:text-[var(--teal-dark-dark)] text-md font-semibold`}
                         >
                             {link.name}
                             {path === link.href && <div className={`${isScrolled ? "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-dark-dark)]" : "w-full rounded-full h-[3px] -mt-1 bg-[var(--teal-light)]"}`}>
@@ -117,11 +116,11 @@ const NavigationBar = () => {
                     </button>
                     <div className={`relative p-2 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
                         <ShoppingCart size={25} />
-                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-md w-5 h-5 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{0}</span>
+                        <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-sm w-4 h-4 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{cart?.length}</span>
                     </div>
-                    <Link href={{ pathname: "/pages/auth/signin" }}>
+                    <Link href={{ pathname: "https://wa.me/254727576955" }}>
                         <button className={`flex  space-x-2 bg-[var(--teal-dark-light)] ${isScrolled ? "border border-2-white bg-white text-[var(--teal-dark-dark)]" : "text-white"} px-6 py-2.5 dark:bg-[var(--teal-dark-light)]  dark:text-white rounded-md font-bold hover:bg-[#0C7779]`}>
-                            <p className='text-md font-semibold md:hidden lg:block'>Request Quatation</p>
+                            <p className='text-md font-semibold md:hidden lg:block'>Get Quatation</p>
                         </button>
                     </Link>
                     <Link href={{ pathname: "/pages/auth/signin" }}>

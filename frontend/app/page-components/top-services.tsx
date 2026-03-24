@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect, FC } from "react"
 import { useServices } from "@/hooks/datafetch"
 import Link from "next/link"
 
@@ -14,8 +14,7 @@ interface Service {
 }
 
 
-export const TopServices = () => {
-    const { data, isLoading, error } = useServices()
+export default function TopServices ({servicesdata}: {servicesdata: Service[]}) {
     const [open, setOpen] = useState<boolean>(false)
     const [selectedService, setSelectedService] = useState<Service | null>({
         id: "",
@@ -27,29 +26,35 @@ export const TopServices = () => {
         price: undefined
     });
     const [showNumber, setShowNumber] = useState(false)
-    console.log(selectedService)
 
     return (
         <div className="p-6 dark:bg-[var(--teal-dark-dark)]/20 dark:border-b-2 bg-white dark:border-b-[var(--teal-light)]">
-<div className="flex flex-col items-center justify-center w-full py-10">
+        <div className="flex flex-col items-center justify-center w-full py-10">
 
-    <h1 className="text-3xl font-extrabold mb-10 text-center dark:text-white text-[var(--teal-dark-dark)]">Top Services</h1>
+    <div className="max-w-3xl mx-auto px-4 mb-10 text-center">
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-6 tracking-tight text-[var(--teal-dark-dark)] dark:text-white">
+            Professional, Essential, and Stable
+        </h1>
+        <p className="text-md md:text-xl text-[var(--teal-dark-light)] dark:text-gray-300 leading-wider max-w-2xl mx-auto">
+            Expert solutions designed to <span className="text-[var(--teal-dark-dark)] dark:text-teal-400 font-bold">power, protect, and maintain</span> your infrastructure.
+        </p>
+    </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl px-4 ">
-        {data?.slice(0, 3).map((s: Service) => (
+        {servicesdata?.slice(0, 3).map((s: Service) => (
             <div
                 key={s.id}
                 onClick={() => { setSelectedService(s); setOpen(true); }}
-                className="relative p-6 rounded-md border border-gray-300 cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1 bg-white dark:bg-[var(--teal-dark-light)] flex flex-col"
+                className="relative p-6 rounded-md  cursor-pointer hover:shadow-xl transition-all hover:-translate-y-1 bg-white dark:bg-[var(--teal-dark-light)] flex flex-col"
             >
                 <h3 className="font-extrabold text-2xl mb-2 text-slate-800 dark:text-white">{s.title}</h3>
                 <p className="text-teal-600 font-semibold text-md mb-3 dark:text-[var(--teal-dark-dark)]">{s.subtitle}</p>
                 
-                <p className="text-slate-600 dark:text-slate-300 text-sm mb-16">
+                <p className="text-slate-600 dark:text-white text-sm mb-16">
                     {s.description}
                 </p>
 
-                <button className="absolute bottom-4 left-6 right-6 text-sm bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-light)] text-white font-semibold py-2 rounded-md">
+                <button className="absolute bottom-4 left-6 right-6 text-sm bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)]/80  text-white font-semibold py-2 rounded-md">
                     View Solution →
                 </button>
             </div>
@@ -64,7 +69,7 @@ export const TopServices = () => {
                 >
                     <div
                         onClick={(e) => e.stopPropagation()} 
-                        className="relative h-[90vh] w-full max-w-md m-4 mt-10 bg-white rounded-md shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300"
+                        className="relative h-[90vh] w-full max-w-md m-4 mt-20 bg-white rounded-md shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-right duration-300"
                     >
                         <div className="p-6 border-b border-gray-100">
                             <div className="flex justify-between items-start">
@@ -94,18 +99,20 @@ export const TopServices = () => {
                                 <span className="text-sm text-gray-600 uppercase tracking-wider font-semibold">Total Price</span>
                                 <p className="text-3xl font-extrabold text-gray-800">
                                     KES {selectedService.price?.toLocaleString()} 
-                                    <span className='text-md font-normal text-gray-500 ml-1'>/ per unit</span>
+                                    <span className='text-[22px] font-normal text-gray-500 ml-1'>/ per unit installation</span>
                                 </p>
                             </div>
                         </div>
 
 
                         <div className="p-6 bg-gray-50 flex flex-col gap-3">
-                            <button 
-                            onClick={() => setShowNumber(true)}
-                            className="w-full py-3 px-4 bg-[var(--teal-dark-dark)] hover:opacity-90 text-white font-semibold rounded-md transition-all">
-                                {!showNumber ? "Get Solution": "call : +254 727 494 414"}
-                            </button>
+                            <Link href={{ pathname: "tel:254 727 494 414"}}>
+                                <button 
+                                onClick={() => setShowNumber(true)}
+                                className="w-full py-3 px-4 bg-[var(--teal-dark-dark)] hover:opacity-90 text-white font-semibold rounded-md transition-all">
+                                    {!showNumber ? "Get Solution": "call : +254 727 494 414"}
+                                </button>
+                            </Link>
                             <Link href="https://wa.me/" className="w-full">
                                 <button className="w-full py-3 px-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold rounded-md transition-all">
                                     Request Quotation
