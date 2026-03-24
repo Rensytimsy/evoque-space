@@ -79,16 +79,16 @@ export const AppSidebar: FC<{ children: ReactNode }> = ({ children }) => {
         <div className="relative">
             <SidebarProvider>
                 <Sidebar collapsible="icon">
-                    <SidebarHeader className="bg-[var(--teal-dark-dark)] text-white font-bold">
-                        <div className="flex space-x-3x">
+                    <SidebarHeader className="bg-gray-100 text-black font-bold">
+                        <div className="flex space-x-3">
                           <img src={"/esl-logo.png"} className={isOpen ? "h-10" : "h-10"} />
-                          <p className={isOpen ? "" : "hidden"}>Admin</p>
+                          <p className={isOpen ? "mt-1 text-md text-[var(--teal-dark-dark)]" : "hidden"}>Admin Dashboard</p>
                         </div>
                     </SidebarHeader>
-                    <SidebarContent className="bg-[var(--teal-dark-dark)] text-white font-bold">
+                    <SidebarContent className="bg-gray-100 text-[var(--teal-dark-dark)] font-bold">
                         <NavMain items={data.navMain} />
                     </SidebarContent>
-                    <SidebarFooter className="bg-[var(--teal-dark-dark)] text-white font-bold">
+                    <SidebarFooter className="bg-white text-[var(--teal-dark-dark)] font-bold">
                         <NavUser user={data.user} />
                     </SidebarFooter>
                 </Sidebar>
@@ -96,8 +96,8 @@ export const AppSidebar: FC<{ children: ReactNode }> = ({ children }) => {
                     className={`
                         absolute top-0 z-10 transition-all duration-300 ease-in-out
                     ${isOpen
-                            ? 'left-4 lg:left-[16rem]'
-                            : 'left-4 lg:left-12'
+                            ? 'left-4 lg:left-[16rem] md:left-[16rem]'
+                            : 'left-4 lg:left-12 md:left-12'
                         }
     `}
                     onClick={

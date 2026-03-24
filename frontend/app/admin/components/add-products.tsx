@@ -163,7 +163,7 @@ const handleSubmit = async(e: React.FormEvent) => {
       {/* Header */}
       <header className="border-b border-stone-200 bg-white px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-stone-800 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-[var(--teal-dark-dark)] rounded-lg flex items-center justify-center">
             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
             </svg>
@@ -182,9 +182,9 @@ const handleSubmit = async(e: React.FormEvent) => {
           <p className="text-stone-400 text-sm">Fill in the details below to list a new product.</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+        <div className="grid grid-rows-1 lg:grid-rows-5 gap-8 p-2">
           <div className="lg:col-span-2 space-y-4">
-            <label className="text-xs font-semibold tracking-widest uppercase text-black mb-10">
+            <label className="text-xs font-semibold tracking-widest uppercase text-black mb-15">
               Product Image
             </label>
 
@@ -193,7 +193,7 @@ const handleSubmit = async(e: React.FormEvent) => {
               onDragLeave={() => setDragOver(false)}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`relative rounded-2xl border-2 border-dashed cursor-pointer transition-all overflow-hidden
+              className={`relative rounded-xl w-[350px] md:w-[450px] mt-5 lg:w-[450px] border-2 border-[var(--teal-light)] border-dashed cursor-pointer transition-all overflow-hidden
                 ${dragOver ? "border-stone-600 bg-stone-100" : "border-stone-200 bg-white hover:border-stone-400 hover:bg-stone-50"}
                 ${errors.image ? "border-red-300" : ""}
               `}
@@ -201,7 +201,7 @@ const handleSubmit = async(e: React.FormEvent) => {
             >
               {form.imagePreview ? (
                 <>
-                  <img src={form.imagePreview} alt="Preview" className="w-full h-full object-contain" style={{ minHeight: "320px" }} />
+                  <img src={form.imagePreview} alt="Preview" className="w-screen border h-full object-contain" style={{ minHeight: "320px" }} />
                   {/* <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-30 transition-all flex items-center justify-center opacity-0 hover:opacity-100">
                     <span className="text-white text-sm font-medium bg-black bg-opacity-60 px-4 py-2 rounded-full">
                       Change Image

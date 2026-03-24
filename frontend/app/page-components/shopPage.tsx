@@ -8,7 +8,7 @@ import { ProductData, useShoppingCart } from "@/hooks/use-context";
 import { unstable_cache } from "next/cache";
 
 
-const categories = ["All", "Bathrooms","Decor", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
+const categories = ["All", "Bathrooms", "Decor", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
 const priceRanges = [
     { label: "Under 1000", min: 0, max: 500 },
     { label: "1000 - 10,000", min: 500, max: 1000 },
@@ -18,7 +18,7 @@ const priceRanges = [
 const sortOptions = ["Featured", "Low Price", "High Price", "Top Rated"];
 
 
-export default  function ShopPage({productdata}:{productdata: ProductData[]}) {
+export default function ShopPage({ productdata }: { productdata: ProductData[] }) {
 
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -30,7 +30,7 @@ export default  function ShopPage({productdata}:{productdata: ProductData[]}) {
     const [product, setProducts] = useState<ProductData[]>(productdata);
     const [isScrolled, setIsScrolled] = useState(false)
 
-    const {cart, checkout, addToCart} = useShoppingCart()
+    const { cart, checkout, addToCart } = useShoppingCart()
     // const data = getAllProducts();
     // console.log(data);
 
@@ -41,50 +41,50 @@ export default  function ShopPage({productdata}:{productdata: ProductData[]}) {
     const toggleTag = (tag: string) => setSelectedTags(p => p.includes(tag) ? p.filter(x => x !== tag) : [...p, tag]);
 
 
-const filtered = useMemo(() => {
-    if (!Array.isArray(product)) return [];
-    
-    let list = [...product];
-    
-    if (search) {
-        list = list.filter(p => 
-            p.title?.toLowerCase().includes(search.toLowerCase()) || 
-            p.description?.toLowerCase().includes(search.toLowerCase())
-        );
-    }
-    
-    if (selectedCategory && selectedCategory !== "All") {
-        list = list.filter(p => 
-            p.category?.toLowerCase() === selectedCategory.toLowerCase()
-        );
-    }
-    
-    if (selectedPrices.length > 0) {
-        list = list.filter(p => {
-            const price = typeof p.price === 'string' ? parseFloat(p.price) : p.price;
-            return selectedPrices.some(label => {
-                const range = priceRanges.find(r => r.label === label);
-                return range && price >= range.min && price < range.max;
+    const filtered = useMemo(() => {
+        if (!Array.isArray(product)) return [];
+
+        let list = [...product];
+
+        if (search) {
+            list = list.filter(p =>
+                p.title?.toLowerCase().includes(search.toLowerCase()) ||
+                p.description?.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        if (selectedCategory && selectedCategory !== "All") {
+            list = list.filter(p =>
+                p.category?.toLowerCase() === selectedCategory.toLowerCase()
+            );
+        }
+
+        if (selectedPrices.length > 0) {
+            list = list.filter(p => {
+                const price = typeof p.price === 'string' ? parseFloat(p.price) : p.price;
+                return selectedPrices.some(label => {
+                    const range = priceRanges.find(r => r.label === label);
+                    return range && price >= range.min && price < range.max;
+                });
             });
-        });
-    }
-    
-    if (sortBy === "Price: Low to High") {
-        list = [...list].sort((a, b) => {
-            const priceA = typeof a.price === 'string' ? parseFloat(a.price) : a.price;
-            const priceB = typeof b.price === 'string' ? parseFloat(b.price) : b.price;
-            return priceA - priceB;
-        });
-    } else if (sortBy === "Price: High to Low") {
-        list = [...list].sort((a, b) => {
-            const priceA = typeof a.price === 'string' ? parseFloat(a.price) : a.price;
-            const priceB = typeof b.price === 'string' ? parseFloat(b.price) : b.price;
-            return priceB - priceA;
-        });
-    }
-    
-    return list;
-}, [search, selectedCategory, selectedPrices, sortBy, product]);
+        }
+
+        if (sortBy === "Price: Low to High") {
+            list = [...list].sort((a, b) => {
+                const priceA = typeof a.price === 'string' ? parseFloat(a.price) : a.price;
+                const priceB = typeof b.price === 'string' ? parseFloat(b.price) : b.price;
+                return priceA - priceB;
+            });
+        } else if (sortBy === "Price: High to Low") {
+            list = [...list].sort((a, b) => {
+                const priceA = typeof a.price === 'string' ? parseFloat(a.price) : a.price;
+                const priceB = typeof b.price === 'string' ? parseFloat(b.price) : b.price;
+                return priceB - priceA;
+            });
+        }
+
+        return list;
+    }, [search, selectedCategory, selectedPrices, sortBy, product]);
 
     const hasFilters = selectedPrices.length > 0 || selectedTags.length > 0 || selectedCategory !== "All" || !!search;
 
@@ -191,47 +191,47 @@ const filtered = useMemo(() => {
                 </aside>
 
                 <main className="flex-1 p-4 md:p-7 mt-32 lg:mt-24">
-  {filtered.length === 0 ? (
-    <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
-      <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)] dark:text-white">
-        No products found
-      </p>
-      <p className="font-jost text-sm mt-2 text-[var(--teal-light)] dark:text-white">
-        Try adjusting your search or filters
-      </p>
-    </div>
-  ) : (
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {filtered.map((p) => (
-        <div 
-          key={p.id} 
-          className="group relative flex flex-col bg-white dark:bg-[var(--teal-dark-dark)] border border-gray-200 rounded-md dark:border-[var(--teal-dark-dark)] rounded-md overflow-hidden"
-        >
-          <div className="aspect-square w-full flex justify-center items-center p-4 bg-[var(--teal-dark-light)]/10 dark:bg-gray-900/50">
-            <img
-              src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${p.image}`}
-              alt={p.title}
-              className="max-h-[200px] max-w-full object-contain mix-blend-multiply dark:mix-blend-normal"
-            />
-          </div>
-          <div className="p-4 flex flex-col flex-grow items-center text-center">
-            <h3 className="text-lg font-semibold text-[var(--teal-dark-dark)] dark:text-white line-clamp-1">
-              {p.title}
-            </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-300 mt-1 line-clamp-2">
-              {p.description}
-            </p>
-            <div className="mt-auto pt-3">
-              <p className="text-xl font-bold text-[var(--teal-dark-light)] dark:text-teal-400">
-                Kes {p.price?.toLocaleString()}
-              </p>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  )}
-</main>
+                    {filtered.length === 0 ? (
+                        <div className="col-span-full flex flex-col items-center justify-center py-24 text-center">
+                            <p className="text-2xl font-light tracking-widest text-[var(--teal-dark-dark)] dark:text-white">
+                                No products found
+                            </p>
+                            <p className="font-jost text-sm mt-2 text-[var(--teal-light)] dark:text-white">
+                                Try adjusting your search or filters
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                            {filtered.map((p) => (
+                                <div
+                                    key={p.id}
+                                    className="group relative flex flex-col bg-white dark:bg-[var(--teal-dark-dark)] border border-gray-200 rounded-md dark:border-[var(--teal-dark-dark)] rounded-md overflow-hidden"
+                                >
+                                    <div className="aspect-square w-full flex justify-center items-center p-4 bg-[var(--teal-dark-light)]/10 dark:bg-gray-900/50">
+                                        <img
+                                            src={`${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/${p.image}`}
+                                            alt={p.title}
+                                            className="max-h-[200px] max-w-full object-contain mix-blend-multiply dark:mix-blend-normal"
+                                        />
+                                    </div>
+                                    <div className="p-4 flex flex-col flex-grow items-center text-center">
+                                        <h3 className="text-lg font-semibold text-[var(--teal-dark-dark)] dark:text-white line-clamp-1">
+                                            {p.title}
+                                        </h3>
+                                        <p className="text-sm text-gray-500 dark:text-gray-300 mt-1 line-clamp-2">
+                                            {p.description}
+                                        </p>
+                                        <div className="mt-auto pt-3">
+                                            <p className="text-xl font-bold text-[var(--teal-dark-light)] dark:text-teal-400">
+                                                Kes {p.price?.toLocaleString()}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </main>
             </div>
         </div>
     );
