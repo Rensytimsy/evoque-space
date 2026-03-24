@@ -162,7 +162,7 @@ const NavigationBar = () => {
             </div>
 
             {/* MOBILE OVERLAY MENU */}
-            <div className={`fixed h-full inset-0 top-[72px] mt-3 ${isScrolled ? "bg-white min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            <div className={`fixed h-full inset-0 top-[72px] mt-1 ${isScrolled ? "bg-white min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                 <div className="flex flex-col p-6 gap-6 ">
 

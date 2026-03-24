@@ -175,7 +175,7 @@ export default function HomePage() {
                                 <ShoppingCart className="text-white" size={20} />
                             </button>
                         </Link>
-                        <Link href={{ pathname: "/pages/services" }}>
+                        <Link href={{ pathname: "/services" }}>
                             <button className="dark:bg-[var(--teal-dark-dark)] bg-white text-[var(--teal-dark-dark)] border border-2 border-[var(--teal-dark-dark)] dark:text-white hover:bg-[var(--teal-light)] hover:text-white hover:border-white hover:border-none px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
                                 Explore Solutions
                             </button>
