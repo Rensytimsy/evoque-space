@@ -165,17 +165,47 @@ def _update_service(request):
         
         
 @decorators.api_view(["PUT"])
-def _update_product(request):
+def _update_product(request, id):
     try:
-        print(request.data.get("id"))
-        product = models.Products.objects.filter(id=request.data.get("id")).update(**request.data)
-        product_serilizers = serializers.ProductSerializer(product)
-        
-
+        product = models.Products.objects.get(id=id)
+        product.title = request.data.get("title", product.title)
+        product.price = request.data.get("price", product.price)
+        product.description = request.data.get("description", product.description)
+        product.category = request.data.get("category", product.category)
+        if request.FILES.get("image"):
+            product.image = request.FILES.get("image")
+        product.save()
+        product_serializer = serializers.ProductSerializer(product)
         return response.Response({
-            "data": product_serilizers.data,
+            "data": product_serializer.data,
         }, status=status.HTTP_200_OK)
     except Exception as e:
         return response.Response({
             "error" : str(e)
         }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@decorators.api_view(["DELETE"])
+def _delete_product(request, id):
+    try:
+        product = models.Products.objects.filter(id=id).delete()
+        return response.Response({
+            "message": "Product deleted successfully"
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return response.Response({
+            "error": str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+
+@decorators.api_view(["GET"])
+def _get_id_param(request, id):
+    try:
+        return response.Response({
+            "id": id
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        return response.Response({
+            "error": str(e)
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)       

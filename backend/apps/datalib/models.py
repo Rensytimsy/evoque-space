@@ -27,7 +27,7 @@ class Services(models.Model):
         return "{} {}".format(self.title, self.subtitle)
     
 class Products(models.Model):
-    title = models.CharField(max_length=30, default="")
+    title = models.CharField(max_length=60, default="")
     price = models.FloatField(default=0.00)
     image = CloudinaryField('image')
     description = models.CharField(default="", max_length=500)

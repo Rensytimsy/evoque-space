@@ -1,6 +1,7 @@
 from django import urls
 from . import views
 
+
 urlpatterns = [
     urls.path("test/", views.test_endpoint, name="test_enpoint"),
     urls.path("new-service/", views.create_service, name="create_service"),
@@ -8,7 +9,9 @@ urlpatterns = [
     urls.path("services/", views._get_services, name="services"),
     urls.path("upload/", views._upload_product, name="upload_proudct"),
     urls.path("products/", views._get_products, name="all_products"),
+    urls.path("products/<int:id>/", views._get_id_param, name="test_product"),
+    urls.path("products/<int:id>/remove/", views._delete_product, name="delete_product"),
     urls.path("categories/", views._get_categories, name="all_categories"),
     urls.path("update-service/", views._update_service, name="update_service"),
-    urls.path("update-product/", views._update_service, name="update_product"),
+    urls.path("update-product/<int:id>/change/", views._update_product, name="update_product"),
 ]
