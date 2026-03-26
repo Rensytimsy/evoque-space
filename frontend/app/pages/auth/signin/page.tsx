@@ -172,7 +172,6 @@ export default function SignInPage() {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="m@example.com"
                       className="border-gray-200 shadow-none"
                       {...field}
                     />
@@ -201,7 +200,6 @@ export default function SignInPage() {
                     <div className="relative">
                       <Input
                         type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
                         className="pr-10 border  border-gray-200 shodow-none"
                         {...field}
                       />
