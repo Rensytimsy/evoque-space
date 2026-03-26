@@ -8,7 +8,7 @@ import { ProductData, useShoppingCart } from "@/hooks/use-context";
 import { unstable_cache } from "next/cache";
 
 
-const categories = ["All", "Bathrooms", "Decor", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
+const categories = ["All", "Bathroom", "Decor", "Kitchen", "Bedroom", "Living Room", "Lighting", "Surveillance", "Solar accessories"];
 const priceRanges = [
     { label: "Under 1000", min: 0, max: 500 },
     { label: "1000 - 10,000", min: 500, max: 1000 },
