@@ -1,196 +1,276 @@
-"use client"
-import { Form, FormMessage, FormControl, FormDescription, FormField, FormLabel, FormItem } from "@/components/ui/form"
-import { signInSchema, signUpSchema } from "@/lib/zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import z from "zod"
-import { Input } from "@/components/ui/input"
-import { Facebook, LoaderCircle, EyeClosed, Eye, EyeOff } from "lucide-react"
+"use client";
+import {
+  Form,
+  FormMessage,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormLabel,
+  FormItem,
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
+import { signInSchema, signUpSchema } from "@/lib/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { Input } from "@/components/ui/input";
+import { Facebook, LoaderCircle, EyeClosed, Eye, EyeOff, GalleryVerticalEnd } from "lucide-react";
 import { FaGoogle } from "react-icons/fa";
-import axios, { AxiosError } from "axios"
-import { DataTable } from '../../../admin/components/data-table';
-import { useState } from "react"
-import { useGoogleLogin } from "@react-oauth/google"
-import {redirect} from "next/navigation"
-
+import axios, { AxiosError } from "axios";
+import { DataTable } from "../../../admin/components/data-table";
+import { useState } from "react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 export default function SignInPage() {
+  const [loginError, setLoginError] = useState<string>("");
+  const [successLogin, setSuccessLogin] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const [loginError, setLoginError] = useState<string>("")
-    const [successLogin, setSuccessLogin] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
-    const [showPassword, setShowPassword] = useState<boolean>(false)
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-    const form = useForm<z.infer<typeof signInSchema>>({
-        resolver: zodResolver(signInSchema),
-        defaultValues: {
-            email: "",
-            password: ""
-        }
-    })
-
-    const handleSubmit = async (values: z.infer<typeof signInSchema>) => {
-        try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}accounts/login/`, values, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            });
-
-            setLoginError("")
-            setSuccessLogin("Success, welcom back!")
-            setLoading(true)
-            console.log(res.data)
-            setTimeout(() => {
-                redirect("/")
-            }, 1500)
-        } catch (error: any) {
-            setLoading(false)
-            setSuccessLogin("")
-            if (error.response.data.detail === "No active account found with the given credentials") {
-                setLoginError("Invalid Credentials")
-            }
-            console.log(error.response.data.detail);
-        }
-    }
-
-    const google_login = useGoogleLogin({
-        onSuccess: async (response) => {
-            const res = await axios.post(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}accounts/google/login/`,
-                {
-                    "access_token": response.access_token
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    withCredentials: true,
-                }
-            );
-            setLoading(true)
-            setSuccessLogin("Success, welcom back!")
-            setLoginError("")
-            setTimeout(() => {
-                redirect("/")
-            }, 1500)
-            console.log(res.data)
+  const handleSubmit = async (values: z.infer<typeof signInSchema>) => {
+    setLoading(true);
+    try {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}accounts/login/`,
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-        onError: () => {
-            setLoading(false)
-            setSuccessLogin("")
-            setLoginError("Something went wrong!")
-            console.log("Login Not Successfull")
-        }
-    })
+      );
 
-    const handleError = (errorMessage: string) => {
-        setLoginError(errorMessage);
-        setSuccessLogin("");
-        setTimeout(() => {
-            setLoginError('');
-        }, 2000);
-    };
+      setLoginError("");
+      setSuccessLogin("Success, welcom back!");
+      console.log(res.data);
+      setTimeout(() => {
+        redirect("/");
+      }, 1500);
+    } catch (error: any) {
+      setLoading(false);
+      setSuccessLogin("");
+      if (
+        error.response.data.detail ===
+        "No active account found with the given credentials"
+      ) {
+        setLoginError("Invalid Credentials");
+      }
+      console.log(error.response.data.detail);
+    }
+  };
 
-    console.log(loginError)
+  console.log(loading)
 
+  const google_login = useGoogleLogin({
+    onSuccess: async (response) => {
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}accounts/google/login/`,
+        {
+          access_token: response.access_token,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        },
+      );
+      setLoading(true);
+      setSuccessLogin("Success, welcom back!");
+      setLoginError("");
+      setTimeout(() => {
+        redirect("/");
+      }, 1500);
+      console.log(res.data);
+    },
+    onError: () => {
+      setLoading(false);
+      setSuccessLogin("");
+      setLoginError("Something went wrong!");
+      console.log("Login Not Successfull");
+    },
+  });
 
-    return (
-        <div className="flex justify-center align-center w-full bg-white dark:bg-[var(--teal-dark-dark)]/20">
-            <div className="mt-40 mx-auto rounded-xl w-full h-[600px] mb-20 bg-[var(--teal-light)] dark:bg-[var(--teal-dark-dark)]  max-w-md p-8 h-[60vh]">
-                <div className="mb-8 text-center space-y-2">
-                    <h2 className="text-3xl text-[var(--teal-dark-dark)] font-semibold tracking-tight dark:text-white">Log in</h2>
-                    <p className="text-sm text-white">Provide Credentials</p>
-                </div>
+  const handleError = (errorMessage: string) => {
+    setLoginError(errorMessage);
+    setSuccessLogin("");
+    setTimeout(() => {
+      setLoginError("");
+    }, 2000);
+  };
 
-                <div className={`
-                    fixed top-20 right-0 z-50
-                    transform transition-all duration-500 ease-in-out
-                    ${loginError ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
-                `}>
-                    {loginError && (
-                        <div className="bg-red-400 text-white p-2 rounded-md shadow-lg font-semibold">
-                            <p>{loginError}</p>
-                        </div>
-                    )}
-                </div>
-                <div className={`
-                    fixed top-20 right-0 z-50
-                    transform transition-all duration-500 ease-in-out
-                    ${successLogin ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}
-                `}>
-                    {successLogin && (
-                        <div className="bg-green-500 text-white p-2 rounded-md shadow-lg font-semibold">
-                            <p>{successLogin}</p>
-                        </div>
-                    )}
-                </div>
+  console.log(loginError);
 
-                <Form {...form}>
-                    <form className="space-y-4" onSubmit={form.handleSubmit(handleSubmit)}>
-                        <FormField
-                            name="email"
-                            control={form.control}
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-white font-bold">Email</FormLabel>
-                                    <FormControl>
-                                        <Input className="dark:bg-white text-black outline-none border border-white bg-white" placeholder="johndoe@examplemail.com" {...field} />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            name="password"
-                            control={form.control}
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel className="text-white font-bold">Password</FormLabel>
-                                    <FormControl>
-                                        <div className="relative flex bg-white p-1 rounded-md">
-                                          <Input className="dark:bg-white text-black outline-none border-white bg-white" placeholder="" type={`${showPassword ? "text" : "password"}`} {...field} />
-                                         {showPassword ?  <EyeOff onClick={() => setShowPassword(prevState => !prevState)} className="absolute right-3 mt-2" /> : <Eye onClick={() => setShowPassword(prevState => !prevState)} size={23}   className="absolute right-3 mt-2"/>}
-                                        </div>
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
+  return (
+    <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
+      {/* Toast: Error */}
+      <div
+        className={cn(
+          "fixed top-5 right-0 z-50 transform transition-all duration-500 ease-in-out",
+          loginError
+            ? "translate-x-0 opacity-100"
+            : "translate-x-full opacity-0",
+        )}
+      >
+        {loginError && (
+          <div className="bg-red-500 text-white px-4 py-2 rounded-l-md shadow-lg font-semibold text-sm">
+            {loginError}
+          </div>
+        )}
+      </div>
 
-                        <button
-                            className="relative flex justify-around w-full h-10 px-4 py-2 mt-2 rounded-md transition-colors bg-[var(--teal-dark-dark)] hover:opacity-90 text-white font-medium"
-                            onClick={() => handleSubmit}
-                        >
-                            Login
-                            <LoaderCircle size={20} className={`${successLogin ? "block" : "hidden"} absolute top-3 right-35 animate-spin`}/>
-                        </button>
-                    </form>
-                </Form>
+      {/* Toast: Success */}
+      <div
+        className={cn(
+          "fixed top-5 right-0 z-50 transform transition-all duration-500 ease-in-out",
+          successLogin
+            ? "translate-x-0 opacity-100"
+            : "translate-x-full opacity-0",
+        )}
+      >
+        {successLogin && (
+          <div className="bg-green-500 text-white px-4 py-2 rounded-l-md shadow-lg font-semibold text-sm">
+            {successLogin}
+          </div>
+        )}
+      </div>
 
-                <div className="mt-8">
-                    <div className="relative mb-6">
-                        {/* <div className="absolute inset-0 flex items-center">
-                            <span className="w-full border-t" />
-                        </div> */}
-                        <div className="relative flex justify-center text-md">
-                            <span className=" px-2 text-white dark:text-white">Or Sign In Using</span>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-center space-x-4">
-                        {/* <button className="flex items-center justify-center w-12 h-12 rounded-sm  bg-[var(--teal-dark-dark)] transition-all hover:bg-[var(--teal-dark-dark)]/90 text-white">
-                            <Facebook size={24} fill="currentColor" />
-                        </button> */}
-                        <button
-                            className="flex items-center justify-center w-12 h-12 rounded-sm  transition-all bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)]/90 text-white"
-                            onClick={() => google_login()}
-                        >
-                            <FaGoogle size={24} fill="currentColor" />
-                        </button>
-                    </div>
-                </div>
+      {/* Card */}
+      <div
+        className={"flex flex-col gap-6 w-full max-w-sm"}
+      >
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(handleSubmit)}
+            className="flex flex-col gap-6"
+          >
+            {/* Header */}
+            <div className="flex flex-col items-center gap-2 text-center lg:mt-20">
+              <h1 className="text-xl font-bold tracking-tight text-[var(--teal-dark-light)]">Welcome back</h1>
+              <p className="text-sm text-muted-foreground">
+                login to Evoque Spaces
+              </p>
             </div>
-        </div>
-    )
+
+            {/* Email */}
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="m@example.com"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Password */}
+            <FormField
+              name="password"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center justify-between">
+                    <FormLabel>Password</FormLabel>
+                    {/* <a
+                      href="#"
+                      className="text-xs text-muted-foreground underline underline-offset-4 hover:text-primary"
+                    >
+                      Forgot password?
+                    </a> */}
+                  </div>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        className="pr-10"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                        tabIndex={-1}
+                      >
+                        {showPassword ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Submit */}
+            <Button
+            type="submit" className="w-full bg-[var(--teal-dark-light)] hover:bg-[var(--teal-dark-dark)]" disabled={loading}>
+              {loading ? (
+                <LoaderCircle size={16} className="animate-spin mr-2" />
+              ) : null}
+              Login
+            </Button>
+
+            {/* Divider */}
+            <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+              <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                Or
+              </span>
+            </div>
+
+            {/* Social login */}
+            <Button
+              variant="outline"
+              type="button"
+              className="w-full"
+              onClick={google_login}
+            >
+              <FaGoogle className="mr-2 size-4" />
+              Continue with Google
+            </Button>
+          </form>
+        </Form>
+
+        {/* Footer */}
+        <p className="text-center text-xs text-muted-foreground px-4">
+          By clicking continue, you agree to our{" "}
+          <a
+            href="#"
+            className="underline underline-offset-4 hover:text-primary"
+          >
+            Terms of Service
+          </a>{" "}
+          and{" "}
+          <a
+            href="#"
+            className="underline underline-offset-4 hover:text-primary"
+          >
+            Privacy Policy
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  );
 }

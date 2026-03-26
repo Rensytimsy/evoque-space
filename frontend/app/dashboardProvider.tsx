@@ -7,7 +7,8 @@ export const DashboardProvider:FC<{children: ReactNode}> = ({children}) => {
     const pathname = usePathname()
 
     const EXCLUDED_PATHNAMES = ["/pages/auth/signin", "/pages/auth/signup", "/pages", "/home","/page", "/services", "/shop"]
-    const should_display = !EXCLUDED_PATHNAMES.some(path => pathname.startsWith(path))
+    const is404Page = pathname === "/404" || pathname === "/_not-found"
+    const should_display = !EXCLUDED_PATHNAMES.some(path => pathname.startsWith(path)) && is404Page;
 
     if (should_display) {
         return <AppSidebar>{children}</AppSidebar>

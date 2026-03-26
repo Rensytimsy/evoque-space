@@ -134,7 +134,7 @@ const NavigationBar = () => {
 
 
                 {/* MOBILE MENU TOGGLE */}
-                <div className={`relative p-2 lg:hidden ml-20 ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
+                <div className={`relative p-2 lg:hidden -mr-8  ${isScrolled ? "text-[var(--teal-light)]" : "text-[var(--teal-dark-dark)]"} dark:text-white hover:bg-[var(--teal-light)] hover:text-[var(--teal-dark-dark)] rounded-full cursor-pointer`}>
                     <ShoppingCart size={28} />
                     <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-md w-5 h-5 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{0}</span>
                 </div>
@@ -162,7 +162,7 @@ const NavigationBar = () => {
             </div>
 
             {/* MOBILE OVERLAY MENU */}
-            <div className={`fixed h-full inset-0 top-[72px] mt-3 ${isScrolled ? "bg-white min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            <div className={`fixed h-full inset-0 top-[64px] mt-3 dark:bg-[var(--teal-dark-dark)] ${isScrolled ? "bg-white  min-h-screen" : "bg-white z-0 min-h-screen"} z-50 transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}>
                 <div className="flex flex-col p-6 gap-6 ">
 
@@ -171,19 +171,21 @@ const NavigationBar = () => {
                             key={link.name}
                             href={link.href}
                             onClick={() => setIsOpen(false)}
-                            className={`flex items-center gap-4 text-xl font-bold ${isScrolled ? "text-[var(--teal-dark-dark)] " : "text-[var(--teal-dark-dark)]"} border-b border-slate-100 pb-4`}
+                            className={`flex items-center gap-4 text-xl dark:text-white font-bold ${isScrolled ? "text-[var(--teal-dark-dark)] " : "text-[var(--teal-dark-dark)]"} border-b dark:border-b-[var(--teal-light)] border-slate-100 pb-4`}
                         >
-                            <span className={`${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"}`}>{link.icon}</span>
+                            <span className={`dark:text-white ${isScrolled ? "text-[var(--teal-dark-dark)]" : "text-[var(--teal-dark-dark)]"}`}>{link.icon}</span>
                             {link.name}
                         </a>
                     ))}
                     <div className="mt-4 flex flex-col gap-4">
-                        <button className="w-full bg-slate-100 text-[#005461] py-4 rounded-2xl font-bold">
-                            My Cart (3 Items)
+                        <button className="w-full bg-[var(--teal-light)] rounded-sm text-white py-4  font-bold">
+                            My Cart ({cart.length} Items)
                         </button>
-                        <button className="w-full bg-[#005461] text-white py-4 rounded-2xl font-bold shadow-xl shadow-[#005461]/20">
-                            Sign In
-                        </button>
+                        <Link href={{ pathname: "/pages/auth/signin" }}>
+                            <button className="w-full bg-[var(--teal-dark-light)] text-white py-4 rounded-sm font-bold shadow-xl ">
+                                Sign In
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
