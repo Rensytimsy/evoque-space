@@ -95,13 +95,13 @@ export default function TopServices ({servicesdata}: {servicesdata: Service[]}) 
                                 ))}
                             </ol>
 
-                            <div className="mt-8">
+                            {/* <div className="mt-8">
                                 <span className="text-sm text-gray-600 uppercase tracking-wider font-semibold">Total Price</span>
                                 <p className="text-3xl font-extrabold text-gray-800">
                                     KES {selectedService.price?.toLocaleString()} 
                                     <span className='text-[22px] font-normal text-gray-500 ml-1'>/ per unit installation</span>
                                 </p>
-                            </div>
+                            </div> */}
                         </div>
 
 
@@ -125,4 +125,3 @@ export default function TopServices ({servicesdata}: {servicesdata: Service[]}) 
         </div>
     )
 }
-

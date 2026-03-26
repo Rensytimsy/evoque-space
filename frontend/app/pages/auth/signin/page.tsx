@@ -244,7 +244,7 @@ export default function SignInPage() {
               variant="outline"
               type="button"
               className="w-full"
-              onClick={google_login}
+              onClick={() => google_login()}
             >
               <FaGoogle className="mr-2 size-4" />
               Continue with Google

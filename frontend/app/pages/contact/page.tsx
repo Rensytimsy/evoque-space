@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
 import { MapPinned, Phone, Mail,  Timer, MapPinPen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const COLORS = {
     teal: "#3BC1A8",
@@ -171,10 +172,12 @@ export default function ContactPage() {
                                     />
                                 </div>
 
-                                <button className="w-full group mt-4 flex items-center justify-center gap-3 bg-[var(--teal-dark-light)] hover:bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-light)] text-white dark:text-[var(--teal-dark-dark)] py-4 rounded-xl font-bold tracking-widest uppercase text-xs transition-all dark:hover:bg-white hover:shadow-lg active:scale-[0.98]">
-                                    Send Enquiry
+                                <Button 
+                                disabled={true}
+                                className="w-full p-2 group mt-4 flex items-center justify-center gap-3 bg-[var(--teal-dark-light)] hover:bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-light)] text-white dark:text-[var(--teal-dark-dark)] py-4 rounded-md font-bold tracking-widest uppercase text-xs transition-all dark:hover:bg-white hover:shadow-lg active:scale-[0.98]">
+                                    Under development...
                                     <span className="group-hover:translate-x-1 transition-transform">→</span>
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </Reveal>

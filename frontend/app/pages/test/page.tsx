@@ -12,7 +12,7 @@ const TestPage = () => {
 
   return(
     <div className="min-h-[100vh]">
-      test page
+      test page.
     </div>
   )
 }
