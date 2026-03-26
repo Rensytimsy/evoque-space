@@ -173,6 +173,7 @@ export default function SignInPage() {
                     <Input
                       type="email"
                       placeholder="m@example.com"
+                      className="border-gray-200 shadow-none"
                       {...field}
                     />
                   </FormControl>
@@ -201,7 +202,7 @@ export default function SignInPage() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
-                        className="pr-10"
+                        className="pr-10 border  border-gray-200 shodow-none"
                         {...field}
                       />
                       <button
@@ -243,7 +244,7 @@ export default function SignInPage() {
             <Button
               variant="outline"
               type="button"
-              className="w-full"
+              className="w-full border-gray-200 shadow-none"
               onClick={() => google_login()}
             >
               <FaGoogle className="mr-2 size-4" />
