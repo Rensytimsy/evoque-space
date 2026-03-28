@@ -17,7 +17,7 @@ const TestPage = () => {
         <div
             className="bg-[url('/bg-one.png')] bg-no-repeat bg-cover bg-center rounded-xl 
             w-full max-w-[400px] lg:max-w-[750px] overflow-hidden
-            flex flex-col lg:flex-row justify-around items-stretch min-h-[500px] lg:min-h-[420px] relative"
+            flex flex-col lg:flex-row justify-around border-none items-stretch min-h-[500px] lg:min-h-[420px] relative"
         >
             {/* LEFT — Image Section */}
             <div className="h-64 lg:h-auto lg:w-3/8 lg:relative absolute h-full z-10 overflow-hidden">
@@ -28,7 +28,7 @@ const TestPage = () => {
                 />
 
                 {/* badge */}
-                <div className="absolute top-5 left-5 flex items-center gap-2 bg-white border rounded-full px-3 py-1.5 shadow-sm">
+                <div className="absolute top-5 left-5 flex items-center gap-2 bg-white border-none rounded-full px-3 py-1.5 shadow-sm">
                     <span className="text-[var(--teal-dark-dark)] text-[9px] lg:text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap">
                         Security, Solar, Access control
                     </span>
