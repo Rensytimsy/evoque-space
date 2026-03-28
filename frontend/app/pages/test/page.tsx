@@ -2,7 +2,6 @@ import { getProducts } from "@/hooks/datafetch"
 import { Product } from "@/hooks/datafetch"
 import { unstable_cache } from "next/cache"
 import { useShoppingCart } from "@/hooks/use-context"
-import Page from '../../../.next/dev/types/routes';
 
 export const dynamic = "force-static"
 export const regenerate = 300
