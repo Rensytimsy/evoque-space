@@ -17,7 +17,6 @@ const getTopServices = unstable_cache(
 
 export default async function TopRequestedServices(){
     const response = await getTopServices();
-    console.log("services data", response.data.data)
     return <TopServices servicesdata={response.data.data}/>
 }
 

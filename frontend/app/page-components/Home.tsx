@@ -140,61 +140,121 @@ export default function HomePage() {
 
 
     return (
-       <div className="flex justify-center align-center w-screen relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-[var(--teal-dark-dark)]/20">
-    
-    {/* Updated Background Image Layer */}
-    <div className="absolute inset-0 opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-normal bg-[var(--teal-dark-dark)] bg-[url('/hero-bg.jpg')] pointer-events-none bg-no-repeat bg-cover bg-center" />
-    
-    <div className="flex flex-col items-center w-full"> 
-        <header className="relative w-screen pt-0 pb-22 z-10 lg:mt-25 mb-30 h-full p-2">
-            <div className="flex flex-col items-center w-full">
-                <div className="relative space-y-8 lg:mt-10 mt-25 text-center flex flex-col items-center">
-                    <div className="space-y-4">
-                        <h1 className="text-4xl lg:text-5xl leading-[1.1] tracking-tight">
-                            <span className="block text-[var(--teal-dark-dark)] dark:text-white font-bold">
-                                High-Performance <span className="text-[var(--teal-dark-light)] font-bold">Power</span>
-                            </span>
-                            <span className="block dark:text-slate-100 text-[var(--teal-dark-dark)] font-bold">
-                                Precision Security
-                            </span>
-                            <span className="block relative">
-                                <span className="relative z-10 text-[var(--teal-dark-light)] font-bold dark:text-[var(--teal-light)]">
-                                    Smart Integration
+        <div className="flex justify-center align-center w-screen relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-[var(--teal-dark-dark)]/20">
+            <div className="absolute inset-0 opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-normal bg-white  pointer-events-none bg-no-repeat bg-cover bg-center" />
+            <div className="flex flex-col items-center w-full p-2 mt-20">
+                <header className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-12 pt-10 lg:pt-16 pb-12">
+
+                    <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-center lg:items-start w-full">
+
+                        {/* LEFT — Copy */}
+                        <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-6 w-full lg:w-1/2">
+                            <h1 className="font-bold text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-[var(--teal-dark-dark)] dark:text-white">
+                                <span className="block">
+                                    High-Performance{" "}
+                                    <span className="text-[var(--teal-dark-light)]">Power</span>
                                 </span>
-                                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 h-13 w-96 p-2 -skew-x-15 bg-[var(--teal-dark-light)]/30 -z-10 hidden lg:block" />
-                            </span>
-                        </h1>
+                                <span className="block dark:text-slate-100">Precision Security</span>
+                                <span className="block relative">
+                                    <span className="relative z-10 text-[var(--teal-dark-light)] dark:text-[var(--teal-light)]">
+                                        Smart Integration
+                                    </span>
+                                    <span className="absolute bottom-0 left-1/2 lg:left-0 -translate-x-1/2 lg:translate-x-0 h-3 w-64 -skew-x-12 bg-[var(--teal-dark-light)]/20 -z-10 hidden lg:block" />
+                                </span>
+                            </h1>
+
+                            <p className="text-base font-medium text-[var(--teal-dark-dark)] dark:text-white max-w-sm leading-relaxed">
+                                Evoque Spaces Limited is a leading provider of integrated solar energy,
+                                security, and smart infrastructure solutions for residential and commercial
+                                developments.
+                            </p>
+
+                            <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+                                <Link href={{ pathname: "/shop" }}>
+                                    <button className="bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-light)] hover:opacity-90 text-white px-7 py-3.5 rounded-lg font-bold transition-all flex items-center gap-2">
+                                        Visit Shop
+                                        <ShoppingCart size={18} />
+                                    </button>
+                                </Link>
+                                <Link href={{ pathname: "/services" }}>
+                                    <button className="bg-[var(--teal-light)] dark:bg-[var(--teal-dark-dark)] text-white dark:text-white hover:bg-[var(--teal-dark-light)] hover:text-white hover:border-[var(--teal-dark-light)] px-7 py-3.5 rounded-lg font-bold transition-all">
+                                        Explore Solutions
+                                    </button>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Don't style this please */}
+                        <div className="flex justify-center items-center w-full lg:w-[600px]">
+                            <div
+                                className="relative bg-[url('/bg-five.png')] bg-no-repeat bg-cover bg-center rounded-xl 
+            w-full max-w-[400px] lg:max-w-none overflow-hidden
+            flex flex-col lg:flex-row justify-between items-stretch min-h-[500px] lg:max-h-[220px] relative border mb-10"
+                            >
+                                {/* LEFT — Image Section */}
+                                <div className="absolute -right-0 h-64 lg:h-auto lg:w-3/6 lg:relative absolute h-full z-10 overflow-hidden">
+                                    <img
+                                        src="https://plus.unsplash.com/premium_photo-1682148196781-8bbcdfd7f537?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                        alt="Solar panels"
+                                        className="lg:min-w-full min-w-screen md:min-w-[450px] h-full object-cover blur-none lg:blur-none scale-110 brightness-45 lg:brightness-75"
+                                    />
+                                    <div className="absolute hidden lg:block top-5 left-5 flex items-center gap-2 bg-white border rounded-full px-3 py-1.5 shadow-sm">
+                                        <span className="text-[var(--teal-dark-dark)] text-[9px] lg:text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap">
+                                            Security, Solar, Access control
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* RIGHT — Details Section */}
+                                <div className="absolute z-10 p-2 max-h-[20vh] border-none lg:left-30 w-full flex flex-col mt-40 justify-center lg:w-3/2 p-6 lg:p-10">
+                                    <div className="lg:ml-35">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <span className="w-5 h-px bg-white rounded" />
+                                            <span className="lg:text-white text-white text-[10px] font-extrabold tracking-[0.18em] uppercase">
+                                                Solar Solutions
+                                            </span>
+                                        </div>
+                                        <h1 className="lg:text-white lg:text-[var(--teal-dark-dark)] text-white font-black leading-[1.05] text-3xl lg:text-4xl tracking-tight">
+                                            Best <span className="text-[var(--teal-dark-light)]">Solar</span><br />
+                                            Solution
+                                        </h1>
+                                        <p className="lg:text-white text-white mt-4 mb-6 text-sm font-md leading-relaxed max-w-[200px]">
+                                            We provide the best solar solution for both commercial and residential buildings.
+                                        </p>
+                                        <div className="flex flex-wrap gap-6 mb-8">
+                                            {[["98%", "Efficiency"], ["25Y", "Warranty"], ["60%", "Bill Cut"]].map(([val, label]) => (
+                                                <div key={label} className="flex flex-col gap-0.5">
+                                                    <span className="lg:text-white text-white text-xl lg:text-2xl font-black leading-none">{val}</span>
+                                                    <span className="text-white text-[9px] uppercase tracking-widest opacity-90 font-bold">{label}</span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div className="flex flex-wrap items-center gap-4">
+                                            <button className="bg-[var(--teal-light)] px-5 py-2.5 rounded-md text-xs lg:text-sm text-white font-bold hover:brightness-110 transition-all">
+                                                View Solution →
+                                            </button>
+                                            {/* <button className="lg:text-[var(--teal-dark-dark)] bg-white text-[var(--teal-dark-dark)] hover:text-slate-300 text-[11px] border border-white/30 px-5 py-2.5 rounded-md font-medium transition-colors duration-200">
+                                                Learn more
+                                            </button> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <p className="text-lg font-semibold text-[var(--teal-dark-dark)] dark:text-white max-w-lg leading-relaxed mx-auto">
-                        Evoque Spaces Limited is a leading provider of integrated solar energy, security, and smart infrastructure solutions for residential and commercial developments.
-                    </p>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        <Link href={{ pathname: "/shop" }}>
-                            <button className="dark:bg-[var(--teal-light)] bg-[var(--teal-dark-dark)] hover:bg-[var(--teal-dark-dark)] text-white px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
-                                Visit Shop
-                                <ShoppingCart className="text-white" size={20} />
-                            </button>
-                        </Link>
-                        <Link href={{ pathname: "/services" }}>
-                            <button className="dark:bg-[var(--teal-dark-dark)] bg-white text-[var(--teal-dark-dark)] border border-2 border-[var(--teal-dark-dark)] dark:text-white hover:bg-[var(--teal-light)] hover:text-white hover:border-white hover:border-none px-8 py-4 rounded-md font-bold transition-all flex items-center gap-2 group">
-                                Explore Solutions
-                            </button>
-                        </Link>
-                    </div>
+                </header>
+            </div>
+            <div className="absolute w-screen left-0 right-0 bottom-0 bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-dark-light)] overflow-hidden py-5 border-t font-semibold">
+                <div className="animate-ticker flex gap-16 whitespace-nowrap">
+                    {[...defaultSolutions, ...defaultSolutions].map((item, i) => (
+                        <div key={i} className="font-bebas text-xl tracking-wider text-white dark:text-[var(--teal-dark-dark)] flex items-center gap-6">
+                            {item.title}
+                            <span className="w-1.5 h-full rounded-full bg-white dark:bg-[var(--teal-dark-dark)] inline-block" />
+                        </div>
+                    ))}
                 </div>
             </div>
-        </header>
-    </div>
-    <div className="absolute w-screen left-0 right-0 bottom-0 bg-[var(--teal-dark-dark)] dark:bg-[var(--teal-dark-light)] overflow-hidden py-5 border-t font-semibold">
-        <div className="animate-ticker flex gap-16 whitespace-nowrap">
-            {[...defaultSolutions, ...defaultSolutions].map((item, i) => (
-                <div key={i} className="font-bebas text-xl tracking-wider text-white dark:text-[var(--teal-dark-dark)] flex items-center gap-6">
-                    {item.title}
-                    <span className="w-1.5 h-full rounded-full bg-white dark:bg-[var(--teal-dark-dark)] inline-block" />
-                </div>
-            ))}
         </div>
-    </div>
-</div>
     )
 }

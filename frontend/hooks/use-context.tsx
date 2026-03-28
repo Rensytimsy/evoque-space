@@ -134,3 +134,26 @@ export const useShoppingCart = () => {
     
     return context;
 };
+
+
+interface UserData {
+    username: string,
+    isAdmin: boolean,
+    email: string,
+    avatar: string
+}
+
+interface UserDataContext extends UserData {
+    isLoggedIn: boolean,
+}
+
+
+const UserContext = createContext<UserDataContext | null>(null)
+
+const initial_state:UserDataContext = {
+    username: "",
+    isAdmin: false,
+    email: "",
+    avatar: "",
+    isLoggedIn: false
+}
