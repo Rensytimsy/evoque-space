@@ -4,7 +4,6 @@ import "./globals.css";
 import NavigationBar from "./page-components/navigationbar";
 import Footer from "./page-components/footer";
 import {ThemeProvider as NextThemesProvider} from "next-themes"
-import { DashboardProvider } from "./dashboardProvider";
 import { ShoppingCartContextProvider } from "@/hooks/use-context";
 import { GoogleOAuthProvider } from "@react-oauth/google"
 import Providers from "@/providers";
@@ -50,7 +49,7 @@ export default function RootLayout({
                             <NavigationBar />
                             <div>
                                 <Providers>
-                                    <DashboardProvider>{children} </DashboardProvider> 
+                                    {children}
                                 </Providers>
                             </div>
                         <Footer />

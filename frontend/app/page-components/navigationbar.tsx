@@ -50,7 +50,7 @@ const NavigationBar = () => {
     }, [])
 
     const navLinks = [
-        { name: 'Home', href: '/home', icon: <Building2 size={25} /> },
+        { name: 'Home', href: '/', icon: <Building2 size={25} /> },
         { name: 'Services', href: '/services', icon: <Hammer size={25} /> },
         { name: 'About', href: '/pages/about', icon: <Info size={25} /> },
         { name: 'Shop', href: '/shop', icon: <ShoppingCart size={25} /> },
@@ -60,7 +60,7 @@ const NavigationBar = () => {
     const path = usePathname()
 
     return (
-        <nav className={`${path.startsWith("/admin/dashboard") ? "hidden" : "block"} ${inter.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-100 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path !== "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}`}>
+        <nav className={`${path.startsWith("/admin/dashboard") || path.startsWith("/admin") ? "hidden" : "block"} ${inter.className} dark:bg-[var(--teal-dark-dark)] fixed top-0 w-full z-100 transition-all duration-300 ${isScrolled ? 'bg-white backdrop-blur-md shadow-md py-2' : path !== "/" ? 'bg-white py-2' : 'bg-white backdrop-blur-md py-3'}`}>
             {/* <Link href={{ pathname: "https://wa.me/254727576955" }} target='_blank'>
                 <div className='fixed right-0 top-19 lg:top-20 md:top-20 flex justify-center align-center dark:bg-green-400 bg-green-400  w-16 h-14 rounded-sm'>
                     <FaWhatsapp size={50} className='text-white dark:text-white' />
@@ -119,13 +119,13 @@ const NavigationBar = () => {
                         <span className="absolute top-1 right-1 bg-[var(--teal-dark-dark)] text-white text-sm w-4 h-4 rounded-full flex items-center dark:bg-white dark:text-black justify-center font-bold">{cart?.length}</span>
                     </div>
                     <Link href={{ pathname: "https://wa.me/254727576955" }}>
-                        <button className={`flex  space-x-2 bg-[var(--teal-dark-light)] ${isScrolled ? "border border-2-white bg-white text-[var(--teal-dark-dark)]" : "text-white"} px-6 py-2.5 dark:bg-[var(--teal-dark-light)]  dark:text-white rounded-md font-bold hover:bg-[#0C7779]`}>
-                            <p className='text-md font-semibold md:hidden lg:block'>Get Quatation</p>
+                        <button className={`flex  space-x-2 bg-[var(--teal-dark-light)] ${isScrolled ? "border border-2-white bg-white text-[var(--teal-dark-dark)]" : "text-white"} px-6 py-3 dark:bg-[var(--teal-dark-light)]  dark:text-white rounded-full font-bold hover:bg-[#0C7779]`}>
+                            <p className='text-sm font-semibold md:hidden lg:block'>Get Quatation</p>
                         </button>
                     </Link>
                     <Link href={{ pathname: "/pages/auth/signin" }}>
-                        <button className={`flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-2.5 dark:bg-[var(--teal-dark-light)]  dark:text-white rounded-md font-bold hover:bg-[var(--teal-dark-light)]`}>
-                            <p className='text-md font-semibold md:hidden lg:block'>Sign In</p>
+                        <button className={`flex  space-x-2 bg-[var(--teal-dark-dark)] text-white px-6 py-3 dark:bg-[var(--teal-dark-light)]  dark:text-white rounded-full font-bold hover:bg-[var(--teal-dark-light)]`}>
+                            <p className='text-sm font-semibold md:hidden lg:block'>Sign In</p>
                             <LogIn className='' size={20} />
                         </button>
                     </Link>

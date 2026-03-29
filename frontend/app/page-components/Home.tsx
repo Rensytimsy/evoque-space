@@ -141,7 +141,7 @@ export default function HomePage() {
 
     return (
         <div className="flex justify-center align-center w-screen relative min-h-screen flex items-center overflow-hidden bg-white dark:bg-[var(--teal-dark-dark)]/20">
-            <div className="absolute inset-0 opacity-40 dark:opacity-30 mix-blend-multiply dark:mix-blend-normal bg-white  pointer-events-none bg-no-repeat bg-cover bg-center" />
+            <div className="absolute inset-0  mix-blend-multiply  bg-white  pointer-events-none bg-no-repeat bg-cover bg-center" />
             <div className="flex flex-col items-center w-full p-2 mt-20">
                 <header className="w-full max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-12 pt-10 lg:pt-16 pb-12">
 
@@ -185,11 +185,11 @@ export default function HomePage() {
                         </div>
 
                         {/* Don't style this please */}
-                        <div className="flex justify-center items-center w-full lg:w-[600px]">
+                        <div className="flex justify-center border-none items-center w-full lg:w-[600px]">
                             <div
-                                className="relative bg-[url('/bg-five.png')] bg-no-repeat bg-cover bg-center rounded-xl 
+                                className="relative bg-[url('/bg-five.png')] bg-no-repeat  border-none bg-cover bg-center rounded-xl 
             w-full max-w-[400px] lg:max-w-none overflow-hidden
-            flex flex-col lg:flex-row justify-between items-stretch min-h-[500px] lg:max-h-[220px] relative border mb-10"
+            flex flex-col lg:flex-row justify-between items-stretch md:min-h-[450px] lg:min-h-[450px]  min-h-[400px] lg:max-h-[220px] relative border mb-10"
                             >
                                 {/* LEFT — Image Section */}
                                 <div className="absolute -right-0 h-64 lg:h-auto lg:w-3/6 lg:relative absolute h-full z-10 overflow-hidden">
@@ -198,8 +198,8 @@ export default function HomePage() {
                                         alt="Solar panels"
                                         className="lg:min-w-full min-w-screen md:min-w-[450px] h-full object-cover blur-none lg:blur-none scale-110 brightness-45 lg:brightness-75"
                                     />
-                                    <div className="absolute hidden lg:block top-5 left-5 flex items-center gap-2 bg-white border rounded-full px-3 py-1.5 shadow-sm">
-                                        <span className="text-[var(--teal-dark-dark)] text-[9px] lg:text-[10px] font-bold tracking-[0.15em] uppercase whitespace-nowrap">
+                                    <div className="absolute hidden lg:block top-2 left-2 flex items-center gap-2 bg-white border-none rounded-full px-3 py-1 shadow-sm">
+                                        <span className="text-[var(--teal-dark-dark)] text-xs lg:text-xs font-bold tracking-wider uppercase whitespace-nowrap">
                                             Security, Solar, Access control
                                         </span>
                                     </div>
@@ -230,9 +230,9 @@ export default function HomePage() {
                                             ))}
                                         </div>
                                         <div className="flex flex-wrap items-center gap-4">
-                                            <button className="bg-[var(--teal-light)] px-5 py-2.5 rounded-md text-xs lg:text-sm text-white font-bold hover:brightness-110 transition-all">
+                                            {/* <button className="bg-[var(--teal-light)] px-5 py-2.5 rounded-md text-xs lg:text-sm text-white font-bold hover:brightness-110 transition-all">
                                                 View Solution →
-                                            </button>
+                                            </button> */}
                                             {/* <button className="lg:text-[var(--teal-dark-dark)] bg-white text-[var(--teal-dark-dark)] hover:text-slate-300 text-[11px] border border-white/30 px-5 py-2.5 rounded-md font-medium transition-colors duration-200">
                                                 Learn more
                                             </button> */}

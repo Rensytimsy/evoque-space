@@ -5,12 +5,14 @@ import axios from 'axios';
 export async function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
 
-    if (url.pathname === '/') {
-        url.pathname = '/home';
+
+
+    if (url.pathname === '/admin/dashboard' ){
+        url.pathname = '/admin/dashboard/products';
         return NextResponse.redirect(url);
     }
 
-    if (url.pathname === '/admin/dashboard'){
+    if (url.pathname === '/admin' ){
         url.pathname = '/admin/dashboard/products';
         return NextResponse.redirect(url);
     }
